@@ -1,8 +1,11 @@
+Environment setup:
+```
 grr config set grafana.url https://grafana.tp.pymnts.exchange
 grr config set grafana.token glsa_tokenabc
 grr config set output-format yaml
 grr config get-contexts
 grr config get
+```
 
 https://grafana.github.io/grizzly/#resource-migration
 
@@ -22,12 +25,12 @@ grizzly.grafana.com/v1alpha1    PrometheusRuleGroup
 grizzly.grafana.com/v1alpha1    SyntheticMonitoringCheck
 ```
 
-Export resources:
+Export all resources:
 ```
 $ grafana-export.sh
 ```
 
-Import resources:
+Import all resources:
 ```
 $ grafana-import.sh
 ```
