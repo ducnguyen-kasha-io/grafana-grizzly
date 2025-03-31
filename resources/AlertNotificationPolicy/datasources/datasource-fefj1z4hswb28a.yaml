@@ -1,0 +1,15 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Datasource
+metadata:
+    name: fefj1z4hswb28a
+spec:
+    access: proxy
+    jsonData:
+        httpMethod: POST
+        tlsSkipVerify: true
+    name: prod-lr
+    orgId: 1
+    type: prometheus
+    typeLogoUrl: public/app/plugins/datasource/prometheus/img/prometheus_logo.svg
+    uid: fefj1z4hswb28a
+    url: https://prom.kasha.io

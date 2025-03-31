@@ -1,0 +1,20 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Datasource
+metadata:
+    name: adonk9wsag3k0d
+spec:
+    access: proxy
+    basicAuth: true
+    basicAuthUser: master_user
+    jsonData:
+        connection: mongodb+srv://prod-do-kasha-reports-database-b3425b08.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=prod-do-kasha-reports-database
+        tlsAuth: false
+        tlsSkipVerify: false
+        validate: false
+    name: prod-reports-db
+    orgId: 1
+    secureJsonFields:
+        basicAuthPassword: true
+    type: grafana-mongodb-datasource
+    typeLogoUrl: public/plugins/grafana-mongodb-datasource/img/mongodb-icon.svg
+    uid: adonk9wsag3k0d

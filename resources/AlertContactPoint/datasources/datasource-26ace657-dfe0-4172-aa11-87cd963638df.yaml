@@ -1,0 +1,15 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Datasource
+metadata:
+    name: 26ace657-dfe0-4172-aa11-87cd963638df
+spec:
+    access: proxy
+    jsonData:
+        timeInterval: 15s
+        tlsSkipVerify: true
+    name: sandbox-kasha
+    orgId: 1
+    type: prometheus
+    typeLogoUrl: public/app/plugins/datasource/prometheus/img/prometheus_logo.svg
+    uid: 26ace657-dfe0-4172-aa11-87cd963638df
+    url: https://prom.sandbox.kasha.tech

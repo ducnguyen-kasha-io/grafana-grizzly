@@ -1,0 +1,210 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Dashboard
+metadata:
+    folder: beg7eceu16pkwc
+    name: aegh48dj8n5kwf
+spec:
+    annotations:
+        list:
+            - builtIn: 1
+              datasource:
+                type: grafana
+                uid: -- Grafana --
+              enable: true
+              hide: true
+              iconColor: rgba(0, 211, 255, 1)
+              name: Annotations & Alerts
+              type: dashboard
+    editable: true
+    fiscalYearStartMonth: 0
+    graphTooltip: 0
+    links: []
+    panels:
+        - datasource:
+            type: grafana-mongodb-datasource
+            uid: adonk9wsag3k0d
+          description: FTH (SS) transactions per 5 minutes
+          fieldConfig:
+            defaults:
+                color:
+                    fixedColor: semi-dark-green
+                    mode: shades
+                custom:
+                    axisBorderShow: false
+                    axisCenteredZero: false
+                    axisColorMode: text
+                    axisLabel: ""
+                    axisPlacement: auto
+                    barAlignment: 0
+                    barWidthFactor: 0.6
+                    drawStyle: bars
+                    fillOpacity: 100
+                    gradientMode: hue
+                    hideFrom:
+                        legend: false
+                        tooltip: false
+                        viz: false
+                    insertNulls: false
+                    lineInterpolation: linear
+                    lineStyle:
+                        fill: solid
+                    lineWidth: 5
+                    pointSize: 2
+                    scaleDistribution:
+                        type: linear
+                    showPoints: auto
+                    spanNulls: false
+                    stacking:
+                        group: A
+                        mode: none
+                    thresholdsStyle:
+                        mode: area
+                fieldMinMax: false
+                mappings: []
+                min: 0
+                noValue: "0"
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: dark-red
+                          value: null
+                        - color: transparent
+                          value: 2
+            overrides: []
+          gridPos:
+            h: 14
+            w: 24
+            x: 0
+            "y": 0
+          id: 2
+          options:
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: false
+            timezone:
+                - Europe/Budapest
+            tooltip:
+                maxHeight: 600
+                mode: single
+                sort: none
+          targets:
+            - datasource:
+                type: grafana-mongodb-datasource
+                uid: adonk9wsag3k0d
+              parsedQuery: |
+                payments.transactions.aggregate([{"$match":{"merchantId":"a39ac315-0fb8-43f9-8f72-6dc4601bceaa","createdAt":{"$gte":{"$date":"2024-08-04T05:30:42.820Z"},"$lte":{"$date":"2024-08-04T11:30:42.820Z"}}}},{"$group":{"_id":{"$toDate":{"$subtract":[{"$toLong":"$createdAt"},{"$mod":[{"$toLong":"$createdAt"},300000]}]}},"count":{"$sum":1}}},{"$project":{"_id":1,"count":1}},{"$sort":{"time":1}}])
+              query: "payments.transactions.aggregate([\r\n  {\r\n    $match: {\r\n      merchantId: \"a39ac315-0fb8-43f9-8f72-6dc4601bceaa\",\r\n      createdAt: {\r\n        $gte: new ISODate($__from),\r\n        $lte: new ISODate($__to)\r\n      }\r\n    }\r\n  },\r\n  {\r\n    $group: {\r\n      _id: {\r\n        $toDate: {\r\n          $subtract: [\r\n            { $toLong: \"$createdAt\" },\r\n            { $mod: [{ $toLong: \"$createdAt\" }, 1000 * 60 * 5] }\r\n          ]\r\n        }\r\n      },\r\n      count: { $sum: 1 }\r\n    }\r\n  },\r\n  {\r\n    $project: {\r\n      _id: 1,\r\n      count: 1,\r\n    }\r\n  },\r\n  {\r\n    $sort: { time: 1 }\r\n  }\r\n])\r\n"
+              queryType: query
+              refId: A
+          title: FTH (SS) Tx / 5 Min
+          type: timeseries
+        - datasource:
+            default: false
+            type: grafana-mongodb-datasource
+            uid: adonk9wsag3k0d
+          description: FTH (SS) transactions per 5 minutes
+          fieldConfig:
+            defaults:
+                color:
+                    fixedColor: semi-dark-green
+                    mode: shades
+                custom:
+                    axisBorderShow: false
+                    axisCenteredZero: false
+                    axisColorMode: text
+                    axisLabel: ""
+                    axisPlacement: auto
+                    barAlignment: 0
+                    barWidthFactor: 0.6
+                    drawStyle: bars
+                    fillOpacity: 100
+                    gradientMode: hue
+                    hideFrom:
+                        legend: false
+                        tooltip: false
+                        viz: false
+                    insertNulls: false
+                    lineInterpolation: linear
+                    lineStyle:
+                        fill: solid
+                    lineWidth: 5
+                    pointSize: 2
+                    scaleDistribution:
+                        type: linear
+                    showPoints: auto
+                    spanNulls: false
+                    stacking:
+                        group: A
+                        mode: none
+                    thresholdsStyle:
+                        mode: area
+                fieldMinMax: false
+                mappings: []
+                min: 0
+                noValue: "0"
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: dark-red
+                          value: null
+                        - color: transparent
+                          value: 2
+            overrides: []
+          gridPos:
+            h: 14
+            w: 24
+            x: 0
+            "y": 14
+          id: 3
+          options:
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: false
+            timezone:
+                - Europe/Budapest
+            tooltip:
+                maxHeight: 600
+                mode: single
+                sort: none
+          targets:
+            - datasource:
+                type: grafana-mongodb-datasource
+                uid: adonk9wsag3k0d
+              parsedQuery: |
+                payments.transactions.aggregate([{"$match":{"merchantId":"$merchanId","createdAt":{"$gte":{"$date":"2025-03-20T23:52:24.940Z"},"$lte":{"$date":"2025-03-21T05:52:24.940Z"}}}},{"$group":{"_id":{"$toDate":{"$subtract":[{"$toLong":"$createdAt"},{"$mod":[{"$toLong":"$createdAt"},300000]}]}},"count":{"$sum":1}}},{"$project":{"_id":1,"count":1}},{"$sort":{"time":1}}])
+              query: "payments.transactions.aggregate([\r\n  {\r\n    $match: {\r\n      merchantId: \"$merchanId\",\r\n      createdAt: {\r\n        $gte: new ISODate($__from),\r\n        $lte: new ISODate($__to)\r\n      }\r\n    }\r\n  },\r\n  {\r\n    $group: {\r\n      _id: {\r\n        $toDate: {\r\n          $subtract: [\r\n            { $toLong: \"$createdAt\" },\r\n            { $mod: [{ $toLong: \"$createdAt\" }, 1000 * 60 * 5] }\r\n          ]\r\n        }\r\n      },\r\n      count: { $sum: 1 }\r\n    }\r\n  },\r\n  {\r\n    $project: {\r\n      _id: 1,\r\n      count: 1,\r\n    }\r\n  },\r\n  {\r\n    $sort: { time: 1 }\r\n  }\r\n])\r\n"
+              queryType: query
+              refId: A
+          title: FTH (SS) Tx / 5 Min
+          type: timeseries
+    schemaVersion: 39
+    tags: []
+    templating:
+        list:
+            - current:
+                selected: false
+                text: a39ac315-0fb8-43f9-8f72-6dc4601bceaa
+                value: a39ac315-0fb8-43f9-8f72-6dc4601bceaa
+              hide: 0
+              includeAll: false
+              multi: false
+              name: merchanId
+              options:
+                - selected: true
+                  text: a39ac315-0fb8-43f9-8f72-6dc4601bceaa
+                  value: a39ac315-0fb8-43f9-8f72-6dc4601bceaa
+              query: a39ac315-0fb8-43f9-8f72-6dc4601bceaa
+              skipUrlSync: false
+              type: custom
+    time:
+        from: now-6h
+        to: now
+    timepicker: {}
+    timezone: browser
+    title: FTH (SS) Copy
+    uid: aegh48dj8n5kwf
+    weekStart: ""

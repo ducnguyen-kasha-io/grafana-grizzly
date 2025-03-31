@@ -1,0 +1,253 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: AlertRuleGroup
+metadata:
+    name: beg7eceu16pkwc.5m
+spec:
+    folderUid: beg7eceu16pkwc
+    interval: 300
+    rules:
+        - annotations:
+            description: Host out of memory
+            summary: '{{ $labels.nodename }} has less than 20% memory'
+          condition: B
+          data:
+            - datasourceUid: d3d0edbb-5c7a-421e-8f5d-bdde2c450523
+              model:
+                datasource:
+                    type: prometheus
+                    uid: d3d0edbb-5c7a-421e-8f5d-bdde2c450523
+                editorMode: code
+                expr: (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100 ) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}
+                hide: false
+                instant: true
+                intervalMs: 1000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: false
+                refId: A
+              refId: A
+              relativeTimeRange:
+                from: 600
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 20
+                            - 0
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params: []
+                      reducer:
+                        params: []
+                        type: avg
+                      type: query
+                datasource:
+                    name: Expression
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: B
+                type: threshold
+              refId: B
+              relativeTimeRange: {}
+          execErrState: Error
+          folderUID: beg7eceu16pkwc
+          for: 5m0s
+          id: 47
+          noDataState: NoData
+          orgID: 1
+          ruleGroup: 5m
+          title: HostOutOfMemory
+          uid: ceg7eghtf3eo0c
+          updated: "2025-03-20T07:45:58.000Z"
+        - annotations:
+            description: Host out of disk space
+            summary: '{{ $labels.nodename }} has less than 20% disk space for {{ $labels.mountpoint }}'
+          condition: B
+          data:
+            - datasourceUid: d3d0edbb-5c7a-421e-8f5d-bdde2c450523
+              model:
+                datasource:
+                    type: prometheus
+                    uid: d3d0edbb-5c7a-421e-8f5d-bdde2c450523
+                editorMode: code
+                expr: 100 - (node_filesystem_size_bytes{fstype=~"ext.*|xfs",mountpoint !~".*pod.*"}-node_filesystem_free_bytes{fstype=~"ext.*|xfs",mountpoint !~".*pod.*"}) *100/(node_filesystem_avail_bytes {fstype=~"ext.*|xfs",mountpoint !~".*pod.*"}+(node_filesystem_size_bytes{fstype=~"ext.*|xfs",mountpoint !~".*pod.*"}-node_filesystem_free_bytes{fstype=~"ext.*|xfs",mountpoint !~".*pod.*"})) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}
+                instant: true
+                intervalMs: 1000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: false
+                refId: A
+              refId: A
+              relativeTimeRange:
+                from: 600
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 20
+                            - 0
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params: []
+                      reducer:
+                        params: []
+                        type: avg
+                      type: query
+                datasource:
+                    name: Expression
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: B
+                type: threshold
+              refId: B
+              relativeTimeRange: {}
+          execErrState: Error
+          folderUID: beg7eceu16pkwc
+          for: 5m0s
+          id: 48
+          noDataState: NoData
+          notification_settings:
+            group_by: null
+            mute_time_intervals: null
+            receiver: MS Team
+          orgID: 1
+          ruleGroup: 5m
+          title: HostOutOfDiskSpace
+          uid: deg7evtvupkw0a
+          updated: "2025-03-20T07:45:58.000Z"
+        - annotations:
+            description: Node has been unready for more than 15 minutes
+            summary: '{{ $labels.node }} has been unready for more than 15 minutes'
+          condition: B
+          data:
+            - datasourceUid: d3d0edbb-5c7a-421e-8f5d-bdde2c450523
+              model:
+                datasource:
+                    type: prometheus
+                    uid: d3d0edbb-5c7a-421e-8f5d-bdde2c450523
+                editorMode: code
+                expr: kube_node_status_condition{condition="Ready",job="kube-state-metrics",status="true"} == 0
+                hide: false
+                instant: true
+                intervalMs: 1000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: false
+                refId: A
+              refId: A
+              relativeTimeRange:
+                from: 600
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 0
+                            - 0
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params: []
+                      reducer:
+                        params: []
+                        type: avg
+                      type: query
+                datasource:
+                    name: Expression
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: B
+                type: threshold
+              refId: B
+              relativeTimeRange: {}
+          execErrState: Error
+          folderUID: beg7eceu16pkwc
+          for: 15m0s
+          id: 49
+          noDataState: NoData
+          orgID: 1
+          ruleGroup: 5m
+          title: KubeNodeNotReady
+          uid: beg7f2qy1qn0gb
+          updated: "2025-03-20T07:45:58.000Z"
+        - annotations:
+            description: Pod container waiting longer than 15m
+            summary: pod/ {{ $labels.pod }} in namespace {{ $labels.namespace }} on container {{ $labels.container }} has been in waiting state for longer than 15 minutes
+          condition: B
+          data:
+            - datasourceUid: d3d0edbb-5c7a-421e-8f5d-bdde2c450523
+              model:
+                datasource:
+                    type: prometheus
+                    uid: d3d0edbb-5c7a-421e-8f5d-bdde2c450523
+                editorMode: code
+                expr: sum by (namespace, pod, container, cluster) (kube_pod_container_status_waiting_reason{job="kube-state-metrics",namespace=~".*"})
+                instant: true
+                intervalMs: 1000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: false
+                refId: A
+              refId: A
+              relativeTimeRange:
+                from: 600
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 0
+                            - 0
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params: []
+                      reducer:
+                        params: []
+                        type: avg
+                      type: query
+                datasource:
+                    name: Expression
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: B
+                type: threshold
+              refId: B
+              relativeTimeRange: {}
+          execErrState: Error
+          folderUID: beg7eceu16pkwc
+          for: 5m0s
+          id: 50
+          noDataState: NoData
+          notification_settings:
+            group_by: null
+            mute_time_intervals: null
+            receiver: MS Team
+          orgID: 1
+          ruleGroup: 5m
+          title: KubeContainerWaiting
+          uid: aeg7f7qu2hrlsa
+          updated: "2025-03-20T07:45:58.000Z"
+    title: 5m

@@ -1,0 +1,106 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Dashboard
+metadata:
+    folder: edoom9gbnjwu8c
+    name: adyefb3z3s9vkd
+spec:
+    annotations:
+        list:
+            - builtIn: 1
+              datasource:
+                type: grafana
+                uid: -- Grafana --
+              enable: true
+              hide: true
+              iconColor: rgba(0, 211, 255, 1)
+              name: Annotations & Alerts
+              type: dashboard
+    editable: true
+    fiscalYearStartMonth: 0
+    graphTooltip: 0
+    links: []
+    panels:
+        - datasource:
+            type: grafana-mongodb-datasource
+            uid: adonk9wsag3k0d
+          description: Merchants with more than 10 transactions in the given timeframe
+          fieldConfig:
+            defaults:
+                color:
+                    mode: palette-classic
+                custom:
+                    axisBorderShow: false
+                    axisCenteredZero: false
+                    axisColorMode: text
+                    axisLabel: ""
+                    axisPlacement: auto
+                    fillOpacity: 100
+                    gradientMode: none
+                    hideFrom:
+                        legend: false
+                        tooltip: false
+                        viz: false
+                    lineWidth: 2
+                    scaleDistribution:
+                        type: linear
+                    thresholdsStyle:
+                        mode: "off"
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: green
+                          value: null
+                        - color: red
+                          value: 80
+            overrides: []
+          gridPos:
+            h: 8
+            w: 24
+            x: 0
+            "y": 0
+          id: 2
+          options:
+            barRadius: 0
+            barWidth: 0.63
+            fullHighlight: false
+            groupWidth: 0.7
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: true
+            orientation: horizontal
+            showValue: always
+            stacking: none
+            tooltip:
+                maxHeight: 600
+                mode: single
+                sort: none
+            xTickLabelRotation: 0
+            xTickLabelSpacing: 0
+          pluginVersion: 11.0.3
+          targets:
+            - datasource:
+                type: grafana-mongodb-datasource
+                uid: adonk9wsag3k0d
+              parsedQuery: |
+                payments.transactions.aggregate([{"$match":{"$expr":{"$and":[{"$gte":["$createdAt",{"$date":"2024-09-19T13:54:01.185Z"}]},{"$lte":["$createdAt",{"$date":"2024-09-19T19:54:01.185Z"}]}]}}},{"$group":{"_id":"$pspId","totalTransactions":{"$sum":1},"completedTransactions":{"$sum":{"$cond":[{"$eq":["$status","COMPLETED"]},1,0]}}}},{"$match":{"totalTransactions":{"$gte":10}}},{"$lookup":{"from":"psps","localField":"_id","foreignField":"_id","as":"pspInfo"}},{"$unwind":"$pspInfo"},{"$project":{"_id":0,"pspName":"$pspInfo.name","approvalRate":{"$cond":[{"$eq":["$totalTransactions",0]},0,{"$round":[{"$multiply":[{"$divide":["$completedTransactions","$totalTransactions"]},100]},2]}]}}},{"$sort":{"approvalRate":-1}}])
+              query: "payments.transactions.aggregate([\r\n    {\r\n        $match: {\r\n            $expr: {\r\n                $and: [\r\n                    { $gte: ['$createdAt', new ISODate($__from)] },\r\n                    { $lte: ['$createdAt', new ISODate($__to)] }\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    {\r\n        $group: {\r\n            _id: '$pspId',\r\n            totalTransactions: { $sum: 1 },\r\n            completedTransactions: {\r\n                $sum: { $cond: [{ $eq: ['$status', 'COMPLETED'] }, 1, 0] }\r\n            }\r\n        }\r\n    },\r\n    {\r\n        $match: {\r\n            totalTransactions: { $gte: 10 }\r\n        }\r\n    },\r\n    {\r\n        $lookup: {\r\n            from: 'psps',\r\n            localField: '_id',\r\n            foreignField: '_id',\r\n            as: 'pspInfo'\r\n        }\r\n    },\r\n    {\r\n        $unwind: '$pspInfo'\r\n    },\r\n    {\r\n        $project: {\r\n            _id: 0,\r\n            pspName: '$pspInfo.name',\r\n            approvalRate: {\r\n                $cond: [\r\n                    { $eq: ['$totalTransactions', 0] },\r\n                    0,\r\n                    {\r\n                        $round: [\r\n                            { $multiply: [{ $divide: ['$completedTransactions', '$totalTransactions'] }, 100] },\r\n                            2\r\n                        ]\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    {\r\n        $sort: { approvalRate: -1 }\r\n    }\r\n])\r\n"
+              queryType: query
+              refId: A
+          title: AR per PSP
+          type: barchart
+    schemaVersion: 39
+    tags: []
+    templating:
+        list: []
+    time:
+        from: now-6h
+        to: now
+    timeRangeUpdatedDuringEditOrView: false
+    timepicker: {}
+    timezone: browser
+    title: AR per PSP
+    uid: adyefb3z3s9vkd
+    weekStart: ""

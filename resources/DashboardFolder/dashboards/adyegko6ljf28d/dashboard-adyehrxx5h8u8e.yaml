@@ -1,0 +1,133 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Dashboard
+metadata:
+    folder: adyegko6ljf28d
+    name: adyehrxx5h8u8e
+spec:
+    annotations:
+        list:
+            - builtIn: 1
+              datasource:
+                type: grafana
+                uid: -- Grafana --
+              enable: true
+              hide: true
+              iconColor: rgba(0, 211, 255, 1)
+              name: Annotations & Alerts
+              type: dashboard
+    editable: true
+    fiscalYearStartMonth: 0
+    graphTooltip: 0
+    links: []
+    panels:
+        - datasource:
+            type: grafana-mongodb-datasource
+            uid: adonk9wsag3k0d
+          fieldConfig:
+            defaults:
+                color:
+                    mode: palette-classic
+                custom:
+                    axisBorderShow: false
+                    axisCenteredZero: false
+                    axisColorMode: text
+                    axisGridShow: true
+                    axisLabel: ""
+                    axisPlacement: auto
+                    barAlignment: -1
+                    drawStyle: line
+                    fillOpacity: 50
+                    gradientMode: opacity
+                    hideFrom:
+                        legend: false
+                        tooltip: false
+                        viz: false
+                    insertNulls: false
+                    lineInterpolation: linear
+                    lineStyle:
+                        fill: solid
+                    lineWidth: 1
+                    pointSize: 4
+                    scaleDistribution:
+                        type: linear
+                    showPoints: never
+                    spanNulls: false
+                    stacking:
+                        group: A
+                        mode: none
+                    thresholdsStyle:
+                        mode: area
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: dark-red
+                          value: null
+                        - color: transparent
+                          value: 1
+            overrides:
+                - __systemRef: hideSeriesFrom
+                  matcher:
+                    id: byNames
+                    options:
+                        mode: exclude
+                        names:
+                            - count
+                        prefix: 'All except:'
+                        readOnly: true
+                  properties:
+                    - id: custom.hideFrom
+                      value:
+                        legend: false
+                        tooltip: false
+                        viz: true
+                - matcher:
+                    id: byName
+                    options: count
+                  properties:
+                    - id: color
+                      value:
+                        fixedColor: '#73BF69'
+                        mode: fixed
+          gridPos:
+            h: 10
+            w: 24
+            x: 0
+            "y": 0
+          id: 1
+          options:
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: true
+            timezone:
+                - Europe/Amsterdam
+            tooltip:
+                maxHeight: 600
+                mode: single
+                sort: none
+          targets:
+            - datasource:
+                type: grafana-mongodb-datasource
+                uid: adonk9wsag3k0d
+              parsedQuery: |
+                payments.transactions.aggregate([{"$match":{"pspId":"0063e91f-9b5b-444c-aa6f-ce5674db17ad","createdAt":{"$gte":{"$date":"2024-09-19T14:22:05.664Z"},"$lte":{"$date":"2024-09-19T20:22:05.664Z"}}}},{"$group":{"_id":{"$toDate":{"$subtract":[{"$toLong":"$createdAt"},{"$mod":[{"$toLong":"$createdAt"},60000]}]}},"count":{"$sum":1}}},{"$project":{"_id":1,"count":1}},{"$sort":{"time":1}}])
+              query: "payments.transactions.aggregate([\r\n  {\r\n    $match: {\r\n      pspId: \"0063e91f-9b5b-444c-aa6f-ce5674db17ad\",\r\n      createdAt: {\r\n        $gte: new ISODate($__from),\r\n        $lte: new ISODate($__to)\r\n      }\r\n    }\r\n  },\r\n  {\r\n    $group: {\r\n      _id: {\r\n        $toDate: {\r\n          $subtract: [\r\n            { $toLong: \"$createdAt\" },\r\n            { $mod: [{ $toLong: \"$createdAt\" }, 1000 * 60 * 1] }\r\n          ]\r\n        }\r\n      },\r\n      count: { $sum: 1 }\r\n    }\r\n  },\r\n  {\r\n    $project: {\r\n      _id: 1,\r\n      count: 1,\r\n    }\r\n  },\r\n  {\r\n    $sort: { time: 1 }\r\n  }\r\n])\r\n"
+              queryType: query
+              refId: A
+          title: Payport transactions per minute
+          type: timeseries
+    schemaVersion: 39
+    tags: []
+    templating:
+        list: []
+    time:
+        from: now-24h
+        to: now
+    timeRangeUpdatedDuringEditOrView: false
+    timepicker: {}
+    timezone: browser
+    title: Payport
+    uid: adyehrxx5h8u8e
+    weekStart: ""

@@ -1,0 +1,79 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Dashboard
+metadata:
+    folder: fds3wc5k1wkcgb
+    name: adwd2x2c173swa
+spec:
+    annotations:
+        list:
+            - builtIn: 1
+              datasource:
+                type: grafana
+                uid: -- Grafana --
+              enable: true
+              hide: true
+              iconColor: rgba(0, 211, 255, 1)
+              name: Annotations & Alerts
+              type: dashboard
+    editable: true
+    fiscalYearStartMonth: 0
+    graphTooltip: 0
+    links: []
+    panels:
+        - datasource:
+            type: grafana-mongodb-datasource
+            uid: adonk9wsag3k0d
+          fieldConfig:
+            defaults:
+                color:
+                    mode: thresholds
+                custom:
+                    align: auto
+                    cellOptions:
+                        type: auto
+                    inspect: false
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: green
+                          value: null
+                        - color: red
+                          value: 80
+            overrides: []
+          gridPos:
+            h: 8
+            w: 12
+            x: 0
+            "y": 0
+          id: 1
+          options:
+            cellHeight: sm
+            footer:
+                countRows: false
+                fields: ""
+                reducer:
+                    - sum
+                show: false
+            showHeader: true
+          pluginVersion: 11.0.3
+          targets:
+            - datasource:
+                type: grafana-mongodb-datasource
+                uid: adonk9wsag3k0d
+              refId: A
+          title: Panel Title
+          type: table
+    schemaVersion: 39
+    tags: []
+    templating:
+        list: []
+    time:
+        from: now-6h
+        to: now
+    timeRangeUpdatedDuringEditOrView: false
+    timepicker: {}
+    timezone: browser
+    title: test
+    uid: adwd2x2c173swa
+    weekStart: ""

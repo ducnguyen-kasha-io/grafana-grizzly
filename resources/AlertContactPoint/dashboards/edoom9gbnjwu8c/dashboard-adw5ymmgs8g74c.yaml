@@ -1,0 +1,144 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Dashboard
+metadata:
+    folder: edoom9gbnjwu8c
+    name: adw5ymmgs8g74c
+spec:
+    annotations:
+        list:
+            - builtIn: 1
+              datasource:
+                type: grafana
+                uid: -- Grafana --
+              enable: true
+              hide: true
+              iconColor: rgba(0, 211, 255, 1)
+              name: Annotations & Alerts
+              type: dashboard
+    editable: true
+    fiscalYearStartMonth: 0
+    graphTooltip: 0
+    links: []
+    panels:
+        - datasource:
+            type: grafana-mongodb-datasource
+            uid: adonk9wsag3k0d
+          description: |-
+            Approval rate per country.
+            Countries not on display have 0 AR.
+          fieldConfig:
+            defaults:
+                color:
+                    mode: thresholds
+                custom:
+                    axisBorderShow: false
+                    axisCenteredZero: false
+                    axisColorMode: text
+                    axisGridShow: true
+                    axisLabel: ""
+                    axisPlacement: auto
+                    axisSoftMax: 101
+                    fillOpacity: 80
+                    gradientMode: none
+                    hideFrom:
+                        legend: false
+                        tooltip: false
+                        viz: false
+                    lineWidth: 1
+                    scaleDistribution:
+                        type: linear
+                    thresholdsStyle:
+                        mode: "off"
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: red
+                          value: null
+                        - color: green
+                          value: 40
+            overrides: []
+          gridPos:
+            h: 14
+            w: 24
+            x: 0
+            "y": 0
+          id: 1
+          options:
+            barRadius: 0
+            barWidth: 0.65
+            colorByField: approvalRate
+            fullHighlight: false
+            groupWidth: 0.7
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: true
+            orientation: vertical
+            showValue: always
+            stacking: none
+            text:
+                valueSize: 10
+            tooltip:
+                maxHeight: 600
+                mode: multi
+                sort: none
+            xTickLabelRotation: 0
+            xTickLabelSpacing: 0
+          pluginVersion: 11.0.3
+          targets:
+            - datasource:
+                type: grafana-mongodb-datasource
+                uid: adonk9wsag3k0d
+              parsedQuery: |
+                payments.transactions.aggregate([{"$match":{"$expr":{"$and":[{"$gte":["$createdAt",{"$date":"2024-08-26T07:03:17.323Z"}]},{"$lte":["$createdAt",{"$date":"2024-08-28T07:03:17.323Z"}]},{"$or":[{"$eq":["71afea8c-7b50-4871-85eb-87ae66982e4d","All"]},{"$eq":["$pspId","71afea8c-7b50-4871-85eb-87ae66982e4d"]}]}]}}},{"$group":{"_id":"$country","code":{"$first":"$country"},"txOthers":{"$sum":{"$cond":[{"$and":[{"$ne":["$status","COMPLETED"]},{"$ne":["$errorCategory",2]}]},1,0]}},"txCompleted":{"$sum":{"$cond":[{"$eq":["$status","COMPLETED"]},1,0]}}}},{"$project":{"_id":0,"code":1,"totalTxOthers":{"$sum":"$txOthers"},"totalTxCompleted":{"$sum":"$txCompleted"}}},{"$project":{"code":1,"approvalRate":{"$cond":[{"$eq":["$totalTxOthers",0]},100,{"$round":[{"$multiply":[{"$divide":["$totalTxCompleted",{"$add":["$totalTxOthers","$totalTxCompleted"]}]},100]},2]}]}}},{"$match":{"approvalRate":{"$ne":0}}}])
+              query: "payments.transactions.aggregate([\r\n    {\r\n        $match: { \r\n            $expr: {\r\n                $and: [\r\n                    { $gte: ['$createdAt', new ISODate($__from)] },\r\n                    { $lte: ['$createdAt', new ISODate($__to)] },\r\n                    {\r\n                        $or: [\r\n                            { $eq: [\"$provider\", \"All\"] },\r\n                            { $eq: [\"$pspId\", \"$provider\"] }\r\n                        ]\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    {\r\n        $group: {\r\n            _id: '$country',\r\n            code: { $first: '$country' },\r\n            txOthers: {\r\n                $sum: {\r\n                    $cond: [{\r\n                        $and: [{ $ne: ['$status', \"COMPLETED\"] }, { $ne: ['$errorCategory', 2] }],\r\n                    }, 1, 0],\r\n                },\r\n            },\r\n            txCompleted: {\r\n                $sum: { $cond: [{ $eq: ['$status', 'COMPLETED'] }, 1, 0] },\r\n            },\r\n        },\r\n    },\r\n    {\r\n        $project: {\r\n            _id: 0,\r\n            code: 1,\r\n            totalTxOthers: { $sum: '$txOthers' },\r\n            totalTxCompleted: { $sum: '$txCompleted' },\r\n        },\r\n    },\r\n    {\r\n        $project: {\r\n            code: 1,\r\n            approvalRate: {\r\n                $cond: [\r\n                    { $eq: ['$totalTxOthers', 0] },\r\n                    100,\r\n                    {\r\n                        $round: [\r\n                            {\r\n                                $multiply: [\r\n                                    {\r\n                                        $divide: [\r\n                                            '$totalTxCompleted',\r\n                                            { $add: ['$totalTxOthers', '$totalTxCompleted'] },\r\n                                        ],\r\n                                    },\r\n                                    100,\r\n                                ],\r\n                            },\r\n                            2,\r\n                        ],\r\n                    },\r\n                ],\r\n            },\r\n        },\r\n    },\r\n    {\r\n        $match: { approvalRate: { $ne: 0 } }\r\n    }\r\n])\r\n"
+              queryType: query
+              refId: A
+          title: AR per country
+          transformations:
+            - id: sortBy
+              options:
+                fields: {}
+                sort:
+                    - field: code
+          type: barchart
+    schemaVersion: 39
+    tags: []
+    templating:
+        list:
+            - allValue: All
+              current:
+                selected: true
+                text: All
+                value: $__all
+              datasource:
+                type: grafana-mongodb-datasource
+                uid: adonk9wsag3k0d
+              definition: "Query: payments.psps.aggregate([\r\n  {\r\n    $project: {\r\n      value: \"$_id\",\r\n      name: 1\r\n    }\r\n  },\r\n  {\r\n    $sort: { name: 1 }\r\n  }\r\n])\r\n"
+              hide: 0
+              includeAll: true
+              label: Provider
+              multi: false
+              name: provider
+              options: []
+              query:
+                parsedQuery: |
+                    payments.psps.aggregate([{"$project":{"value":"$_id","name":1}},{"$sort":{"name":1}}])
+                query: "payments.psps.aggregate([\r\n  {\r\n    $project: {\r\n      value: \"$_id\",\r\n      name: 1\r\n    }\r\n  },\r\n  {\r\n    $sort: { name: 1 }\r\n  }\r\n])\r\n"
+                queryType: query
+              refresh: 1
+              regex: ""
+              skipUrlSync: false
+              sort: 0
+              type: query
+    time:
+        from: now/d
+        to: now/d
+    timeRangeUpdatedDuringEditOrView: false
+    timepicker: {}
+    timezone: browser
+    title: AR per country
+    uid: adw5ymmgs8g74c
+    weekStart: ""

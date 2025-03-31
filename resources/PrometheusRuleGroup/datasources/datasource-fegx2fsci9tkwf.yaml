@@ -1,0 +1,23 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Datasource
+metadata:
+    name: fegx2fsci9tkwf
+spec:
+    access: proxy
+    basicAuth: true
+    basicAuthUser: metrics
+    jsonData:
+        httpHeaderName1: X-Scope-OrgID
+        httpMethod: POST
+        oauthPassThru: false
+        sigV4Auth: false
+        tlsSkipVerify: true
+    name: kasha-gke-dev-mimir
+    orgId: 1
+    secureJsonFields:
+        basicAuthPassword: true
+        httpHeaderValue1: true
+    type: prometheus
+    typeLogoUrl: public/app/plugins/datasource/prometheus/img/prometheus_logo.svg
+    uid: fegx2fsci9tkwf
+    url: https://mimir.dev-lr.kasha.io/prometheus

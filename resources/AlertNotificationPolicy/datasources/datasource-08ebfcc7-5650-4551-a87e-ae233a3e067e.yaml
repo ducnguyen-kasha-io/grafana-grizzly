@@ -1,0 +1,15 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Datasource
+metadata:
+    name: 08ebfcc7-5650-4551-a87e-ae233a3e067e
+spec:
+    access: proxy
+    jsonData:
+        timeInterval: 15s
+        tlsSkipVerify: true
+    name: test-kasha
+    orgId: 1
+    type: prometheus
+    typeLogoUrl: public/app/plugins/datasource/prometheus/img/prometheus_logo.svg
+    uid: 08ebfcc7-5650-4551-a87e-ae233a3e067e
+    url: https://prom.test.kasha.tech

@@ -1,0 +1,106 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Dashboard
+metadata:
+    folder: edoom9gbnjwu8c
+    name: bdw693s54g740a
+spec:
+    annotations:
+        list:
+            - builtIn: 1
+              datasource:
+                type: grafana
+                uid: -- Grafana --
+              enable: true
+              hide: true
+              iconColor: rgba(0, 211, 255, 1)
+              name: Annotations & Alerts
+              type: dashboard
+    description: Transaction count per merchant
+    editable: true
+    fiscalYearStartMonth: 0
+    graphTooltip: 0
+    links: []
+    panels:
+        - datasource:
+            type: grafana-mongodb-datasource
+            uid: adonk9wsag3k0d
+          fieldConfig:
+            defaults:
+                color:
+                    mode: palette-classic
+                custom:
+                    axisBorderShow: false
+                    axisCenteredZero: false
+                    axisColorMode: text
+                    axisLabel: ""
+                    axisPlacement: auto
+                    fillOpacity: 100
+                    gradientMode: none
+                    hideFrom:
+                        legend: false
+                        tooltip: false
+                        viz: false
+                    lineWidth: 2
+                    scaleDistribution:
+                        type: linear
+                    thresholdsStyle:
+                        mode: "off"
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: green
+                          value: null
+                        - color: red
+                          value: 80
+            overrides: []
+          gridPos:
+            h: 27
+            w: 24
+            x: 0
+            "y": 0
+          id: 1
+          options:
+            barRadius: 0
+            barWidth: 0.63
+            fullHighlight: false
+            groupWidth: 0.7
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: true
+            orientation: horizontal
+            showValue: always
+            stacking: none
+            tooltip:
+                maxHeight: 600
+                mode: single
+                sort: none
+            xTickLabelRotation: 0
+            xTickLabelSpacing: 0
+          pluginVersion: 11.0.3
+          targets:
+            - datasource:
+                type: grafana-mongodb-datasource
+                uid: adonk9wsag3k0d
+              parsedQuery: |
+                payments.transactions.aggregate([{"$match":{"createdAt":{"$gte":{"$date":"2024-08-27T21:00:00Z"},"$lte":{"$date":"2024-08-28T20:59:59.999Z"}}}},{"$group":{"_id":"$merchantId","transactionCount":{"$sum":1}}},{"$lookup":{"from":"merchants","localField":"_id","foreignField":"_id","as":"merchantInfo"}},{"$unwind":"$merchantInfo"},{"$project":{"_id":0,"merchantName":"$merchantInfo.name","transactionCount":1}},{"$sort":{"transactionCount":-1}}])
+              query: "payments.transactions.aggregate([\r\n    {\r\n        $match: { createdAt: {\r\n        $gte: new ISODate($__from),\r\n        $lte: new ISODate($__to)\r\n      } }\r\n    },\r\n    {\r\n        $group: {\r\n            _id: '$merchantId',\r\n            transactionCount: { $sum: 1 }\r\n        }\r\n    },\r\n    {\r\n        $lookup: {\r\n            from: 'merchants',\r\n            localField: '_id',\r\n            foreignField: '_id',\r\n            as: 'merchantInfo'\r\n        }\r\n    },\r\n    {\r\n        $unwind: '$merchantInfo'\r\n    },\r\n    {\r\n        $project: {\r\n            _id: 0,\r\n            merchantName: '$merchantInfo.name',\r\n            transactionCount: 1\r\n        }\r\n    },\r\n    {\r\n        $sort: { transactionCount: -1 }\r\n    }\r\n])\r\n"
+              queryType: query
+              refId: A
+          title: Merchant transaction count
+          type: barchart
+    schemaVersion: 39
+    tags: []
+    templating:
+        list: []
+    time:
+        from: now/d
+        to: now/d
+    timeRangeUpdatedDuringEditOrView: false
+    timepicker: {}
+    timezone: browser
+    title: Merchants transaction count
+    uid: bdw693s54g740a
+    weekStart: ""

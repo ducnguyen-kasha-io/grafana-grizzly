@@ -1,0 +1,8 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: DashboardFolder
+metadata:
+    name: cdos8yuir5ou8a
+spec:
+    parentUid: edoom9gbnjwu8c
+    title: Merchants
+    uid: cdos8yuir5ou8a

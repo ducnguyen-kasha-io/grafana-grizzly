@@ -1,0 +1,537 @@
+Export started at: 2025-03-31 19:45:30
+Pulling resources for provider: Datasource
+level=info msg="Pulling resources to Datasource"
+Pulling 1 resources
+AlertNotificationPolicy.global pulled
+PrometheusRuleGroup failed: failed listing remote values: missing tenant-id
+1 resource pulled, 1 resource failed
+Error pulling resources for provider: Datasource
+Pulling resources for provider: DashboardFolder
+level=info msg="Pulling resources to DashboardFolder"
+No resources found
+Pulling 41 resources
+Dashboard.adw5ymmgs8g74c pulled
+Dashboard.ddork92ldi60wc pulled
+Dashboard.cdw6x5lh5wirka pulled
+Dashboard.adyefb3z3s9vkd pulled
+Dashboard.cduzjzwxa7togb pulled
+Dashboard.fdtt1rrf75ybkd pulled
+Dashboard.edw6adms8fo5ca pulled
+Dashboard.edrflz1cok5c0c pulled
+Dashboard.edstoqgxtbrb4f pulled
+Dashboard.edtt1chpy34lca pulled
+Dashboard.aegh48dj8n5kwf pulled
+Dashboard.cdtswznyhz5kwa pulled
+Dashboard.adyehislse4u8f pulled
+Dashboard.k8s_system_apisrv pulled
+Dashboard.k8s_system_coredns pulled
+Dashboard.k8s_views_global pulled
+Dashboard.k8s_views_ns pulled
+Dashboard.k8s_views_pods pulled
+Dashboard.ddus2tdxtli4gd pulled
+Dashboard.bdw693s54g740a pulled
+Dashboard.fdtt0tlbq9g5ca pulled
+Dashboard.rYdddlPWk pulled
+Dashboard.adyehrxx5h8u8e pulled
+Dashboard.cdtsz48vtjshse pulled
+Dashboard.edyeg0kee7im8f pulled
+Dashboard.prod-rabbitmq pulled
+Dashboard.rabbitmq-lr pulled
+Dashboard.ddyeh6vf8y4n4b pulled
+Dashboard.Kn5xm-gZk pulled
+Dashboard.bdtpk6cufozcwf pulled
+Dashboard.overview-k8s pulled
+Dashboard.overview-node-exporter pulled
+Dashboard.adwd2x2c173swa pulled
+Dashboard.ingress-overview pulled
+Dashboard.ddoooxctiqqrkd pulled
+Dashboard.adonm52l3sem8e pulled
+Dashboard.bdtt00hu0n1mob pulled
+Dashboard.be8h0e43d0wzkd pulled
+Dashboard.fdos95khh2ltsc pulled
+Dashboard.edyegln9op1j4a pulled
+Dashboard.adtpjgtqip534c pulled
+Pulling 4 resources
+AlertNotificationTemplate.custom.services.alert.body pulled
+AlertNotificationTemplate.custom.services.alert.body.v2 pulled
+AlertNotificationTemplate.custom.services.alert.mail.body pulled
+AlertNotificationTemplate.custom.services.alert.title pulled
+PrometheusRuleGroup failed: failed listing remote values: missing tenant-id
+45 resources pulled, 1 resource failed
+Error pulling resources for provider: DashboardFolder
+Pulling resources for provider: LibraryElement
+level=info msg="Pulling resources to LibraryElement"
+Pulling 9 resources
+Datasource.cdruj39ogo54wa pulled
+Datasource.fegx2fsci9tkwf pulled
+Datasource.10b16cce-1434-4c4e-8eee-2a65c8d7594f pulled
+Datasource.d3d0edbb-5c7a-421e-8f5d-bdde2c450523 pulled
+Datasource.fefj1z4hswb28a pulled
+Datasource.adonk9wsag3k0d pulled
+Datasource.eegx2fqqsm9z4b pulled
+Datasource.26ace657-dfe0-4172-aa11-87cd963638df pulled
+Datasource.08ebfcc7-5650-4551-a87e-ae233a3e067e pulled
+Pulling 6 resources
+DashboardFolder.beg7eceu16pkwc pulled
+DashboardFolder.edoom9gbnjwu8c pulled
+DashboardFolder.cdos8yuir5ou8a pulled
+DashboardFolder.bdrfltdpb2q68c pulled
+DashboardFolder.adyegko6ljf28d pulled
+DashboardFolder.fds3wc5k1wkcgb pulled
+Pulling 3 resources
+AlertRuleGroup.bdrfltdpb2q68c.Error messages pulled
+AlertRuleGroup.beg7eceu16pkwc.5m pulled
+AlertRuleGroup.edoom9gbnjwu8c.1 minute pulled
+Pulling 1 resources
+AlertNotificationPolicy.global pulled
+Pulling 4 resources
+AlertContactPoint.be9hhseu9yrcwd pulled
+AlertContactPoint.degaten3exhc0d pulled
+AlertContactPoint.edrfu9emozzswa pulled
+AlertContactPoint.ce9jqath4nklca pulled
+PrometheusRuleGroup failed: failed listing remote values: missing tenant-id
+23 resources pulled, 1 resource failed
+Error pulling resources for provider: LibraryElement
+Pulling resources for provider: Dashboard
+level=info msg="Pulling resources to Dashboard"
+No resources found
+Pulling 41 resources
+Dashboard.adw5ymmgs8g74c pulled
+Dashboard.ddork92ldi60wc pulled
+Dashboard.cdw6x5lh5wirka pulled
+Dashboard.adyefb3z3s9vkd pulled
+Dashboard.cduzjzwxa7togb pulled
+Dashboard.fdtt1rrf75ybkd pulled
+Dashboard.edw6adms8fo5ca pulled
+Dashboard.edrflz1cok5c0c pulled
+Dashboard.edstoqgxtbrb4f pulled
+Dashboard.edtt1chpy34lca pulled
+Dashboard.aegh48dj8n5kwf pulled
+Dashboard.cdtswznyhz5kwa pulled
+Dashboard.adyehislse4u8f pulled
+Dashboard.k8s_system_apisrv pulled
+Dashboard.k8s_system_coredns pulled
+Dashboard.k8s_views_global pulled
+Dashboard.k8s_views_ns pulled
+Dashboard.k8s_views_pods pulled
+Dashboard.ddus2tdxtli4gd pulled
+Dashboard.bdw693s54g740a pulled
+Dashboard.fdtt0tlbq9g5ca pulled
+Dashboard.rYdddlPWk pulled
+Dashboard.adyehrxx5h8u8e pulled
+Dashboard.cdtsz48vtjshse pulled
+Dashboard.edyeg0kee7im8f pulled
+Dashboard.prod-rabbitmq pulled
+Dashboard.rabbitmq-lr pulled
+Dashboard.ddyeh6vf8y4n4b pulled
+Dashboard.Kn5xm-gZk pulled
+Dashboard.bdtpk6cufozcwf pulled
+Dashboard.overview-k8s pulled
+Dashboard.overview-node-exporter pulled
+Dashboard.adwd2x2c173swa pulled
+Dashboard.ingress-overview pulled
+Dashboard.ddoooxctiqqrkd pulled
+Dashboard.adonm52l3sem8e pulled
+Dashboard.bdtt00hu0n1mob pulled
+Dashboard.be8h0e43d0wzkd pulled
+Dashboard.fdos95khh2ltsc pulled
+Dashboard.edyegln9op1j4a pulled
+Dashboard.adtpjgtqip534c pulled
+Pulling 4 resources
+AlertContactPoint.be9hhseu9yrcwd pulled
+AlertContactPoint.degaten3exhc0d pulled
+AlertContactPoint.edrfu9emozzswa pulled
+AlertContactPoint.ce9jqath4nklca pulled
+PrometheusRuleGroup failed: failed listing remote values: missing tenant-id
+45 resources pulled, 1 resource failed
+Error pulling resources for provider: Dashboard
+Pulling resources for provider: AlertRuleGroup
+level=info msg="Pulling resources to AlertRuleGroup"
+Pulling 9 resources
+Datasource.cdruj39ogo54wa pulled
+Datasource.fegx2fsci9tkwf pulled
+Datasource.10b16cce-1434-4c4e-8eee-2a65c8d7594f pulled
+Datasource.d3d0edbb-5c7a-421e-8f5d-bdde2c450523 pulled
+Datasource.fefj1z4hswb28a pulled
+Datasource.adonk9wsag3k0d pulled
+Datasource.eegx2fqqsm9z4b pulled
+Datasource.26ace657-dfe0-4172-aa11-87cd963638df pulled
+Datasource.08ebfcc7-5650-4551-a87e-ae233a3e067e pulled
+No resources found
+Pulling 41 resources
+Dashboard.adw5ymmgs8g74c pulled
+Dashboard.ddork92ldi60wc pulled
+Dashboard.cdw6x5lh5wirka pulled
+Dashboard.adyefb3z3s9vkd pulled
+Dashboard.cduzjzwxa7togb pulled
+Dashboard.fdtt1rrf75ybkd pulled
+Dashboard.edw6adms8fo5ca pulled
+Dashboard.edrflz1cok5c0c pulled
+Dashboard.edstoqgxtbrb4f pulled
+Dashboard.edtt1chpy34lca pulled
+Dashboard.aegh48dj8n5kwf pulled
+Dashboard.cdtswznyhz5kwa pulled
+Dashboard.adyehislse4u8f pulled
+Dashboard.k8s_system_apisrv pulled
+Dashboard.k8s_system_coredns pulled
+Dashboard.k8s_views_global pulled
+Dashboard.k8s_views_ns pulled
+Dashboard.k8s_views_pods pulled
+Dashboard.ddus2tdxtli4gd pulled
+Dashboard.bdw693s54g740a pulled
+Dashboard.fdtt0tlbq9g5ca pulled
+Dashboard.rYdddlPWk pulled
+Dashboard.adyehrxx5h8u8e pulled
+Dashboard.cdtsz48vtjshse pulled
+Dashboard.edyeg0kee7im8f pulled
+Dashboard.prod-rabbitmq pulled
+Dashboard.rabbitmq-lr pulled
+Dashboard.ddyeh6vf8y4n4b pulled
+Dashboard.Kn5xm-gZk pulled
+Dashboard.bdtpk6cufozcwf pulled
+Dashboard.overview-k8s pulled
+Dashboard.overview-node-exporter pulled
+Dashboard.adwd2x2c173swa pulled
+Dashboard.ingress-overview pulled
+Dashboard.ddoooxctiqqrkd pulled
+Dashboard.adonm52l3sem8e pulled
+Dashboard.bdtt00hu0n1mob pulled
+Dashboard.be8h0e43d0wzkd pulled
+Dashboard.fdos95khh2ltsc pulled
+Dashboard.edyegln9op1j4a pulled
+Dashboard.adtpjgtqip534c pulled
+Pulling 3 resources
+AlertRuleGroup.bdrfltdpb2q68c.Error messages pulled
+AlertRuleGroup.beg7eceu16pkwc.5m pulled
+AlertRuleGroup.edoom9gbnjwu8c.1 minute pulled
+Pulling 1 resources
+AlertNotificationPolicy.global pulled
+Pulling 4 resources
+AlertNotificationTemplate.custom.services.alert.body pulled
+AlertNotificationTemplate.custom.services.alert.body.v2 pulled
+AlertNotificationTemplate.custom.services.alert.mail.body pulled
+AlertNotificationTemplate.custom.services.alert.title pulled
+Pulling 6 resources
+DashboardFolder.beg7eceu16pkwc pulled
+DashboardFolder.edoom9gbnjwu8c pulled
+DashboardFolder.cdos8yuir5ou8a pulled
+DashboardFolder.bdrfltdpb2q68c pulled
+DashboardFolder.adyegko6ljf28d pulled
+DashboardFolder.fds3wc5k1wkcgb pulled
+Pulling 4 resources
+AlertContactPoint.be9hhseu9yrcwd pulled
+AlertContactPoint.degaten3exhc0d pulled
+AlertContactPoint.edrfu9emozzswa pulled
+AlertContactPoint.ce9jqath4nklca pulled
+PrometheusRuleGroup failed: failed listing remote values: missing tenant-id
+68 resources pulled, 1 resource failed
+Error pulling resources for provider: AlertRuleGroup
+Pulling resources for provider: AlertNotificationPolicy
+level=info msg="Pulling resources to AlertNotificationPolicy"
+Pulling 4 resources
+AlertNotificationTemplate.custom.services.alert.body pulled
+AlertNotificationTemplate.custom.services.alert.body.v2 pulled
+AlertNotificationTemplate.custom.services.alert.mail.body pulled
+AlertNotificationTemplate.custom.services.alert.title pulled
+Pulling 9 resources
+Datasource.cdruj39ogo54wa pulled
+Datasource.fegx2fsci9tkwf pulled
+Datasource.10b16cce-1434-4c4e-8eee-2a65c8d7594f pulled
+Datasource.d3d0edbb-5c7a-421e-8f5d-bdde2c450523 pulled
+Datasource.fefj1z4hswb28a pulled
+Datasource.adonk9wsag3k0d pulled
+Datasource.eegx2fqqsm9z4b pulled
+Datasource.26ace657-dfe0-4172-aa11-87cd963638df pulled
+Datasource.08ebfcc7-5650-4551-a87e-ae233a3e067e pulled
+No resources found
+Pulling 3 resources
+AlertRuleGroup.bdrfltdpb2q68c.Error messages pulled
+AlertRuleGroup.beg7eceu16pkwc.5m pulled
+AlertRuleGroup.edoom9gbnjwu8c.1 minute pulled
+Pulling 1 resources
+AlertNotificationPolicy.global pulled
+Pulling 4 resources
+AlertContactPoint.be9hhseu9yrcwd pulled
+AlertContactPoint.degaten3exhc0d pulled
+AlertContactPoint.edrfu9emozzswa pulled
+AlertContactPoint.ce9jqath4nklca pulled
+Pulling 6 resources
+DashboardFolder.beg7eceu16pkwc pulled
+DashboardFolder.edoom9gbnjwu8c pulled
+DashboardFolder.cdos8yuir5ou8a pulled
+DashboardFolder.bdrfltdpb2q68c pulled
+DashboardFolder.adyegko6ljf28d pulled
+DashboardFolder.fds3wc5k1wkcgb pulled
+Pulling 41 resources
+Dashboard.adw5ymmgs8g74c pulled
+Dashboard.ddork92ldi60wc pulled
+Dashboard.cdw6x5lh5wirka pulled
+Dashboard.adyefb3z3s9vkd pulled
+Dashboard.cduzjzwxa7togb pulled
+Dashboard.fdtt1rrf75ybkd pulled
+Dashboard.edw6adms8fo5ca pulled
+Dashboard.edrflz1cok5c0c pulled
+Dashboard.edstoqgxtbrb4f pulled
+Dashboard.edtt1chpy34lca pulled
+Dashboard.aegh48dj8n5kwf pulled
+Dashboard.cdtswznyhz5kwa pulled
+Dashboard.adyehislse4u8f pulled
+Dashboard.k8s_system_apisrv pulled
+Dashboard.k8s_system_coredns pulled
+Dashboard.k8s_views_global pulled
+Dashboard.k8s_views_ns pulled
+Dashboard.k8s_views_pods pulled
+Dashboard.ddus2tdxtli4gd pulled
+Dashboard.bdw693s54g740a pulled
+Dashboard.fdtt0tlbq9g5ca pulled
+Dashboard.rYdddlPWk pulled
+Dashboard.adyehrxx5h8u8e pulled
+Dashboard.cdtsz48vtjshse pulled
+Dashboard.edyeg0kee7im8f pulled
+Dashboard.prod-rabbitmq pulled
+Dashboard.rabbitmq-lr pulled
+Dashboard.ddyeh6vf8y4n4b pulled
+Dashboard.Kn5xm-gZk pulled
+Dashboard.bdtpk6cufozcwf pulled
+Dashboard.overview-k8s pulled
+Dashboard.overview-node-exporter pulled
+Dashboard.adwd2x2c173swa pulled
+Dashboard.ingress-overview pulled
+Dashboard.ddoooxctiqqrkd pulled
+Dashboard.adonm52l3sem8e pulled
+Dashboard.bdtt00hu0n1mob pulled
+Dashboard.be8h0e43d0wzkd pulled
+Dashboard.fdos95khh2ltsc pulled
+Dashboard.edyegln9op1j4a pulled
+Dashboard.adtpjgtqip534c pulled
+PrometheusRuleGroup failed: failed listing remote values: missing tenant-id
+68 resources pulled, 1 resource failed
+Error pulling resources for provider: AlertNotificationPolicy
+Pulling resources for provider: AlertContactPoint
+level=info msg="Pulling resources to AlertContactPoint"
+No resources found
+Pulling 41 resources
+Dashboard.adw5ymmgs8g74c pulled
+Dashboard.ddork92ldi60wc pulled
+Dashboard.cdw6x5lh5wirka pulled
+Dashboard.adyefb3z3s9vkd pulled
+Dashboard.cduzjzwxa7togb pulled
+Dashboard.fdtt1rrf75ybkd pulled
+Dashboard.edw6adms8fo5ca pulled
+Dashboard.edrflz1cok5c0c pulled
+Dashboard.edstoqgxtbrb4f pulled
+Dashboard.edtt1chpy34lca pulled
+Dashboard.aegh48dj8n5kwf pulled
+Dashboard.cdtswznyhz5kwa pulled
+Dashboard.adyehislse4u8f pulled
+Dashboard.k8s_system_apisrv pulled
+Dashboard.k8s_system_coredns pulled
+Dashboard.k8s_views_global pulled
+Dashboard.k8s_views_ns pulled
+Dashboard.k8s_views_pods pulled
+Dashboard.ddus2tdxtli4gd pulled
+Dashboard.bdw693s54g740a pulled
+Dashboard.fdtt0tlbq9g5ca pulled
+Dashboard.rYdddlPWk pulled
+Dashboard.adyehrxx5h8u8e pulled
+Dashboard.cdtsz48vtjshse pulled
+Dashboard.edyeg0kee7im8f pulled
+Dashboard.prod-rabbitmq pulled
+Dashboard.rabbitmq-lr pulled
+Dashboard.ddyeh6vf8y4n4b pulled
+Dashboard.Kn5xm-gZk pulled
+Dashboard.bdtpk6cufozcwf pulled
+Dashboard.overview-k8s pulled
+Dashboard.overview-node-exporter pulled
+Dashboard.adwd2x2c173swa pulled
+Dashboard.ingress-overview pulled
+Dashboard.ddoooxctiqqrkd pulled
+Dashboard.adonm52l3sem8e pulled
+Dashboard.bdtt00hu0n1mob pulled
+Dashboard.be8h0e43d0wzkd pulled
+Dashboard.fdos95khh2ltsc pulled
+Dashboard.edyegln9op1j4a pulled
+Dashboard.adtpjgtqip534c pulled
+Pulling 3 resources
+AlertRuleGroup.bdrfltdpb2q68c.Error messages pulled
+AlertRuleGroup.beg7eceu16pkwc.5m pulled
+AlertRuleGroup.edoom9gbnjwu8c.1 minute pulled
+Pulling 4 resources
+AlertNotificationTemplate.custom.services.alert.body pulled
+AlertNotificationTemplate.custom.services.alert.body.v2 pulled
+AlertNotificationTemplate.custom.services.alert.mail.body pulled
+AlertNotificationTemplate.custom.services.alert.title pulled
+Pulling 9 resources
+Datasource.cdruj39ogo54wa pulled
+Datasource.fegx2fsci9tkwf pulled
+Datasource.10b16cce-1434-4c4e-8eee-2a65c8d7594f pulled
+Datasource.d3d0edbb-5c7a-421e-8f5d-bdde2c450523 pulled
+Datasource.fefj1z4hswb28a pulled
+Datasource.adonk9wsag3k0d pulled
+Datasource.eegx2fqqsm9z4b pulled
+Datasource.26ace657-dfe0-4172-aa11-87cd963638df pulled
+Datasource.08ebfcc7-5650-4551-a87e-ae233a3e067e pulled
+Pulling 6 resources
+DashboardFolder.beg7eceu16pkwc pulled
+DashboardFolder.edoom9gbnjwu8c pulled
+DashboardFolder.cdos8yuir5ou8a pulled
+DashboardFolder.bdrfltdpb2q68c pulled
+DashboardFolder.adyegko6ljf28d pulled
+DashboardFolder.fds3wc5k1wkcgb pulled
+Pulling 1 resources
+AlertNotificationPolicy.global pulled
+Pulling 4 resources
+AlertContactPoint.be9hhseu9yrcwd pulled
+AlertContactPoint.degaten3exhc0d pulled
+AlertContactPoint.edrfu9emozzswa pulled
+AlertContactPoint.ce9jqath4nklca pulled
+PrometheusRuleGroup failed: failed listing remote values: missing tenant-id
+68 resources pulled, 1 resource failed
+Error pulling resources for provider: AlertContactPoint
+Pulling resources for provider: AlertNotificationTemplate
+level=info msg="Pulling resources to AlertNotificationTemplate"
+Pulling 41 resources
+Dashboard.adw5ymmgs8g74c pulled
+Dashboard.ddork92ldi60wc pulled
+Dashboard.cdw6x5lh5wirka pulled
+Dashboard.adyefb3z3s9vkd pulled
+Dashboard.cduzjzwxa7togb pulled
+Dashboard.fdtt1rrf75ybkd pulled
+Dashboard.edw6adms8fo5ca pulled
+Dashboard.edrflz1cok5c0c pulled
+Dashboard.edstoqgxtbrb4f pulled
+Dashboard.edtt1chpy34lca pulled
+Dashboard.aegh48dj8n5kwf pulled
+Dashboard.cdtswznyhz5kwa pulled
+Dashboard.adyehislse4u8f pulled
+Dashboard.k8s_system_apisrv pulled
+Dashboard.k8s_system_coredns pulled
+Dashboard.k8s_views_global pulled
+Dashboard.k8s_views_ns pulled
+Dashboard.k8s_views_pods pulled
+Dashboard.ddus2tdxtli4gd pulled
+Dashboard.bdw693s54g740a pulled
+Dashboard.fdtt0tlbq9g5ca pulled
+Dashboard.rYdddlPWk pulled
+Dashboard.adyehrxx5h8u8e pulled
+Dashboard.cdtsz48vtjshse pulled
+Dashboard.edyeg0kee7im8f pulled
+Dashboard.prod-rabbitmq pulled
+Dashboard.rabbitmq-lr pulled
+Dashboard.ddyeh6vf8y4n4b pulled
+Dashboard.Kn5xm-gZk pulled
+Dashboard.bdtpk6cufozcwf pulled
+Dashboard.overview-k8s pulled
+Dashboard.overview-node-exporter pulled
+Dashboard.adwd2x2c173swa pulled
+Dashboard.ingress-overview pulled
+Dashboard.ddoooxctiqqrkd pulled
+Dashboard.adonm52l3sem8e pulled
+Dashboard.bdtt00hu0n1mob pulled
+Dashboard.be8h0e43d0wzkd pulled
+Dashboard.fdos95khh2ltsc pulled
+Dashboard.edyegln9op1j4a pulled
+Dashboard.adtpjgtqip534c pulled
+Pulling 3 resources
+AlertRuleGroup.bdrfltdpb2q68c.Error messages pulled
+AlertRuleGroup.beg7eceu16pkwc.5m pulled
+AlertRuleGroup.edoom9gbnjwu8c.1 minute pulled
+Pulling 4 resources
+AlertContactPoint.be9hhseu9yrcwd pulled
+AlertContactPoint.degaten3exhc0d pulled
+AlertContactPoint.edrfu9emozzswa pulled
+AlertContactPoint.ce9jqath4nklca pulled
+Pulling 4 resources
+AlertNotificationTemplate.custom.services.alert.body pulled
+AlertNotificationTemplate.custom.services.alert.body.v2 pulled
+AlertNotificationTemplate.custom.services.alert.mail.body pulled
+AlertNotificationTemplate.custom.services.alert.title pulled
+SyntheticMonitoringCheck failed: failed listing remote values: failed to install synthetic monitoring client : sending install request: sending HTTP request: Post "/api/v1/register/install": unsupported protocol scheme ""
+52 resources pulled, 1 resource failed
+Error pulling resources for provider: AlertNotificationTemplate
+Pulling resources for provider: PrometheusRuleGroup
+level=info msg="Pulling resources to PrometheusRuleGroup"
+No resources found
+Pulling 1 resources
+AlertNotificationPolicy.global pulled
+Pulling 4 resources
+AlertNotificationTemplate.custom.services.alert.body pulled
+AlertNotificationTemplate.custom.services.alert.body.v2 pulled
+AlertNotificationTemplate.custom.services.alert.mail.body pulled
+AlertNotificationTemplate.custom.services.alert.title pulled
+Pulling 9 resources
+Datasource.cdruj39ogo54wa pulled
+Datasource.fegx2fsci9tkwf pulled
+Datasource.10b16cce-1434-4c4e-8eee-2a65c8d7594f pulled
+Datasource.d3d0edbb-5c7a-421e-8f5d-bdde2c450523 pulled
+Datasource.fefj1z4hswb28a pulled
+Datasource.adonk9wsag3k0d pulled
+Datasource.eegx2fqqsm9z4b pulled
+Datasource.26ace657-dfe0-4172-aa11-87cd963638df pulled
+Datasource.08ebfcc7-5650-4551-a87e-ae233a3e067e pulled
+Pulling 41 resources
+Dashboard.adw5ymmgs8g74c pulled
+Dashboard.ddork92ldi60wc pulled
+Dashboard.cdw6x5lh5wirka pulled
+Dashboard.adyefb3z3s9vkd pulled
+Dashboard.cduzjzwxa7togb pulled
+Dashboard.fdtt1rrf75ybkd pulled
+Dashboard.edw6adms8fo5ca pulled
+Dashboard.edrflz1cok5c0c pulled
+Dashboard.edstoqgxtbrb4f pulled
+Dashboard.edtt1chpy34lca pulled
+Dashboard.aegh48dj8n5kwf pulled
+Dashboard.cdtswznyhz5kwa pulled
+Dashboard.adyehislse4u8f pulled
+Dashboard.k8s_system_apisrv pulled
+Dashboard.k8s_system_coredns pulled
+Dashboard.k8s_views_global pulled
+Dashboard.k8s_views_ns pulled
+Dashboard.k8s_views_pods pulled
+Dashboard.ddus2tdxtli4gd pulled
+Dashboard.bdw693s54g740a pulled
+Dashboard.fdtt0tlbq9g5ca pulled
+Dashboard.rYdddlPWk pulled
+Dashboard.adyehrxx5h8u8e pulled
+Dashboard.cdtsz48vtjshse pulled
+Dashboard.edyeg0kee7im8f pulled
+Dashboard.prod-rabbitmq pulled
+Dashboard.rabbitmq-lr pulled
+Dashboard.ddyeh6vf8y4n4b pulled
+Dashboard.Kn5xm-gZk pulled
+Dashboard.bdtpk6cufozcwf pulled
+Dashboard.overview-k8s pulled
+Dashboard.overview-node-exporter pulled
+Dashboard.adwd2x2c173swa pulled
+Dashboard.ingress-overview pulled
+Dashboard.ddoooxctiqqrkd pulled
+Dashboard.adonm52l3sem8e pulled
+Dashboard.bdtt00hu0n1mob pulled
+Dashboard.be8h0e43d0wzkd pulled
+Dashboard.fdos95khh2ltsc pulled
+Dashboard.edyegln9op1j4a pulled
+Dashboard.adtpjgtqip534c pulled
+Pulling 3 resources
+AlertRuleGroup.beg7eceu16pkwc.5m pulled
+AlertRuleGroup.edoom9gbnjwu8c.1 minute pulled
+AlertRuleGroup.bdrfltdpb2q68c.Error messages pulled
+Pulling 4 resources
+AlertContactPoint.be9hhseu9yrcwd pulled
+AlertContactPoint.degaten3exhc0d pulled
+AlertContactPoint.edrfu9emozzswa pulled
+AlertContactPoint.ce9jqath4nklca pulled
+PrometheusRuleGroup failed: failed listing remote values: missing tenant-id
+62 resources pulled, 1 resource failed
+Error pulling resources for provider: PrometheusRuleGroup
+Pulling resources for provider: SyntheticMonitoringCheck
+level=info msg="Pulling resources to SyntheticMonitoringCheck"
+Pulling 4 resources
+AlertNotificationTemplate.custom.services.alert.body pulled
+AlertNotificationTemplate.custom.services.alert.body.v2 pulled
+AlertNotificationTemplate.custom.services.alert.mail.body pulled
+AlertNotificationTemplate.custom.services.alert.title pulled
+PrometheusRuleGroup failed: failed listing remote values: missing tenant-id
+4 resources pulled, 1 resource failed
+Error pulling resources for provider: SyntheticMonitoringCheck
+Export finished at: 2025-03-31 19:48:11
+Finished pulling resources for all providers.

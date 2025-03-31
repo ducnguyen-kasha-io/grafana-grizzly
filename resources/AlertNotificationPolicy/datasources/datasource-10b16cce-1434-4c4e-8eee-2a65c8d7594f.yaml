@@ -1,0 +1,15 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Datasource
+metadata:
+    name: 10b16cce-1434-4c4e-8eee-2a65c8d7594f
+spec:
+    access: proxy
+    jsonData:
+        timeInterval: 15s
+        tlsSkipVerify: true
+    name: MongoDB
+    orgId: 1
+    type: simple-json-datasource
+    typeLogoUrl: public/img/icn-datasource.svg
+    uid: 10b16cce-1434-4c4e-8eee-2a65c8d7594f
+    url: http://mongodb-grafana
