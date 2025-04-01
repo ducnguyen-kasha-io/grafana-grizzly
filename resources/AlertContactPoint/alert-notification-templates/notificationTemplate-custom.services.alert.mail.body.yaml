@@ -1,7 +1,0 @@
-apiVersion: grizzly.grafana.com/v1alpha1
-kind: AlertNotificationTemplate
-metadata:
-    name: custom.services.alert.mail.body
-spec:
-    name: custom.services.alert.mail.body
-    template: "{{ define \"custom.services.alert.mail.body\" }}\n{{ range $k, $v := .Alerts.Firing }}\n{{ $http_unknown_errors_reduced := index $v.Values \"http_unknown_errors_reduced\" }}\n{{ if $http_unknown_errors_reduced }}\n- \U0001F525 **There is a HTTP error**\n{{ end }}\n{{ $http_errors_reduced := index $v.Values \"http_errors_reduced\" }}\n{{ if $http_errors_reduced }}\n- \U0001F4A5 **There is a HTTP error with status code {{ $http_errors_reduced }}**\n{{ end }}\n{{ $mongo_errors_reduced  := index $v.Values \"mongo_errors_reduced\" }}\n{{ if $mongo_errors_reduced }}\n- \U0001F9ED **There is a Mongo DB error**\n{{ end }}\n{{ $elastic_url  := index $v.Labels \"elastic_url\" }}\n{{ if $elastic_url }}\n- \U0001F517 Elastic Url: {{$elastic_url}}\n{{ end }}\n- \U0001F517 Dashboard: {{ .DashboardURL }}\n- \U0001F517 Panel: [{{ $v.PanelURL }}]({{ $v.PanelURL }})\n- \U0001F517 Silence this notifacions: {{ $v.SilenceURL }}\n{{ end }}\n{{ end }}"
