@@ -1,0 +1,694 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: AlertRuleGroup
+metadata:
+    name: dej2wdgeov5z4e.5m
+spec:
+    folderUid: dej2wdgeov5z4e
+    interval: 300
+    rules:
+        - condition: C
+          data:
+            - datasourceUid: feu6yxrhwnrpca
+              model:
+                collection: transactions
+                datasource:
+                    type: haohanyang-mongodb-datasource
+                    uid: feu6yxrhwnrpca
+                hide: false
+                intervalMs: 1000
+                isStreaming: false
+                maxDataPoints: 43200
+                queryLanguage: json
+                queryText: "[\r\n  {\r\n    \"$match\": {\r\n      \"$expr\": {\r\n        \"$gte\": [\r\n          \"$createdAt\",\r\n          {\r\n            \"$dateSubtract\": {\r\n              \"startDate\": \"$$NOW\",\r\n              \"unit\": \"minute\",\r\n              \"amount\": 30\r\n            }\r\n          }\r\n        ]\r\n      },\r\n      \"merchantId\": \"3a9e9723-90d0-454e-8bec-8c4f3a9d6403\"\r\n    }\r\n  },\r\n  {\r\n    \"$facet\": {\r\n      \"count\": [\r\n        {\r\n          \"$count\": \"transactionCount\"\r\n        }\r\n      ],\r\n      \"default\": [\r\n        {\r\n          \"$addFields\": {\r\n            \"transactionCount\": 0\r\n          }\r\n        }\r\n      ]\r\n    }\r\n  },\r\n  {\r\n    \"$project\": {\r\n      \"transactionCount\": {\r\n        \"$cond\": {\r\n          \"if\": {\r\n            \"$gt\": [\r\n              { \"$size\": \"$count\" },\r\n              0\r\n            ]\r\n          },\r\n          \"then\": {\r\n            \"$arrayElemAt\": [\r\n              \"$count.transactionCount\",\r\n              0\r\n            ]\r\n          },\r\n          \"else\": 0\r\n        }\r\n      }\r\n    }\r\n  }\r\n]"
+                queryType: table
+                refId: A
+              queryType: table
+              refId: A
+              relativeTimeRange:
+                from: 600
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: B
+                type: reduce
+              refId: B
+              relativeTimeRange: {}
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 1
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+              refId: C
+              relativeTimeRange: {}
+          execErrState: Error
+          folderUID: dej2wdgeov5z4e
+          for: 0s
+          id: 48
+          noDataState: NoData
+          notification_settings:
+            group_by: null
+            mute_time_intervals: null
+            receiver: grafana-default-email
+          orgID: 1
+          ruleGroup: 5m
+          title: Softswiss stopped processing
+          uid: ceu6zfsml8j5sb
+          updated: "2025-08-08T06:20:31.201Z"
+        - condition: C
+          data:
+            - datasourceUid: feu6yxrhwnrpca
+              model:
+                collection: transactions
+                datasource:
+                    type: haohanyang-mongodb-datasource
+                    uid: feu6yxrhwnrpca
+                intervalMs: 1000
+                isStreaming: false
+                maxDataPoints: 43200
+                queryLanguage: json
+                queryText: "[\r\n  {\r\n    \"$match\": {\r\n      \"$expr\": {\r\n        \"$gte\": [\r\n          \"$createdAt\",\r\n          {\r\n            \"$dateSubtract\": {\r\n              \"startDate\": \"$$NOW\",\r\n              \"unit\": \"minute\",\r\n              \"amount\": 30\r\n            }\r\n          }\r\n        ]\r\n      },\r\n      \"merchantId\": \"608914a2-e309-4d10-9a2c-f90f9fb38e82\"\r\n    }\r\n  },\r\n  {\r\n    \"$facet\": {\r\n      \"count\": [\r\n        {\r\n          \"$count\": \"transactionCount\"\r\n        }\r\n      ],\r\n      \"default\": [\r\n        {\r\n          \"$addFields\": {\r\n            \"transactionCount\": 0\r\n          }\r\n        }\r\n      ]\r\n    }\r\n  },\r\n  {\r\n    \"$project\": {\r\n      \"transactionCount\": {\r\n        \"$cond\": {\r\n          \"if\": {\r\n            \"$gt\": [\r\n              { \"$size\": \"$count\" },\r\n              0\r\n            ]\r\n          },\r\n          \"then\": {\r\n            \"$arrayElemAt\": [\r\n              \"$count.transactionCount\",\r\n              0\r\n            ]\r\n          },\r\n          \"else\": 0\r\n        }\r\n      }\r\n    }\r\n  }\r\n]"
+                queryType: table
+                refId: A
+              queryType: table
+              refId: A
+              relativeTimeRange:
+                from: 600
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: B
+                type: reduce
+              refId: B
+              relativeTimeRange: {}
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 1
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+              refId: C
+              relativeTimeRange: {}
+          execErrState: Error
+          folderUID: dej2wdgeov5z4e
+          for: 0s
+          id: 49
+          isPaused: true
+          noDataState: NoData
+          notification_settings:
+            group_by: null
+            mute_time_intervals: null
+            receiver: grafana-default-email
+          orgID: 1
+          ruleGroup: 5m
+          title: VZTech stopped processing
+          uid: aeu6zl0btk54wf
+          updated: "2025-08-08T06:20:31.201Z"
+        - condition: C
+          data:
+            - datasourceUid: feu6yxrhwnrpca
+              model:
+                collection: transactions
+                datasource:
+                    type: haohanyang-mongodb-datasource
+                    uid: feu6yxrhwnrpca
+                intervalMs: 1000
+                isStreaming: false
+                maxDataPoints: 43200
+                queryLanguage: json
+                queryText: "[\r\n  {\r\n    \"$match\": {\r\n      \"$expr\": {\r\n        \"$gte\": [\r\n          \"$createdAt\",\r\n          {\r\n            \"$dateSubtract\": {\r\n              \"startDate\": \"$$NOW\",\r\n              \"unit\": \"minute\",\r\n              \"amount\": 30\r\n            }\r\n          }\r\n        ]\r\n      },\r\n      \"merchantId\": \"db3ef96b-aa74-41a3-b8d9-ff3ae2999253\"\r\n    }\r\n  },\r\n  {\r\n    \"$facet\": {\r\n      \"count\": [\r\n        {\r\n          \"$count\": \"transactionCount\"\r\n        }\r\n      ],\r\n      \"default\": [\r\n        {\r\n          \"$addFields\": {\r\n            \"transactionCount\": 0\r\n          }\r\n        }\r\n      ]\r\n    }\r\n  },\r\n  {\r\n    \"$project\": {\r\n      \"transactionCount\": {\r\n        \"$cond\": {\r\n          \"if\": {\r\n            \"$gt\": [\r\n              { \"$size\": \"$count\" },\r\n              0\r\n            ]\r\n          },\r\n          \"then\": {\r\n            \"$arrayElemAt\": [\r\n              \"$count.transactionCount\",\r\n              0\r\n            ]\r\n          },\r\n          \"else\": 0\r\n        }\r\n      }\r\n    }\r\n  }\r\n]"
+                queryType: table
+                refId: A
+              queryType: table
+              refId: A
+              relativeTimeRange:
+                from: 600
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: B
+                type: reduce
+              refId: B
+              relativeTimeRange: {}
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 1
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+              refId: C
+              relativeTimeRange: {}
+          execErrState: Error
+          folderUID: dej2wdgeov5z4e
+          for: 5m0s
+          id: 50
+          isPaused: true
+          noDataState: NoData
+          notification_settings:
+            group_by: null
+            mute_time_intervals: null
+            receiver: grafana-default-email
+          orgID: 1
+          ruleGroup: 5m
+          title: GumballPay stopped processing
+          uid: feu6zn1og7wg0d
+          updated: "2025-08-08T06:20:31.201Z"
+        - condition: C
+          data:
+            - datasourceUid: feu6yxrhwnrpca
+              model:
+                collection: transactions
+                datasource:
+                    type: haohanyang-mongodb-datasource
+                    uid: feu6yxrhwnrpca
+                intervalMs: 1000
+                isStreaming: false
+                maxDataPoints: 43200
+                queryLanguage: json
+                queryText: "[\r\n  {\r\n    \"$match\": {\r\n      \"$expr\": {\r\n        \"$gte\": [\r\n          \"$createdAt\",\r\n          {\r\n            \"$dateSubtract\": {\r\n              \"startDate\": \"$$NOW\",\r\n              \"unit\": \"minute\",\r\n              \"amount\": 30\r\n            }\r\n          }\r\n        ]\r\n      },\r\n      \"merchantId\": \"c40e0e89-52de-420e-ad2f-111e8a8dae99\"\r\n    }\r\n  },\r\n  {\r\n    \"$facet\": {\r\n      \"count\": [\r\n        {\r\n          \"$count\": \"transactionCount\"\r\n        }\r\n      ],\r\n      \"default\": [\r\n        {\r\n          \"$addFields\": {\r\n            \"transactionCount\": 0\r\n          }\r\n        }\r\n      ]\r\n    }\r\n  },\r\n  {\r\n    \"$project\": {\r\n      \"transactionCount\": {\r\n        \"$cond\": {\r\n          \"if\": {\r\n            \"$gt\": [\r\n              { \"$size\": \"$count\" },\r\n              0\r\n            ]\r\n          },\r\n          \"then\": {\r\n            \"$arrayElemAt\": [\r\n              \"$count.transactionCount\",\r\n              0\r\n            ]\r\n          },\r\n          \"else\": 0\r\n        }\r\n      }\r\n    }\r\n  }\r\n]"
+                queryType: table
+                refId: A
+              queryType: table
+              refId: A
+              relativeTimeRange:
+                from: 600
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: B
+                type: reduce
+              refId: B
+              relativeTimeRange: {}
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 1
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+              refId: C
+              relativeTimeRange: {}
+          execErrState: Error
+          folderUID: dej2wdgeov5z4e
+          for: 0s
+          id: 51
+          isPaused: true
+          noDataState: NoData
+          notification_settings:
+            group_by: null
+            mute_time_intervals: null
+            receiver: grafana-default-email
+          orgID: 1
+          ruleGroup: 5m
+          title: Pixturo stopped processing
+          uid: deu6zoh7ib8xsc
+          updated: "2025-08-08T06:20:31.201Z"
+        - condition: C
+          data:
+            - datasourceUid: feu6yxrhwnrpca
+              model:
+                collection: transactions
+                datasource:
+                    type: haohanyang-mongodb-datasource
+                    uid: feu6yxrhwnrpca
+                intervalMs: 1000
+                isStreaming: false
+                maxDataPoints: 43200
+                queryLanguage: json
+                queryText: "[\r\n  {\r\n    \"$match\": {\r\n      \"$expr\": {\r\n        \"$gte\": [\r\n          \"$createdAt\",\r\n          {\r\n            \"$dateSubtract\": {\r\n              \"startDate\": \"$$NOW\",\r\n              \"unit\": \"minute\",\r\n              \"amount\": 30\r\n            }\r\n          }\r\n        ]\r\n      },\r\n      \"merchantId\": \"c3e92779-2bcf-4682-95e9-ec25c3df155e\"\r\n    }\r\n  },\r\n  {\r\n    \"$facet\": {\r\n      \"count\": [\r\n        {\r\n          \"$count\": \"transactionCount\"\r\n        }\r\n      ],\r\n      \"default\": [\r\n        {\r\n          \"$addFields\": {\r\n            \"transactionCount\": 0\r\n          }\r\n        }\r\n      ]\r\n    }\r\n  },\r\n  {\r\n    \"$project\": {\r\n      \"transactionCount\": {\r\n        \"$cond\": {\r\n          \"if\": {\r\n            \"$gt\": [\r\n              { \"$size\": \"$count\" },\r\n              0\r\n            ]\r\n          },\r\n          \"then\": {\r\n            \"$arrayElemAt\": [\r\n              \"$count.transactionCount\",\r\n              0\r\n            ]\r\n          },\r\n          \"else\": 0\r\n        }\r\n      }\r\n    }\r\n  }\r\n]"
+                queryType: table
+                refId: A
+              queryType: table
+              refId: A
+              relativeTimeRange:
+                from: 600
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: B
+                type: reduce
+              refId: B
+              relativeTimeRange: {}
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 1
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+              refId: C
+              relativeTimeRange: {}
+          execErrState: Error
+          folderUID: dej2wdgeov5z4e
+          for: 0s
+          id: 52
+          noDataState: NoData
+          notification_settings:
+            group_by: null
+            mute_time_intervals: null
+            receiver: grafana-default-email
+          orgID: 1
+          ruleGroup: 5m
+          title: TransactWorld stopped processing
+          uid: deu6zylequjgga
+          updated: "2025-08-08T06:20:31.201Z"
+        - condition: C
+          data:
+            - datasourceUid: feu6yxrhwnrpca
+              model:
+                collection: transactions
+                datasource:
+                    type: haohanyang-mongodb-datasource
+                    uid: feu6yxrhwnrpca
+                intervalMs: 1000
+                isStreaming: false
+                maxDataPoints: 43200
+                queryLanguage: json
+                queryText: "[\r\n  {\r\n    \"$match\": {\r\n      \"$expr\": {\r\n        \"$gte\": [\r\n          \"$createdAt\",\r\n          {\r\n            \"$dateSubtract\": {\r\n              \"startDate\": \"$$NOW\",\r\n              \"unit\": \"minute\",\r\n              \"amount\": 30\r\n            }\r\n          }\r\n        ]\r\n      },\r\n      \"merchantId\": \"ac2a8d1b-85e4-4d05-8471-7e9af5634894\"\r\n    }\r\n  },\r\n  {\r\n    \"$facet\": {\r\n      \"count\": [\r\n        {\r\n          \"$count\": \"transactionCount\"\r\n        }\r\n      ],\r\n      \"default\": [\r\n        {\r\n          \"$addFields\": {\r\n            \"transactionCount\": 0\r\n          }\r\n        }\r\n      ]\r\n    }\r\n  },\r\n  {\r\n    \"$project\": {\r\n      \"transactionCount\": {\r\n        \"$cond\": {\r\n          \"if\": {\r\n            \"$gt\": [\r\n              { \"$size\": \"$count\" },\r\n              0\r\n            ]\r\n          },\r\n          \"then\": {\r\n            \"$arrayElemAt\": [\r\n              \"$count.transactionCount\",\r\n              0\r\n            ]\r\n          },\r\n          \"else\": 0\r\n        }\r\n      }\r\n    }\r\n  }\r\n]"
+                queryType: table
+                refId: A
+              queryType: table
+              refId: A
+              relativeTimeRange:
+                from: 600
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: B
+                type: reduce
+              refId: B
+              relativeTimeRange: {}
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 1
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+              refId: C
+              relativeTimeRange: {}
+          execErrState: Error
+          folderUID: dej2wdgeov5z4e
+          for: 0s
+          id: 53
+          noDataState: NoData
+          notification_settings:
+            group_by: null
+            mute_time_intervals: null
+            receiver: grafana-default-email
+          orgID: 1
+          ruleGroup: 5m
+          title: Mirata stopped processing
+          uid: eeu700h35t534f
+          updated: "2025-08-08T06:20:31.201Z"
+        - condition: C
+          data:
+            - datasourceUid: feu6yxrhwnrpca
+              model:
+                collection: transactions
+                datasource:
+                    type: haohanyang-mongodb-datasource
+                    uid: feu6yxrhwnrpca
+                intervalMs: 1000
+                isStreaming: false
+                maxDataPoints: 43200
+                queryLanguage: json
+                queryText: "[\r\n  {\r\n    \"$match\": {\r\n      \"$expr\": {\r\n        \"$gte\": [\r\n          \"$createdAt\",\r\n          {\r\n            \"$dateSubtract\": {\r\n              \"startDate\": \"$$NOW\",\r\n              \"unit\": \"minute\",\r\n              \"amount\": 30\r\n            }\r\n          }\r\n        ]\r\n      },\r\n      \"merchantId\": \"a39ac315-0fb8-43f9-8f72-6dc4601bceaa\"\r\n    }\r\n  },\r\n  {\r\n    \"$facet\": {\r\n      \"count\": [\r\n        {\r\n          \"$count\": \"transactionCount\"\r\n        }\r\n      ],\r\n      \"default\": [\r\n        {\r\n          \"$addFields\": {\r\n            \"transactionCount\": 0\r\n          }\r\n        }\r\n      ]\r\n    }\r\n  },\r\n  {\r\n    \"$project\": {\r\n      \"transactionCount\": {\r\n        \"$cond\": {\r\n          \"if\": {\r\n            \"$gt\": [\r\n              { \"$size\": \"$count\" },\r\n              0\r\n            ]\r\n          },\r\n          \"then\": {\r\n            \"$arrayElemAt\": [\r\n              \"$count.transactionCount\",\r\n              0\r\n            ]\r\n          },\r\n          \"else\": 0\r\n        }\r\n      }\r\n    }\r\n  }\r\n]"
+                queryType: table
+                refId: A
+              queryType: table
+              refId: A
+              relativeTimeRange:
+                from: 600
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: B
+                type: reduce
+              refId: B
+              relativeTimeRange: {}
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 1
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+              refId: C
+              relativeTimeRange: {}
+          execErrState: Error
+          folderUID: dej2wdgeov5z4e
+          for: 0s
+          id: 54
+          noDataState: NoData
+          notification_settings:
+            group_by: null
+            mute_time_intervals: null
+            receiver: grafana-default-email
+          orgID: 1
+          ruleGroup: 5m
+          title: FTH (SS) stopped processing
+          uid: deu702aafw6iod
+          updated: "2025-08-08T06:20:31.201Z"
+        - condition: C
+          data:
+            - datasourceUid: feu6yxrhwnrpca
+              model:
+                collection: transactions
+                datasource:
+                    type: haohanyang-mongodb-datasource
+                    uid: feu6yxrhwnrpca
+                intervalMs: 1000
+                isStreaming: false
+                maxDataPoints: 43200
+                queryLanguage: json
+                queryText: "[\r\n  {\r\n    \"$match\": {\r\n      \"$expr\": {\r\n        \"$gte\": [\r\n          \"$createdAt\",\r\n          {\r\n            \"$dateSubtract\": {\r\n              \"startDate\": \"$$NOW\",\r\n              \"unit\": \"minute\",\r\n              \"amount\": 30\r\n            }\r\n          }\r\n        ]\r\n      },\r\n      \"merchantId\": \"8b1c80a6-8fc7-426c-b4fb-5c79d3e76f77\"\r\n    }\r\n  },\r\n  {\r\n    \"$facet\": {\r\n      \"count\": [\r\n        {\r\n          \"$count\": \"transactionCount\"\r\n        }\r\n      ],\r\n      \"default\": [\r\n        {\r\n          \"$addFields\": {\r\n            \"transactionCount\": 0\r\n          }\r\n        }\r\n      ]\r\n    }\r\n  },\r\n  {\r\n    \"$project\": {\r\n      \"transactionCount\": {\r\n        \"$cond\": {\r\n          \"if\": {\r\n            \"$gt\": [\r\n              { \"$size\": \"$count\" },\r\n              0\r\n            ]\r\n          },\r\n          \"then\": {\r\n            \"$arrayElemAt\": [\r\n              \"$count.transactionCount\",\r\n              0\r\n            ]\r\n          },\r\n          \"else\": 0\r\n        }\r\n      }\r\n    }\r\n  }\r\n]"
+                queryType: table
+                refId: A
+              queryType: table
+              refId: A
+              relativeTimeRange:
+                from: 600
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: B
+                type: reduce
+              refId: B
+              relativeTimeRange: {}
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 1
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+              refId: C
+              relativeTimeRange: {}
+          execErrState: Error
+          folderUID: dej2wdgeov5z4e
+          for: 0s
+          id: 55
+          isPaused: true
+          noDataState: NoData
+          notification_settings:
+            group_by: null
+            mute_time_intervals: null
+            receiver: grafana-default-email
+          orgID: 1
+          ruleGroup: 5m
+          title: Digital Galaxy stopped processing
+          uid: ceu704mzfgcu8b
+          updated: "2025-08-08T06:20:31.201Z"
+    title: 5m

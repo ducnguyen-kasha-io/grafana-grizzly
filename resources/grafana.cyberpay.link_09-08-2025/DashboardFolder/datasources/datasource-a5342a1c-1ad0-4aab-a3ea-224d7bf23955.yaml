@@ -1,0 +1,14 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Datasource
+metadata:
+    name: a5342a1c-1ad0-4aab-a3ea-224d7bf23955
+spec:
+    access: proxy
+    jsonData:
+        manageAlerts: false
+    name: do-metrics-prod-cyberpay
+    orgId: 1
+    type: prometheus
+    typeLogoUrl: public/app/plugins/datasource/prometheus/img/prometheus_logo.svg
+    uid: a5342a1c-1ad0-4aab-a3ea-224d7bf23955
+    url: https://prom.cyberpay.link

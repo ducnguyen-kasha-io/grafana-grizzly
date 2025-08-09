@@ -1,0 +1,14 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Datasource
+metadata:
+    name: 0f24a246-7147-49ec-abc8-80c79df82969
+spec:
+    access: proxy
+    jsonData:
+        manageAlerts: false
+    name: do-metrics-prod-bastion-cyberpay
+    orgId: 1
+    type: prometheus
+    typeLogoUrl: public/app/plugins/datasource/prometheus/img/prometheus_logo.svg
+    uid: 0f24a246-7147-49ec-abc8-80c79df82969
+    url: http://kube-prometheus-stack-prometheus.observability-client:9090

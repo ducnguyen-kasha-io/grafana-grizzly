@@ -1,0 +1,122 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Dashboard
+metadata:
+    folder: dej2wdgeov5z4e
+    name: bejre8y0t03r4c
+spec:
+    annotations:
+        list:
+            - builtIn: 1
+              datasource:
+                type: grafana
+                uid: -- Grafana --
+              enable: true
+              hide: true
+              iconColor: rgba(0, 211, 255, 1)
+              name: Annotations & Alerts
+              type: dashboard
+    editable: true
+    fiscalYearStartMonth: 0
+    graphTooltip: 0
+    links: []
+    panels:
+        - datasource:
+            default: false
+            type: haohanyang-mongodb-datasource
+            uid: feu6yxrhwnrpca
+          description: |-
+            Approval rate per country.
+            Countries not on display have 0 AR.
+          fieldConfig:
+            defaults:
+                color:
+                    mode: thresholds
+                custom:
+                    axisBorderShow: false
+                    axisCenteredZero: false
+                    axisColorMode: text
+                    axisGridShow: true
+                    axisLabel: ""
+                    axisPlacement: auto
+                    axisSoftMax: 101
+                    fillOpacity: 80
+                    gradientMode: none
+                    hideFrom:
+                        legend: false
+                        tooltip: false
+                        viz: false
+                    lineWidth: 1
+                    scaleDistribution:
+                        type: linear
+                    thresholdsStyle:
+                        mode: "off"
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: red
+                        - color: green
+                          value: 40
+            overrides: []
+          gridPos:
+            h: 15
+            w: 24
+            x: 0
+            "y": 0
+          id: 1
+          options:
+            barRadius: 0
+            barWidth: 0.65
+            colorByField: approvalRate
+            fullHighlight: false
+            groupWidth: 0.7
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: true
+            orientation: vertical
+            showValue: always
+            stacking: none
+            text:
+                valueSize: 10
+            tooltip:
+                hideZeros: true
+                maxHeight: 600
+                mode: multi
+                sort: none
+            xField: code
+            xTickLabelRotation: 0
+            xTickLabelSpacing: 0
+          pluginVersion: 11.6.4
+          targets:
+            - collection: transactions
+              datasource:
+                type: haohanyang-mongodb-datasource
+                uid: feu6yxrhwnrpca
+              isStreaming: false
+              queryLanguage: json
+              queryText: "[\r\n  {\r\n    \"$match\": {\r\n      \"$expr\": {\r\n        \"$and\": [\r\n          { \"$gte\": [\"$createdAt\", { \"$date\": { \"$numberLong\": \"$__from\" } }] },\r\n          { \"$lte\": [\"$createdAt\", { \"$date\": { \"$numberLong\": \"$__to\" } }] }\r\n        ]\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$group\": {\r\n      \"_id\": \"$country\",\r\n      \"code\": { \"$first\": \"$country\" },\r\n      \"txOthers\": {\r\n        \"$sum\": {\r\n          \"$cond\": [\r\n            {\r\n              \"$and\": [\r\n                { \"$ne\": [\"$status\", \"COMPLETED\"] },\r\n                { \"$ne\": [\"$errorCategory\", 2] }\r\n              ]\r\n            },\r\n            1,\r\n            0\r\n          ]\r\n        }\r\n      },\r\n      \"txCompleted\": {\r\n        \"$sum\": { \"$cond\": [{ \"$eq\": [\"$status\", \"COMPLETED\"] }, 1, 0] }\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$project\": {\r\n      \"_id\": 0,\r\n      \"code\": 1,\r\n      \"totalTxOthers\": { \"$sum\": \"$txOthers\" },\r\n      \"totalTxCompleted\": { \"$sum\": \"$txCompleted\" }\r\n    }\r\n  },\r\n  {\r\n    \"$project\": {\r\n      \"code\": 1,\r\n      \"approvalRate\": {\r\n        \"$cond\": [\r\n          { \"$eq\": [\"$totalTxOthers\", 0] },\r\n          100,\r\n          {\r\n            \"$round\": [\r\n              {\r\n                \"$multiply\": [\r\n                  {\r\n                    \"$divide\": [\r\n                      \"$totalTxCompleted\",\r\n                      { \"$add\": [\"$totalTxOthers\", \"$totalTxCompleted\"] }\r\n                    ]\r\n                  },\r\n                  100\r\n                ]\r\n              },\r\n              2\r\n            ]\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$match\": { \"approvalRate\": { \"$ne\": 0 } }\r\n  }\r\n]"
+              queryType: table
+              refId: A
+          title: AR per country
+          transformations:
+            - id: sortBy
+              options:
+                fields: {}
+                sort:
+                    - field: code
+          type: barchart
+    preload: false
+    refresh: ""
+    schemaVersion: 41
+    tags: []
+    templating:
+        list: []
+    time:
+        from: now/d
+        to: now/d
+    timepicker: {}
+    timezone: browser
+    title: AR per country
+    uid: bejre8y0t03r4c

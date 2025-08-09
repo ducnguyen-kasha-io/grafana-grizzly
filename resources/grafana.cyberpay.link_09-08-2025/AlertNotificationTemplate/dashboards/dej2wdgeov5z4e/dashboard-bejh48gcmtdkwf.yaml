@@ -1,0 +1,107 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Dashboard
+metadata:
+    folder: dej2wdgeov5z4e
+    name: bejh48gcmtdkwf
+spec:
+    annotations:
+        list:
+            - builtIn: 1
+              datasource:
+                type: grafana
+                uid: -- Grafana --
+              enable: true
+              hide: true
+              iconColor: rgba(0, 211, 255, 1)
+              name: Annotations & Alerts
+              type: dashboard
+    editable: true
+    fiscalYearStartMonth: 0
+    graphTooltip: 0
+    links: []
+    panels:
+        - datasource:
+            default: false
+            type: haohanyang-mongodb-datasource
+            uid: feu6yxrhwnrpca
+          fieldConfig:
+            defaults:
+                color:
+                    mode: palette-classic
+                custom:
+                    axisBorderShow: false
+                    axisCenteredZero: false
+                    axisColorMode: text
+                    axisLabel: ""
+                    axisPlacement: auto
+                    fillOpacity: 100
+                    gradientMode: none
+                    hideFrom:
+                        legend: false
+                        tooltip: false
+                        viz: false
+                    lineWidth: 2
+                    scaleDistribution:
+                        type: linear
+                    thresholdsStyle:
+                        mode: "off"
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: green
+                        - color: red
+                          value: 80
+            overrides: []
+          gridPos:
+            h: 27
+            w: 24
+            x: 0
+            "y": 0
+          id: 2
+          options:
+            barRadius: 0
+            barWidth: 0.63
+            fullHighlight: false
+            groupWidth: 0.7
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: true
+            orientation: horizontal
+            showValue: always
+            stacking: none
+            tooltip:
+                hideZeros: false
+                maxHeight: 600
+                mode: single
+                sort: none
+            xTickLabelRotation: 0
+            xTickLabelSpacing: 0
+          pluginVersion: 11.6.4
+          targets:
+            - collection: transactions
+              datasource:
+                type: haohanyang-mongodb-datasource
+                uid: feu6yxrhwnrpca
+              isStreaming: false
+              queryLanguage: json
+              queryText: "[\r\n  {\r\n    \"$match\": {\r\n      \"status\": { \"$ne\": \"COMPLETED\" },\r\n      \"errorReason\": { \"$ne\": null },\r\n      \"$expr\": {\r\n        \"$and\": [\r\n          {\r\n            \"$gte\": [\r\n              \"$createdAt\",\r\n              {\r\n                \"$date\": {\r\n                  \"$numberLong\": \"$__from\"\r\n                }\r\n              }\r\n            ]\r\n          },\r\n          {\r\n            \"$lte\": [\r\n              \"$createdAt\",\r\n              {\r\n                \"$date\": {\r\n                  \"$numberLong\": \"$__to\"\r\n                }\r\n              }\r\n            ]\r\n          },\r\n          {\r\n            \"$or\": [\r\n              { \"$eq\": [\"$provider\", \"$providerId\"] },\r\n              { \"$eq\": [\"$pspId\", \"$provider\"] }\r\n            ]\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$group\": {\r\n      \"_id\": \"$errorReason\",\r\n      \"errorCount\": { \"$sum\": 1 }\r\n    }\r\n  },\r\n  {\r\n    \"$project\": {\r\n      \"_id\": 0,\r\n      \"errorReason\": \"$_id\",\r\n      \"errorCount\": 1\r\n    }\r\n  },\r\n  {\r\n    \"$sort\": { \"errorCount\": -1 }\r\n  }\r\n]"
+              queryType: table
+              refId: A
+          title: Error count
+          type: barchart
+    preload: false
+    refresh: ""
+    schemaVersion: 41
+    tags: []
+    templating:
+        list: []
+    time:
+        from: now/d
+        to: now/d
+    timepicker: {}
+    timezone: browser
+    title: Error count - NO ENV
+    uid: bejh48gcmtdkwf

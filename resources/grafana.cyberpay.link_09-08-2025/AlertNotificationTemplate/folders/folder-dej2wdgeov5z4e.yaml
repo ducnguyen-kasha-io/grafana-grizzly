@@ -1,0 +1,8 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: DashboardFolder
+metadata:
+    name: dej2wdgeov5z4e
+spec:
+    orgId: 1
+    title: MongoDB
+    uid: dej2wdgeov5z4e

@@ -1,0 +1,18 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Datasource
+metadata:
+    name: deu9kg99td5vkd
+spec:
+    access: proxy
+    jsonData:
+        httpMethod: POST
+        manageAlerts: false
+        oauthPassThru: false
+        sigV4Auth: false
+        tlsSkipVerify: false
+    name: prometheus
+    orgId: 1
+    type: prometheus
+    typeLogoUrl: public/app/plugins/datasource/prometheus/img/prometheus_logo.svg
+    uid: deu9kg99td5vkd
+    url: https://prom.test.kasha.tech

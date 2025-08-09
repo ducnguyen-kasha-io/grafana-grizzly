@@ -1,0 +1,181 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Dashboard
+metadata:
+    folder: eej2wghwf4x6oe
+    name: dej68uhzfqps0f
+spec:
+    annotations:
+        list:
+            - builtIn: 1
+              datasource:
+                type: grafana
+                uid: -- Grafana --
+              enable: true
+              hide: true
+              iconColor: rgba(0, 211, 255, 1)
+              name: Annotations & Alerts
+              type: dashboard
+    editable: true
+    fiscalYearStartMonth: 0
+    graphTooltip: 0
+    links: []
+    panels:
+        - datasource:
+            default: false
+            type: haohanyang-mongodb-datasource
+            uid: feu6yxrhwnrpca
+          fieldConfig:
+            defaults:
+                color:
+                    mode: palette-classic
+                custom:
+                    axisBorderShow: false
+                    axisCenteredZero: false
+                    axisColorMode: text
+                    axisLabel: ""
+                    axisPlacement: auto
+                    barAlignment: 0
+                    barWidthFactor: 0.6
+                    drawStyle: line
+                    fillOpacity: 50
+                    gradientMode: opacity
+                    hideFrom:
+                        legend: false
+                        tooltip: false
+                        viz: false
+                    insertNulls: false
+                    lineInterpolation: linear
+                    lineWidth: 1
+                    pointSize: 5
+                    scaleDistribution:
+                        type: linear
+                    showPoints: auto
+                    spanNulls: false
+                    stacking:
+                        group: A
+                        mode: none
+                    thresholdsStyle:
+                        mode: area
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: dark-red
+                        - color: transparent
+                          value: 1
+            overrides: []
+          gridPos:
+            h: 10
+            w: 24
+            x: 0
+            "y": 0
+          id: 1
+          options:
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: true
+            tooltip:
+                hideZeros: false
+                mode: single
+                sort: none
+          pluginVersion: 11.6.4
+          targets:
+            - collection: transactions
+              datasource:
+                type: haohanyang-mongodb-datasource
+                uid: feu6yxrhwnrpca
+              isStreaming: false
+              queryLanguage: json
+              queryText: "[\r\n  {\r\n    \"$match\": {\r\n      \"pspId\": {\r\n        \"$in\": [\r\n          \"0063e91f-9b5b-444c-aa6f-ce5674db17ad\"\r\n        ]\r\n      },\r\n      \"status\": {\r\n        \"$nin\": [\r\n          \"CHARGEBACK\",\r\n          \"REFUNDED\"\r\n        ]\r\n      },\r\n      \"createdAt\": {\r\n        \"$gt\": {\r\n          \"$date\": {\r\n            \"$numberLong\": \"$__from\"\r\n          }\r\n        },\r\n        \"$lt\": {\r\n          \"$date\": {\r\n            \"$numberLong\": \"$__to\"\r\n          }\r\n        }\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$group\": {\r\n      \"_id\": {\r\n        \"$toDate\": {\r\n          \"$subtract\": [\r\n            {\r\n              \"$toLong\": \"$createdAt\"\r\n            },\r\n            {\r\n              \"$mod\": [\r\n                {\r\n                  \"$toLong\": \"$createdAt\"\r\n                },\r\n                60000\r\n              ]\r\n            }\r\n          ]\r\n        }\r\n      },\r\n      \"count\": {\r\n        \"$sum\": 1\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$project\": {\r\n      \"_id\": 1,\r\n      \"count\": 1\r\n    }\r\n  },\r\n  {\r\n    \"$sort\": {\r\n      \"_id\": 1\r\n    }\r\n  }\r\n]"
+              queryType: table
+              refId: A
+          title: Payport transactions per minute
+          type: timeseries
+        - datasource:
+            default: false
+            type: haohanyang-mongodb-datasource
+            uid: feu6yxrhwnrpca
+          fieldConfig:
+            defaults:
+                color:
+                    mode: palette-classic
+                custom:
+                    axisBorderShow: false
+                    axisCenteredZero: false
+                    axisColorMode: text
+                    axisLabel: ""
+                    axisPlacement: auto
+                    barAlignment: 0
+                    barWidthFactor: 0.6
+                    drawStyle: line
+                    fillOpacity: 0
+                    gradientMode: none
+                    hideFrom:
+                        legend: false
+                        tooltip: false
+                        viz: false
+                    insertNulls: false
+                    lineInterpolation: linear
+                    lineWidth: 1
+                    pointSize: 5
+                    scaleDistribution:
+                        type: linear
+                    showPoints: auto
+                    spanNulls: false
+                    stacking:
+                        group: A
+                        mode: none
+                    thresholdsStyle:
+                        mode: area
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: dark-red
+                        - color: transparent
+                          value: 50
+            overrides: []
+          gridPos:
+            h: 10
+            w: 24
+            x: 0
+            "y": 10
+          id: 2
+          options:
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: true
+            tooltip:
+                hideZeros: false
+                mode: single
+                sort: none
+          pluginVersion: 11.6.4
+          targets:
+            - collection: transactions
+              datasource:
+                type: haohanyang-mongodb-datasource
+                uid: feu6yxrhwnrpca
+              isStreaming: false
+              queryLanguage: json
+              queryText: "[\r\n  {\r\n    \"$match\": {\r\n      \"pspId\": {\r\n        \"$in\": [\r\n          \"0063e91f-9b5b-444c-aa6f-ce5674db17ad\"\r\n        ]\r\n      },\r\n      \"status\": {\r\n        \"$nin\": [\r\n          \"CHARGEBACK\",\r\n          \"REFUNDED\"\r\n        ]\r\n      },\r\n      \"createdAt\": {\r\n        \"$gte\": {\r\n          \"$date\": {\r\n            \"$numberLong\": \"$__from\"\r\n          }\r\n        },\r\n        \"$lte\": {\r\n          \"$date\": {\r\n            \"$numberLong\": \"$__to\"\r\n          }\r\n        }\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$group\": {\r\n      \"_id\": {\r\n        \"$dateToString\": {\r\n          \"format\": \"%Y-%m-%dT%H:%M\",\r\n          \"date\": \"$createdAt\"\r\n        }\r\n      },\r\n      \"txOthers\": {\r\n        \"$sum\": {\r\n          \"$cond\": [\r\n            {\r\n              \"$and\": [\r\n                {\r\n                  \"$ne\": [\r\n                    \"$status\",\r\n                    \"COMPLETED\"\r\n                  ]\r\n                },\r\n                {\r\n                  \"$ne\": [\r\n                    \"$errorCategory\",\r\n                    2\r\n                  ]\r\n                }\r\n              ]\r\n            },\r\n            1,\r\n            0\r\n          ]\r\n        }\r\n      },\r\n      \"txCompleted\": {\r\n        \"$sum\": {\r\n          \"$cond\": [\r\n            {\r\n              \"$eq\": [\r\n                \"$status\",\r\n                \"COMPLETED\"\r\n              ]\r\n            },\r\n            1,\r\n            0\r\n          ]\r\n        }\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$addFields\": {\r\n      \"date\": {\r\n        \"$dateFromString\": {\r\n          \"dateString\": \"$_id\",\r\n          \"format\": \"%Y-%m-%dT%H:%M\"\r\n        }\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$project\": {\r\n      \"_id\": 0,\r\n      \"date\": 1,\r\n      \"approvalRate\": {\r\n        \"$cond\": [\r\n          {\r\n            \"$eq\": [\r\n              {\r\n                \"$add\": [\r\n                  \"$txOthers\",\r\n                  \"$txCompleted\"\r\n                ]\r\n              },\r\n              0\r\n            ]\r\n          },\r\n          100,\r\n          {\r\n            \"$round\": [\r\n              {\r\n                \"$multiply\": [\r\n                  {\r\n                    \"$divide\": [\r\n                      \"$txCompleted\",\r\n                      {\r\n                        \"$add\": [\r\n                          \"$txOthers\",\r\n                          \"$txCompleted\"\r\n                        ]\r\n                      }\r\n                    ]\r\n                  },\r\n                  100\r\n                ]\r\n              },\r\n              2\r\n            ]\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$sort\": {\r\n      \"date\": 1\r\n    }\r\n  }\r\n]"
+              queryType: table
+              refId: A
+          title: Payport AR per minute
+          type: timeseries
+    preload: false
+    refresh: ""
+    schemaVersion: 41
+    tags: []
+    templating:
+        list: []
+    time:
+        from: now-24h
+        to: now
+    timepicker: {}
+    timezone: browser
+    title: Payport
+    uid: dej68uhzfqps0f

@@ -1,0 +1,460 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: AlertRuleGroup
+metadata:
+    name: dej2wdgeov5z4e.1m
+spec:
+    folderUid: dej2wdgeov5z4e
+    interval: 60
+    rules:
+        - annotations:
+            __dashboardUid__: aejdlhpqpee4ge
+            __panelId__: "2"
+          condition: C
+          data:
+            - datasourceUid: feu6yxrhwnrpca
+              model:
+                collection: transactions
+                datasource:
+                    type: haohanyang-mongodb-datasource
+                    uid: feu6yxrhwnrpca
+                instant: false
+                intervalMs: 1000
+                isStreaming: false
+                maxDataPoints: 43200
+                queryLanguage: json
+                queryText: |-
+                    [
+                      {
+                        "$match": {
+                          "category": "PAYIN",
+                          "$expr": {
+                            "$gte": [
+                              "$createdAt",
+                              {
+                                "$dateSubtract": {
+                                  "startDate": "$$NOW",
+                                  "unit": "minute",
+                                  "amount": 10
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "$group": {
+                          "_id": null,
+                          "totalTxOthers": {
+                            "$sum": {
+                              "$cond": [
+                                {
+                                  "$and": [
+                                    { "$ne": ["$status", "COMPLETED"] },
+                                    { "$ne": ["$errorCategory", 2] }
+                                  ]
+                                },
+                                1,
+                                0
+                              ]
+                            }
+                          },
+                          "totalTxCompleted": {
+                            "$sum": {
+                              "$cond": [
+                                { "$eq": ["$status", "COMPLETED"] },
+                                1,
+                                0
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "$project": {
+                          "_id": 0,
+                          "averageApprovalRate": {
+                            "$cond": [
+                              {
+                                "$eq": [
+                                  { "$add": ["$totalTxOthers", "$totalTxCompleted"] },
+                                  0
+                                ]
+                              },
+                              100,
+                              {
+                                "$round": [
+                                  {
+                                    "$multiply": [
+                                      {
+                                        "$divide": [
+                                          "$totalTxCompleted",
+                                          { "$add": ["$totalTxOthers", "$totalTxCompleted"] }
+                                        ]
+                                      },
+                                      100
+                                    ]
+                                  },
+                                  2
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                queryType: table
+                range: true
+                refId: A
+              queryType: table
+              refId: A
+              relativeTimeRange:
+                from: 86400
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: B
+                type: reduce
+              refId: B
+              relativeTimeRange: {}
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 30
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+              refId: C
+              relativeTimeRange: {}
+          execErrState: Error
+          folderUID: dej2wdgeov5z4e
+          for: 5m0s
+          id: 59
+          noDataState: NoData
+          orgID: 1
+          ruleGroup: 1m
+          title: AR Fallen Below 30%
+          uid: eeucv6qxtohkwa
+          updated: "2025-08-08T06:20:31.201Z"
+        - annotations:
+            __dashboardUid__: aejdlhpqpee4ge
+            __panelId__: "1"
+          condition: C
+          data:
+            - datasourceUid: feu6yxrhwnrpca
+              model:
+                collection: transactions
+                datasource:
+                    type: haohanyang-mongodb-datasource
+                    uid: feu6yxrhwnrpca
+                instant: false
+                intervalMs: 1000
+                isStreaming: false
+                maxDataPoints: 43200
+                queryLanguage: json
+                queryText: |-
+                    [
+                      {
+                        "$match": {
+                          "$expr": {
+                            "$gte": [
+                              "$createdAt",
+                              {
+                                "$dateSubtract": {
+                                  "startDate": "$$NOW",
+                                  "unit": "minute",
+                                  "amount": 2
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "$facet": {
+                          "count": [
+                            {
+                              "$count": "transactionCount"
+                            }
+                          ],
+                          "default": [
+                            {
+                              "$addFields": {
+                                "transactionCount": 0
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "$project": {
+                          "transactionCount": {
+                            "$cond": {
+                              "if": {
+                                "$gt": [
+                                  {
+                                    "$size": "$count"
+                                  },
+                                  0
+                                ]
+                              },
+                              "then": {
+                                "$arrayElemAt": [
+                                  "$count.transactionCount",
+                                  0
+                                ]
+                              },
+                              "else": 0
+                            }
+                          }
+                        }
+                      }
+                    ]
+                queryType: table
+                range: true
+                refId: A
+              queryType: table
+              refId: A
+              relativeTimeRange:
+                from: 86400
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: B
+                type: reduce
+              refId: B
+              relativeTimeRange: {}
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 2
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+              refId: C
+              relativeTimeRange: {}
+          execErrState: Error
+          folderUID: dej2wdgeov5z4e
+          for: 5m0s
+          id: 58
+          noDataState: NoData
+          orgID: 1
+          ruleGroup: 1m
+          title: Low Traffic Detected
+          uid: deucuubj5enlsa
+          updated: "2025-08-08T06:20:31.201Z"
+        - annotations:
+            __dashboardUid__: aejdlhpqpee4ge
+            __panelId__: "3"
+          condition: C
+          data:
+            - datasourceUid: feu6yxrhwnrpca
+              model:
+                collection: transaction_attempts
+                datasource:
+                    type: haohanyang-mongodb-datasource
+                    uid: feu6yxrhwnrpca
+                instant: false
+                intervalMs: 1000
+                isStreaming: false
+                maxDataPoints: 43200
+                queryLanguage: json
+                queryText: |-
+                    [
+                      {
+                        "$match": {
+                          "$expr": {
+                            "$gte": [
+                              "$createdAt",
+                              {
+                                "$dateSubtract": {
+                                  "startDate": "$$NOW",
+                                  "unit": "minute",
+                                  "amount": 5
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "$facet": {
+                          "count": [
+                            {
+                              "$count": "transactionCount"
+                            }
+                          ],
+                          "default": [
+                            {
+                              "$addFields": {
+                                "transactionCount": 0
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "$project": {
+                          "transactionCount": {
+                            "$cond": {
+                              "if": {
+                                "$gt": [
+                                  {
+                                    "$size": "$count"
+                                  },
+                                  0
+                                ]
+                              },
+                              "then": {
+                                "$arrayElemAt": [
+                                  "$count.transactionCount",
+                                  0
+                                ]
+                              },
+                              "else": 0
+                            }
+                          }
+                        }
+                      }
+                    ]
+                queryType: table
+                range: true
+                refId: A
+              queryType: table
+              refId: A
+              relativeTimeRange:
+                from: 86400
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: B
+                type: reduce
+              refId: B
+              relativeTimeRange: {}
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 10
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+              refId: C
+              relativeTimeRange: {}
+          execErrState: Error
+          folderUID: dej2wdgeov5z4e
+          for: 3m0s
+          id: 60
+          noDataState: NoData
+          orgID: 1
+          ruleGroup: 1m
+          title: Unusually High Validation Error
+          uid: ceucvj7e0xekgd
+          updated: "2025-08-08T06:20:31.201Z"
+    title: 1m

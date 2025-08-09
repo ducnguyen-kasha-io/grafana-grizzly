@@ -1,0 +1,97 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Dashboard
+metadata:
+    folder: fds3wc5k1wkcgb
+    name: cduzjzwxa7togb
+spec:
+    annotations:
+        list:
+            - builtIn: 1
+              datasource:
+                type: grafana
+                uid: -- Grafana --
+              enable: true
+              hide: true
+              iconColor: rgba(0, 211, 255, 1)
+              name: Annotations & Alerts
+              type: dashboard
+    editable: true
+    fiscalYearStartMonth: 0
+    graphTooltip: 0
+    links: []
+    panels:
+        - datasource:
+            type: haohanyang-mongodb-datasource
+            uid: feu6yxrhwnrpca
+          fieldConfig:
+            defaults:
+                color:
+                    mode: thresholds
+                custom:
+                    align: auto
+                    cellOptions:
+                        type: auto
+                    filterable: true
+                    inspect: false
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: green
+                        - color: red
+                          value: 80
+            overrides: []
+          gridPos:
+            h: 14
+            w: 24
+            x: 0
+            "y": 0
+          id: 1
+          options:
+            cellHeight: sm
+            footer:
+                countRows: false
+                fields: ""
+                reducer:
+                    - sum
+                show: false
+            showHeader: true
+          pluginVersion: 11.6.4
+          targets:
+            - collection: transactions
+              datasource:
+                type: haohanyang-mongodb-datasource
+                uid: feu6yxrhwnrpca
+              isStreaming: false
+              queryLanguage: json
+              queryText: "[\r\n  {\r\n    \"$match\": {\r\n      \"$expr\": {\r\n        \"$and\": [\r\n          { \"$gte\": [\"$createdAt\", { \"$date\": { \"$numberLong\": \"$__from\" } }] },\r\n          { \"$lte\": [\"$createdAt\", { \"$date\": { \"$numberLong\": \"$__to\" } }] },\r\n          { \"$eq\": [\"$status\", \"COMPLETED\"] }\r\n        ]\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$group\": {\r\n      \"_id\": {\r\n        \"merchantId\": \"$merchantId\",\r\n        \"countryCode\": \"$country\"\r\n      },\r\n      \"todayTotalAmount\": {\r\n        \"$sum\": \"$fx.amount\"\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$lookup\": {\r\n      \"from\": \"merchants\",\r\n      \"localField\": \"_id.merchantId\",\r\n      \"foreignField\": \"_id\",\r\n      \"as\": \"merchantDetails\"\r\n    }\r\n  },\r\n  {\r\n    \"$unwind\": {\r\n      \"path\": \"$merchantDetails\",\r\n      \"preserveNullAndEmptyArrays\": true\r\n    }\r\n  },\r\n  {\r\n    \"$lookup\": {\r\n      \"from\": \"countries\",\r\n      \"localField\": \"_id.countryCode\",\r\n      \"foreignField\": \"code\",\r\n      \"as\": \"countryDetails\"\r\n    }\r\n  },\r\n  {\r\n    \"$unwind\": {\r\n      \"path\": \"$countryDetails\",\r\n      \"preserveNullAndEmptyArrays\": true\r\n    }\r\n  },\r\n  {\r\n    \"$project\": {\r\n      \"_id\": 0,\r\n      \"merchantId\": \"$_id.merchantId\",\r\n      \"merchantName\": {\r\n        \"$ifNull\": [\r\n          \"$merchantDetails.name\",\r\n          \"Unknown Merchant\"\r\n        ]\r\n      },\r\n      \"countryCode\": \"$_id.countryCode\",\r\n      \"countryName\": {\r\n        \"$ifNull\": [\r\n          \"$countryDetails.name\",\r\n          \"Unknown Country\"\r\n        ]\r\n      },\r\n      \"todayTotalAmount\": 1\r\n    }\r\n  }\r\n]"
+              queryType: table
+              refId: A
+          title: ""
+          transformations:
+            - id: organize
+              options:
+                excludeByName:
+                    countryCode: true
+                    merchantId: true
+                includeByName: {}
+                indexByName:
+                    countryName: 1
+                    merchantId: 2
+                    merchantName: 0
+                    todayTotalAmount: 3
+                renameByName: {}
+          type: table
+    preload: false
+    refresh: ""
+    schemaVersion: 41
+    tags: []
+    templating:
+        list: []
+    time:
+        from: now-6h
+        to: now
+    timepicker: {}
+    timezone: browser
+    title: Comparison between days
+    uid: cduzjzwxa7togb

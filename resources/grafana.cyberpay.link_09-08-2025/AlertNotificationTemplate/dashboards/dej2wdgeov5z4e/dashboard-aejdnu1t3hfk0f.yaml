@@ -1,0 +1,142 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Dashboard
+metadata:
+    folder: dej2wdgeov5z4e
+    name: aejdnu1t3hfk0f
+spec:
+    annotations:
+        list:
+            - builtIn: 1
+              datasource:
+                type: grafana
+                uid: -- Grafana --
+              enable: true
+              hide: true
+              iconColor: rgba(0, 211, 255, 1)
+              name: Annotations & Alerts
+              type: dashboard
+    description: Transaction count per status
+    editable: true
+    fiscalYearStartMonth: 0
+    graphTooltip: 0
+    links: []
+    panels:
+        - datasource:
+            default: false
+            type: haohanyang-mongodb-datasource
+            uid: feu6yxrhwnrpca
+          fieldConfig:
+            defaults:
+                color:
+                    mode: palette-classic
+                custom:
+                    axisBorderShow: false
+                    axisCenteredZero: false
+                    axisColorMode: text
+                    axisLabel: ""
+                    axisPlacement: auto
+                    fillOpacity: 80
+                    gradientMode: none
+                    hideFrom:
+                        legend: false
+                        tooltip: false
+                        viz: false
+                    lineWidth: 1
+                    scaleDistribution:
+                        type: linear
+                    thresholdsStyle:
+                        mode: "off"
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: green
+                        - color: red
+                          value: 80
+            overrides: []
+          gridPos:
+            h: 16
+            w: 24
+            x: 0
+            "y": 0
+          id: 1
+          options:
+            barRadius: 0
+            barWidth: 0.97
+            fullHighlight: false
+            groupWidth: 0.7
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: true
+            orientation: auto
+            showValue: auto
+            stacking: none
+            tooltip:
+                hideZeros: false
+                maxHeight: 600
+                mode: single
+                sort: none
+            xTickLabelRotation: 0
+            xTickLabelSpacing: 0
+          pluginVersion: 11.6.4
+          targets:
+            - collection: transactions
+              datasource:
+                type: haohanyang-mongodb-datasource
+                uid: feu6yxrhwnrpca
+              isStreaming: false
+              queryLanguage: json
+              queryText: |-
+                [
+                  {
+                    "$match": {
+                      "createdAt": {
+                        "$gte": {
+                          "$date": {
+                            "$numberLong": "$__from"
+                          }
+                        },
+                        "$lte": {
+                          "$date": {
+                            "$numberLong": "$__to"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "$group": {
+                      "_id": "$status",
+                      "Count": { "$sum": 1 }
+                    }
+                  },
+                  {
+                    "$project": {
+                      "_id": 0,
+                      "Status": "$_id",
+                      "Count": 1
+                    }
+                  },
+                  {
+                    "$sort": { "Count": 1 }
+                  }
+                ]
+              queryType: table
+              refId: A
+          title: Transaction count per status
+          type: barchart
+    preload: false
+    refresh: ""
+    schemaVersion: 41
+    tags: []
+    templating:
+        list: []
+    time:
+        from: now-1h
+        to: now
+    timepicker: {}
+    timezone: browser
+    title: Transactions per status
+    uid: aejdnu1t3hfk0f

@@ -1,0 +1,450 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Dashboard
+metadata:
+    folder: dej2wdgeov5z4e
+    name: bej2yz2jfl3i8e
+spec:
+    annotations:
+        list:
+            - builtIn: 1
+              datasource:
+                type: grafana
+                uid: -- Grafana --
+              enable: true
+              hide: true
+              iconColor: rgba(0, 211, 255, 1)
+              name: Annotations & Alerts
+              type: dashboard
+    editable: true
+    fiscalYearStartMonth: 0
+    graphTooltip: 0
+    links: []
+    panels:
+        - datasource:
+            default: false
+            type: haohanyang-mongodb-datasource
+            uid: feu6yxrhwnrpca
+          fieldConfig:
+            defaults:
+                color:
+                    fixedColor: blue
+                    mode: fixed
+                custom:
+                    axisBorderShow: false
+                    axisCenteredZero: false
+                    axisColorMode: text
+                    axisLabel: ""
+                    axisPlacement: auto
+                    fillOpacity: 80
+                    gradientMode: none
+                    hideFrom:
+                        legend: false
+                        tooltip: false
+                        viz: false
+                    lineWidth: 1
+                    scaleDistribution:
+                        type: linear
+                    thresholdsStyle:
+                        mode: "off"
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: green
+                        - color: red
+                          value: 80
+            overrides: []
+          gridPos:
+            h: 8
+            w: 12
+            x: 0
+            "y": 0
+          id: 3
+          options:
+            barRadius: 0
+            barWidth: 0.2
+            fullHighlight: false
+            groupWidth: 0.7
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: true
+            orientation: horizontal
+            showValue: auto
+            stacking: none
+            tooltip:
+                hideZeros: false
+                mode: single
+                sort: none
+            xTickLabelRotation: 0
+            xTickLabelSpacing: 0
+          pluginVersion: 11.6.4
+          targets:
+            - collection: transactions
+              datasource:
+                type: haohanyang-mongodb-datasource
+                uid: feu6yxrhwnrpca
+              isStreaming: false
+              queryLanguage: json
+              queryText: "[\r\n  {\r\n    \"$match\": {\r\n      \"merchantId\": \"$merchantId\",\r\n      \"pspId\": {\r\n        \"$ne\": null\r\n      },\r\n      \"createdAt\": {\r\n        \"$gte\": {\r\n          \"$date\": {\r\n            \"$numberLong\": \"$__from\"\r\n          }\r\n        },\r\n        \"$lte\": {\r\n          \"$date\": {\r\n            \"$numberLong\": \"$__to\"\r\n          }\r\n        }\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$group\": {\r\n      \"_id\": \"$pspId\",\r\n      \"transactionCount\": {\r\n        \"$sum\": 1\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$lookup\": {\r\n      \"from\": \"psps\",\r\n      \"localField\": \"_id\",\r\n      \"foreignField\": \"_id\",\r\n      \"as\": \"pspDetails\"\r\n    }\r\n  },\r\n  {\r\n    \"$unwind\": \"$pspDetails\"\r\n  },\r\n  {\r\n    \"$project\": {\r\n      \"_id\": 0,\r\n      \"pspName\": \"$pspDetails.name\",\r\n      \"transactionCount\": 1\r\n    }\r\n  },\r\n  {\r\n    \"$sort\": {\r\n      \"transactionCount\": -1\r\n    }\r\n  }\r\n]"
+              queryType: table
+              refId: A
+          title: Tx count per PSP
+          type: barchart
+        - datasource:
+            default: false
+            type: haohanyang-mongodb-datasource
+            uid: feu6yxrhwnrpca
+          fieldConfig:
+            defaults:
+                color:
+                    fixedColor: green
+                    mode: fixed
+                custom:
+                    axisBorderShow: false
+                    axisCenteredZero: false
+                    axisColorMode: text
+                    axisLabel: ""
+                    axisPlacement: auto
+                    fillOpacity: 80
+                    gradientMode: none
+                    hideFrom:
+                        legend: false
+                        tooltip: false
+                        viz: false
+                    lineWidth: 1
+                    scaleDistribution:
+                        type: linear
+                    thresholdsStyle:
+                        mode: "off"
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: green
+                        - color: red
+                          value: 80
+            overrides: []
+          gridPos:
+            h: 8
+            w: 12
+            x: 12
+            "y": 0
+          id: 4
+          options:
+            barRadius: 0
+            barWidth: 0.66
+            fullHighlight: false
+            groupWidth: 0.7
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: true
+            orientation: horizontal
+            showValue: auto
+            stacking: none
+            tooltip:
+                hideZeros: false
+                mode: single
+                sort: none
+            xTickLabelRotation: 0
+            xTickLabelSpacing: 0
+          pluginVersion: 11.6.4
+          targets:
+            - collection: transactions
+              datasource:
+                type: haohanyang-mongodb-datasource
+                uid: feu6yxrhwnrpca
+              isStreaming: false
+              queryLanguage: json
+              queryText: "[\r\n  {\r\n    \"$match\": {\r\n      \"merchantId\": \"$merchantId\",\r\n      \"midId\": { \"$ne\": null },\r\n      \"createdAt\": {\r\n        \"$gte\": { \"$date\": { \"$numberLong\": \"$__from\" } },\r\n        \"$lte\": { \"$date\": { \"$numberLong\": \"$__to\" } }\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$group\": {\r\n      \"_id\": \"$midId\",\r\n      \"transactionCount\": { \"$sum\": 1 }\r\n    }\r\n  },\r\n  {\r\n    \"$lookup\": {\r\n      \"from\": \"psp_mids\",\r\n      \"localField\": \"_id\",\r\n      \"foreignField\": \"_id\",\r\n      \"as\": \"pspDetails\"\r\n    }\r\n  },\r\n  {\r\n    \"$unwind\": \"$pspDetails\"\r\n  },\r\n  {\r\n    \"$project\": {\r\n      \"_id\": 0,\r\n      \"pspName\": \"$pspDetails.name\",\r\n      \"transactionCount\": 1\r\n    }\r\n  },\r\n  {\r\n    \"$sort\": { \"transactionCount\": -1 }\r\n  }\r\n]"
+              queryType: table
+              refId: A
+          title: Tx count per mid
+          type: barchart
+        - datasource:
+            default: false
+            type: haohanyang-mongodb-datasource
+            uid: feu6yxrhwnrpca
+          fieldConfig:
+            defaults:
+                color:
+                    fixedColor: yellow
+                    mode: fixed
+                custom:
+                    axisBorderShow: false
+                    axisCenteredZero: false
+                    axisColorMode: text
+                    axisLabel: ""
+                    axisPlacement: auto
+                    fillOpacity: 80
+                    gradientMode: none
+                    hideFrom:
+                        legend: false
+                        tooltip: false
+                        viz: false
+                    lineWidth: 1
+                    scaleDistribution:
+                        type: linear
+                    thresholdsStyle:
+                        mode: "off"
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: green
+                        - color: red
+                          value: 80
+            overrides:
+                - matcher:
+                    id: byName
+                    options: ""
+                  properties: []
+          gridPos:
+            h: 8
+            w: 12
+            x: 0
+            "y": 8
+          id: 1
+          options:
+            barRadius: 0
+            barWidth: 0.2
+            fullHighlight: false
+            groupWidth: 0.7
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: true
+            orientation: auto
+            showValue: auto
+            stacking: none
+            tooltip:
+                hideZeros: false
+                mode: single
+                sort: none
+            xTickLabelRotation: 0
+            xTickLabelSpacing: 0
+          pluginVersion: 11.6.4
+          targets:
+            - aggregateBypassDocumentValidation: true
+              collection: transactions
+              datasource:
+                type: haohanyang-mongodb-datasource
+                uid: feu6yxrhwnrpca
+              isStreaming: false
+              queryLanguage: json
+              queryText: "[\r\n  {\r\n    \"$match\": {\r\n      \"merchantId\": \"$merchantId\",\r\n      \"createdAt\": {\r\n        \"$gt\": {\r\n          \"$date\": {\r\n            \"$numberLong\": \"$__from\"\r\n          }\r\n        },\r\n        \"$lt\": {\r\n          \"$date\": {\r\n            \"$numberLong\": \"$__to\"\r\n          }\r\n        }\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$group\": {\r\n      \"_id\": \"$status\",\r\n      \"Count\": {\r\n        \"$sum\": 1\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$project\": {\r\n      \"_id\": 0,\r\n      \"Status\": \"$_id\",\r\n      \"Count\": 1\r\n    }\r\n  },\r\n  {\r\n    \"$sort\": {\r\n      \"Count\": 1\r\n    }\r\n  }\r\n]"
+              queryType: table
+              refId: A
+          title: Tx count per status
+          type: barchart
+        - datasource:
+            default: false
+            type: haohanyang-mongodb-datasource
+            uid: feu6yxrhwnrpca
+          fieldConfig:
+            defaults:
+                color:
+                    mode: thresholds
+                custom:
+                    axisBorderShow: false
+                    axisCenteredZero: false
+                    axisColorMode: text
+                    axisLabel: ""
+                    axisPlacement: auto
+                    fillOpacity: 80
+                    gradientMode: none
+                    hideFrom:
+                        legend: false
+                        tooltip: false
+                        viz: false
+                    lineWidth: 1
+                    scaleDistribution:
+                        type: linear
+                    thresholdsStyle:
+                        mode: "off"
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: green
+                        - color: red
+                          value: 80
+            overrides:
+                - matcher:
+                    id: byName
+                    options: totalAmount
+                  properties:
+                    - id: color
+                      value:
+                        fixedColor: purple
+                        mode: fixed
+          gridPos:
+            h: 8
+            w: 12
+            x: 12
+            "y": 8
+          id: 2
+          options:
+            barRadius: 0
+            barWidth: 0.2
+            fullHighlight: false
+            groupWidth: 0.7
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: true
+            orientation: auto
+            showValue: auto
+            stacking: none
+            tooltip:
+                hideZeros: false
+                mode: single
+                sort: none
+            xTickLabelRotation: 0
+            xTickLabelSpacing: 0
+          pluginVersion: 11.6.4
+          targets:
+            - aggregateBypassDocumentValidation: true
+              collection: transactions
+              datasource:
+                type: haohanyang-mongodb-datasource
+                uid: feu6yxrhwnrpca
+              isStreaming: false
+              queryLanguage: json
+              queryText: "[\r\n  {\r\n    \"$match\": {\r\n      \"merchantId\": \"$merchantId\",\r\n      \"createdAt\": {\r\n        \"$gt\": {\r\n          \"$date\": {\r\n            \"$numberLong\": \"$__from\"\r\n          }\r\n        },\r\n        \"$lt\": {\r\n          \"$date\": {\r\n            \"$numberLong\": \"$__to\"\r\n          }\r\n        }\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$group\": {\r\n      \"_id\": \"$status\",\r\n      \"totalAmount\": { \"$sum\": \"$fx.amount\" }\r\n    }\r\n  },\r\n  {\r\n    \"$project\": {\r\n      \"_id\": 0,\r\n      \"Status\": \"$_id\",\r\n      \"totalAmount\": 1\r\n    }\r\n  },\r\n  {\r\n    \"$sort\": {\r\n      \"totalAmount\": 1\r\n    }\r\n  }\r\n]"
+              queryType: table
+              refId: A
+          title: $ per status
+          type: barchart
+        - datasource:
+            default: false
+            type: haohanyang-mongodb-datasource
+            uid: feu6yxrhwnrpca
+          fieldConfig:
+            defaults:
+                color:
+                    mode: palette-classic
+                custom:
+                    axisBorderShow: false
+                    axisCenteredZero: false
+                    axisColorMode: text
+                    axisLabel: ""
+                    axisPlacement: auto
+                    barAlignment: 0
+                    barWidthFactor: 0.6
+                    drawStyle: line
+                    fillOpacity: 53
+                    gradientMode: none
+                    hideFrom:
+                        legend: false
+                        tooltip: false
+                        viz: false
+                    insertNulls: false
+                    lineInterpolation: linear
+                    lineWidth: 1
+                    pointSize: 5
+                    scaleDistribution:
+                        type: linear
+                    showPoints: auto
+                    spanNulls: false
+                    stacking:
+                        group: A
+                        mode: none
+                    thresholdsStyle:
+                        mode: "off"
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: green
+                        - color: red
+                          value: 80
+            overrides: []
+          gridPos:
+            h: 7
+            w: 12
+            x: 0
+            "y": 16
+          id: 5
+          options:
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: true
+            tooltip:
+                hideZeros: false
+                maxHeight: 600
+                mode: single
+                sort: none
+          pluginVersion: 11.6.4
+          targets:
+            - collection: transactions
+              datasource:
+                type: haohanyang-mongodb-datasource
+                uid: feu6yxrhwnrpca
+              isStreaming: false
+              queryLanguage: json
+              queryText: "[\r\n  {\r\n    \"$match\": {\r\n      \"merchantId\": \"$merchantId\",\r\n      \"createdAt\": {\r\n        \"$gte\": { \"$date\": { \"$numberLong\": \"$__from\" } },\r\n        \"$lte\": { \"$date\": { \"$numberLong\": \"$__to\" } }\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$group\": {\r\n      \"_id\": {\r\n        \"$dateToString\": { \"format\": \"%Y-%m-%d\", \"date\": \"$createdAt\" }\r\n      },\r\n      \"txOthers\": {\r\n        \"$sum\": {\r\n          \"$cond\": [\r\n            { \"$and\": [{ \"$ne\": [\"$status\", \"COMPLETED\"] }, { \"$ne\": [\"$errorCategory\", 2] }] },\r\n            1,\r\n            0\r\n          ]\r\n        }\r\n      },\r\n      \"txCompleted\": {\r\n        \"$sum\": { \"$cond\": [{ \"$eq\": [\"$status\", \"COMPLETED\"] }, 1, 0] }\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$addFields\": {\r\n      \"date\": { \"$dateFromString\": { \"dateString\": \"$_id\" } }\r\n    }\r\n  },\r\n  {\r\n    \"$project\": {\r\n      \"_id\": 0,\r\n      \"date\": 1,\r\n      \"approvalRate\": {\r\n        \"$cond\": [\r\n          { \"$eq\": [{ \"$add\": [\"$txOthers\", \"$txCompleted\"] }, 0] },\r\n          100,\r\n          {\r\n            \"$round\": [\r\n              {\r\n                \"$multiply\": [\r\n                  {\r\n                    \"$divide\": [\"$txCompleted\", { \"$add\": [\"$txOthers\", \"$txCompleted\"] }]\r\n                  },\r\n                  100\r\n                ]\r\n              },\r\n              2\r\n            ]\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$sort\": { \"date\": 1 }\r\n  }\r\n]"
+              queryType: table
+              refId: A
+          title: AR per day
+          type: timeseries
+    preload: false
+    refresh: ""
+    schemaVersion: 41
+    tags: []
+    templating:
+        list:
+            - current:
+                text: "888"
+                value: "888"
+              datasource:
+                type: haohanyang-mongodb-datasource
+                uid: deu6xtwsv5vy8d
+              definition: ""
+              includeAll: false
+              label: Merchant Name
+              name: merchantName
+              options: []
+              query:
+                collection: merchants
+                queryText: "[\r\n  {\r\n  \"$project\": {\r\n    \"value\": \"$name\"\r\n  }\r\n}\r\n]"
+                queryType: table
+                refId: MongoDBVariableQueryEditor-VariableQuery
+              refresh: 1
+              regex: ""
+              sort: 1
+              type: query
+            - current:
+                text: 75c8722b-32f7-4434-9a14-39a57016be63
+                value: 75c8722b-32f7-4434-9a14-39a57016be63
+              datasource:
+                type: haohanyang-mongodb-datasource
+                uid: deu6xtwsv5vy8d
+              definition: ""
+              hide: 2
+              includeAll: false
+              label: Merchant ID
+              name: merchantId
+              options: []
+              query:
+                collection: merchants
+                queryText: "[\r\n  {\r\n    \"$match\":{\r\n      \"name\": \"$merchantName\"\r\n    }\r\n  },\r\n  {\r\n  \"$project\": {\r\n    \"value\": \"$_id\"\r\n  }\r\n}\r\n]"
+                queryType: table
+                refId: MongoDBVariableQueryEditor-VariableQuery
+              refresh: 1
+              regex: ""
+              type: query
+    time:
+        from: now-12h
+        to: now
+    timepicker: {}
+    timezone: browser
+    title: Merchants - Tx counts
+    uid: bej2yz2jfl3i8e

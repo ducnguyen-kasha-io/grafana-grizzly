@@ -1,0 +1,14 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Datasource
+metadata:
+    name: 9f49e9eb-099a-4463-9c31-950dc57110d6
+spec:
+    access: proxy
+    jsonData:
+        manageAlerts: false
+    name: do-metrics-sandbox-cyberpay
+    orgId: 1
+    type: prometheus
+    typeLogoUrl: public/app/plugins/datasource/prometheus/img/prometheus_logo.svg
+    uid: 9f49e9eb-099a-4463-9c31-950dc57110d6
+    url: https://prom.sandbox.cyberpay.link

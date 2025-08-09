@@ -1,0 +1,9 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: DashboardFolder
+metadata:
+    name: eej2wghwf4x6oe
+spec:
+    orgId: 1
+    parentUid: dej2wdgeov5z4e
+    title: PSPs
+    uid: eej2wghwf4x6oe

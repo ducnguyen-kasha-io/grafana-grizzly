@@ -1,0 +1,9 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: DashboardFolder
+metadata:
+    name: fds3wc5k1wkcgb
+spec:
+    orgId: 1
+    parentUid: dej2wdgeov5z4e
+    title: Reports
+    uid: fds3wc5k1wkcgb

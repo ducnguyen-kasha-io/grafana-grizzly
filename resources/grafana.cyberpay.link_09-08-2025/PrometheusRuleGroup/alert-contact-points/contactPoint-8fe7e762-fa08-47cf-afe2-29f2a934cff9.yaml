@@ -1,0 +1,11 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: AlertContactPoint
+metadata:
+    name: 8fe7e762-fa08-47cf-afe2-29f2a934cff9
+spec:
+    disableResolveMessage: false
+    name: cyberpay-slack
+    settings:
+        url: https://hooks.slack.com/services/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
+    type: slack
+    uid: 8fe7e762-fa08-47cf-afe2-29f2a934cff9

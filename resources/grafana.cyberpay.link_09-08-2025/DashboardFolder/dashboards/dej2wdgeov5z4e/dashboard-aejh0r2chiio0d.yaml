@@ -1,0 +1,108 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Dashboard
+metadata:
+    folder: dej2wdgeov5z4e
+    name: aejh0r2chiio0d
+spec:
+    annotations:
+        list:
+            - builtIn: 1
+              datasource:
+                type: grafana
+                uid: -- Grafana --
+              enable: true
+              hide: true
+              iconColor: rgba(0, 211, 255, 1)
+              name: Annotations & Alerts
+              type: dashboard
+    editable: true
+    fiscalYearStartMonth: 0
+    graphTooltip: 0
+    links: []
+    panels:
+        - datasource:
+            default: false
+            type: haohanyang-mongodb-datasource
+            uid: feu6yxrhwnrpca
+          description: Merchants with more than 10 transactions in the given timeframe
+          fieldConfig:
+            defaults:
+                color:
+                    mode: palette-classic
+                custom:
+                    axisBorderShow: false
+                    axisCenteredZero: false
+                    axisColorMode: text
+                    axisLabel: ""
+                    axisPlacement: auto
+                    fillOpacity: 100
+                    gradientMode: none
+                    hideFrom:
+                        legend: false
+                        tooltip: false
+                        viz: false
+                    lineWidth: 2
+                    scaleDistribution:
+                        type: linear
+                    thresholdsStyle:
+                        mode: "off"
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: green
+                        - color: red
+                          value: 80
+            overrides: []
+          gridPos:
+            h: 22
+            w: 24
+            x: 0
+            "y": 0
+          id: 2
+          options:
+            barRadius: 0
+            barWidth: 0.63
+            fullHighlight: false
+            groupWidth: 0.7
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: true
+            orientation: horizontal
+            showValue: always
+            stacking: none
+            tooltip:
+                hideZeros: false
+                maxHeight: 600
+                mode: single
+                sort: none
+            xTickLabelRotation: 0
+            xTickLabelSpacing: 0
+          pluginVersion: 11.6.4
+          targets:
+            - collection: transactions
+              datasource:
+                type: haohanyang-mongodb-datasource
+                uid: feu6yxrhwnrpca
+              isStreaming: false
+              queryLanguage: json
+              queryText: "[\r\n  {\r\n    \"$match\": {\r\n      \"createdAt\": {\r\n        \"$gte\": {\r\n          \"$date\": {\r\n            \"$numberLong\": \"$__from\"\r\n          }\r\n        },\r\n        \"$lte\": {\r\n          \"$date\": {\r\n            \"$numberLong\": \"$__to\"\r\n          }\r\n        }\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$group\": {\r\n      \"_id\": \"$merchantId\",\r\n      \"totalTransactions\": {\r\n        \"$sum\": 1\r\n      },\r\n      \"completedTransactions\": {\r\n        \"$sum\": {\r\n          \"$cond\": [\r\n            {\r\n              \"$eq\": [\r\n                \"$status\",\r\n                \"COMPLETED\"\r\n              ]\r\n            },\r\n            1,\r\n            0\r\n          ]\r\n        }\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$match\": {\r\n      \"totalTransactions\": {\r\n        \"$gte\": 10\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$lookup\": {\r\n      \"from\": \"merchants\",\r\n      \"localField\": \"_id\",\r\n      \"foreignField\": \"_id\",\r\n      \"as\": \"merchantInfo\"\r\n    }\r\n  },\r\n  {\r\n    \"$unwind\": \"$merchantInfo\"\r\n  },\r\n  {\r\n    \"$project\": {\r\n      \"_id\": 0,\r\n      \"merchantName\": \"$merchantInfo.name\",\r\n      \"approvalRate\": {\r\n        \"$cond\": [\r\n          {\r\n            \"$eq\": [\r\n              \"$totalTransactions\",\r\n              0\r\n            ]\r\n          },\r\n          0,\r\n          {\r\n            \"$round\": [\r\n              {\r\n                \"$multiply\": [\r\n                  {\r\n                    \"$divide\": [\r\n                      \"$completedTransactions\",\r\n                      \"$totalTransactions\"\r\n                    ]\r\n                  },\r\n                  100\r\n                ]\r\n              },\r\n              2\r\n            ]\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"$sort\": {\r\n      \"approvalRate\": -1\r\n    }\r\n  }\r\n]"
+              queryType: table
+              refId: A
+          title: AR per merchant
+          type: barchart
+    preload: false
+    refresh: ""
+    schemaVersion: 41
+    tags: []
+    templating:
+        list: []
+    time:
+        from: now-24h
+        to: now
+    timepicker: {}
+    timezone: browser
+    title: AR per merchant
+    uid: aejh0r2chiio0d

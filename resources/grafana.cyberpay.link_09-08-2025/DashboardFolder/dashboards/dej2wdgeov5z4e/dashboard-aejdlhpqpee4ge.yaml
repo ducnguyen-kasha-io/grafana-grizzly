@@ -1,0 +1,502 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Dashboard
+metadata:
+    folder: dej2wdgeov5z4e
+    name: aejdlhpqpee4ge
+spec:
+    annotations:
+        list:
+            - builtIn: 1
+              datasource:
+                type: grafana
+                uid: -- Grafana --
+              enable: true
+              hide: true
+              iconColor: rgba(0, 211, 255, 1)
+              name: Annotations & Alerts
+              type: dashboard
+    editable: true
+    fiscalYearStartMonth: 0
+    graphTooltip: 0
+    links: []
+    panels:
+        - datasource:
+            default: false
+            type: haohanyang-mongodb-datasource
+            uid: feu6yxrhwnrpca
+          fieldConfig:
+            defaults:
+                color:
+                    mode: palette-classic
+                custom:
+                    axisBorderShow: false
+                    axisCenteredZero: false
+                    axisColorMode: text
+                    axisGridShow: true
+                    axisLabel: ""
+                    axisPlacement: auto
+                    barAlignment: -1
+                    barWidthFactor: 0.6
+                    drawStyle: line
+                    fillOpacity: 50
+                    gradientMode: opacity
+                    hideFrom:
+                        legend: false
+                        tooltip: false
+                        viz: false
+                    insertNulls: false
+                    lineInterpolation: linear
+                    lineStyle:
+                        fill: solid
+                    lineWidth: 1
+                    pointSize: 4
+                    scaleDistribution:
+                        type: linear
+                    showPoints: never
+                    spanNulls: false
+                    stacking:
+                        group: A
+                        mode: none
+                    thresholdsStyle:
+                        mode: area
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: dark-red
+                        - color: transparent
+                          value: 2
+            overrides:
+                - __systemRef: hideSeriesFrom
+                  matcher:
+                    id: byNames
+                    options:
+                        mode: exclude
+                        names:
+                            - count
+                        prefix: 'All except:'
+                        readOnly: true
+                  properties:
+                    - id: custom.hideFrom
+                      value:
+                        legend: false
+                        tooltip: false
+                        viz: true
+                - matcher:
+                    id: byName
+                    options: count
+                  properties:
+                    - id: color
+                      value:
+                        fixedColor: '#73BF69'
+                        mode: fixed
+          gridPos:
+            h: 10
+            w: 24
+            x: 0
+            "y": 0
+          id: 1
+          options:
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: true
+            timezone:
+                - Europe/Amsterdam
+            tooltip:
+                hideZeros: false
+                maxHeight: 600
+                mode: single
+                sort: none
+          pluginVersion: 11.6.4
+          targets:
+            - collection: transactions
+              datasource:
+                type: haohanyang-mongodb-datasource
+                uid: feu6yxrhwnrpca
+              isStreaming: false
+              queryLanguage: json
+              queryText: |-
+                [
+                  {
+                    "$match": {
+                      "createdAt": {
+                        "$gte": {
+                          "$date": {
+                            "$numberLong": "$__from"
+                          }
+                        },
+                        "$lte": {
+                          "$date": {
+                            "$numberLong": "$__to"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "$group": {
+                      "_id": {
+                        "$toDate": {
+                          "$subtract": [
+                            { "$toLong": "$createdAt" },
+                            { "$mod": [{ "$toLong": "$createdAt" }, 60000] }
+                          ]
+                        }
+                      },
+                      "count": { "$sum": 1 }
+                    }
+                  },
+                  {
+                    "$project": {
+                      "_id": 1,
+                      "count": 1
+                    }
+                  },
+                  {
+                    "$sort": {
+                      "_id": 1
+                    }
+                  }
+                ]
+              queryType: table
+              refId: A
+          title: Transactions per minute
+          type: timeseries
+        - datasource:
+            default: false
+            type: haohanyang-mongodb-datasource
+            uid: feu6yxrhwnrpca
+          fieldConfig:
+            defaults:
+                color:
+                    mode: palette-classic
+                custom:
+                    axisBorderShow: false
+                    axisCenteredZero: false
+                    axisColorMode: text
+                    axisLabel: ""
+                    axisPlacement: auto
+                    axisSoftMax: 100
+                    barAlignment: 0
+                    barWidthFactor: 0.6
+                    drawStyle: line
+                    fillOpacity: 50
+                    gradientMode: opacity
+                    hideFrom:
+                        legend: false
+                        tooltip: false
+                        viz: false
+                    insertNulls: false
+                    lineInterpolation: linear
+                    lineWidth: 1
+                    pointSize: 5
+                    scaleDistribution:
+                        type: linear
+                    showPoints: auto
+                    spanNulls: false
+                    stacking:
+                        group: A
+                        mode: none
+                    thresholdsStyle:
+                        mode: area
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: dark-red
+                        - color: transparent
+                          value: 50
+            overrides: []
+          gridPos:
+            h: 11
+            w: 24
+            x: 0
+            "y": 10
+          id: 2
+          options:
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: false
+            timezone:
+                - Europe/Amsterdam
+            tooltip:
+                hideZeros: false
+                maxHeight: 600
+                mode: single
+                sort: none
+          pluginVersion: 11.6.4
+          targets:
+            - collection: transactions
+              datasource:
+                type: haohanyang-mongodb-datasource
+                uid: feu6yxrhwnrpca
+              isStreaming: false
+              queryLanguage: json
+              queryText: |-
+                [
+                  {
+                    "$match": {
+                      "category": "PAYIN",
+                      "status": {
+                        "$nin": [
+                          "CHARGEBACK",
+                          "REFUNDED"
+                        ]
+                      },
+                      "createdAt": {
+                        "$gte": {
+                          "$date": {
+                            "$numberLong": "$__from"
+                          }
+                        },
+                        "$lte": {
+                          "$date": {
+                            "$numberLong": "$__to"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "$group": {
+                      "_id": {
+                        "$dateToString": {
+                          "format": "%Y-%m-%dT%H:%M",
+                          "date": "$createdAt"
+                        }
+                      },
+                      "txOthers": {
+                        "$sum": {
+                          "$cond": [
+                            {
+                              "$and": [
+                                {
+                                  "$ne": [
+                                    "$status",
+                                    "COMPLETED"
+                                  ]
+                                },
+                                {
+                                  "$ne": [
+                                    "$errorCategory",
+                                    2
+                                  ]
+                                }
+                              ]
+                            },
+                            1,
+                            0
+                          ]
+                        }
+                      },
+                      "txCompleted": {
+                        "$sum": {
+                          "$cond": [
+                            {
+                              "$eq": [
+                                "$status",
+                                "COMPLETED"
+                              ]
+                            },
+                            1,
+                            0
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "$addFields": {
+                      "date": {
+                        "$dateFromString": {
+                          "dateString": "$_id",
+                          "format": "%Y-%m-%dT%H:%M"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "$project": {
+                      "_id": 0,
+                      "date": 1,
+                      "approvalRate": {
+                        "$cond": [
+                          {
+                            "$eq": [
+                              {
+                                "$add": [
+                                  "$txOthers",
+                                  "$txCompleted"
+                                ]
+                              },
+                              0
+                            ]
+                          },
+                          100,
+                          {
+                            "$round": [
+                              {
+                                "$multiply": [
+                                  {
+                                    "$divide": [
+                                      "$txCompleted",
+                                      {
+                                        "$add": [
+                                          "$txOthers",
+                                          "$txCompleted"
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  100
+                                ]
+                              },
+                              2
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "$sort": {
+                      "date": 1
+                    }
+                  }
+                ]
+              queryType: table
+              refId: A
+          title: AR per minute
+          type: timeseries
+        - datasource:
+            default: false
+            type: haohanyang-mongodb-datasource
+            uid: feu6yxrhwnrpca
+          fieldConfig:
+            defaults:
+                color:
+                    mode: palette-classic
+                custom:
+                    axisBorderShow: true
+                    axisCenteredZero: false
+                    axisColorMode: text
+                    axisLabel: ""
+                    axisPlacement: auto
+                    barAlignment: 0
+                    barWidthFactor: 0.6
+                    drawStyle: bars
+                    fillOpacity: 50
+                    gradientMode: none
+                    hideFrom:
+                        legend: false
+                        tooltip: false
+                        viz: false
+                    insertNulls: 3.6e+06
+                    lineInterpolation: linear
+                    lineWidth: 1
+                    pointSize: 3
+                    scaleDistribution:
+                        type: linear
+                    showPoints: auto
+                    spanNulls: false
+                    stacking:
+                        group: A
+                        mode: none
+                    thresholdsStyle:
+                        mode: "off"
+                mappings: []
+                noValue: No errors
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: green
+            overrides: []
+          gridPos:
+            h: 7
+            w: 24
+            x: 0
+            "y": 21
+          id: 3
+          options:
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: true
+            timezone:
+                - Europe/Amsterdam
+            tooltip:
+                hideZeros: false
+                maxHeight: 600
+                mode: single
+                sort: none
+          pluginVersion: 11.6.4
+          targets:
+            - collection: transaction_attempts
+              datasource:
+                type: haohanyang-mongodb-datasource
+                uid: feu6yxrhwnrpca
+              isStreaming: false
+              queryLanguage: json
+              queryText: |-
+                [
+                  {
+                    "$match": {
+                      "createdAt": {
+                        "$gte": {
+                          "$date": {
+                            "$numberLong": "$__from"
+                          }
+                        },
+                        "$lte": {
+                          "$date": {
+                            "$numberLong": "$__to"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "$group": {
+                      "_id": {
+                        "$toDate": {
+                          "$subtract": [
+                            { "$toLong": "$createdAt" },
+                            { "$mod": [ { "$toLong": "$createdAt" }, 60000 ] }
+                          ]
+                        }
+                      },
+                      "count": { "$sum": 1 }
+                    }
+                  },
+                  {
+                    "$project": {
+                      "_id": 1,
+                      "count": 1
+                    }
+                  },
+                  {
+                    "$sort": { "time": 1 }
+                  }
+                ]
+              queryType: table
+              refId: A
+          title: Validation errors
+          type: timeseries
+    preload: false
+    refresh: 1m
+    schemaVersion: 41
+    tags: []
+    templating:
+        list: []
+    time:
+        from: now-24h
+        to: now
+    timepicker: {}
+    timezone: browser
+    title: Transactions per minute
+    uid: aejdlhpqpee4ge

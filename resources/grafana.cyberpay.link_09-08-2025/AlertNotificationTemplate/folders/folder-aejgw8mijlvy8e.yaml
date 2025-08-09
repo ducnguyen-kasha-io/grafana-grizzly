@@ -1,0 +1,9 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: DashboardFolder
+metadata:
+    name: aejgw8mijlvy8e
+spec:
+    orgId: 1
+    parentUid: dej2wdgeov5z4e
+    title: Merchants
+    uid: aejgw8mijlvy8e
