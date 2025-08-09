@@ -1,7 +1,0 @@
-apiVersion: grizzly.grafana.com/v1alpha1
-kind: DashboardFolder
-metadata:
-    name: bdrfltdpb2q68c
-spec:
-    title: Microservices
-    uid: bdrfltdpb2q68c

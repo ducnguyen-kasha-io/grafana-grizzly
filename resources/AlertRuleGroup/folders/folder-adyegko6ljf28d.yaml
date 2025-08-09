@@ -1,8 +1,0 @@
-apiVersion: grizzly.grafana.com/v1alpha1
-kind: DashboardFolder
-metadata:
-    name: adyegko6ljf28d
-spec:
-    parentUid: edoom9gbnjwu8c
-    title: PSPs
-    uid: adyegko6ljf28d
