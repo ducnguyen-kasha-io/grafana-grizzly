@@ -1,0 +1,129 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Dashboard
+metadata:
+    folder: edoom9gbnjwu8c
+    name: edw6adms8fo5ca
+spec:
+    annotations:
+        list:
+            - builtIn: 1
+              datasource:
+                type: grafana
+                uid: -- Grafana --
+              enable: true
+              hide: true
+              iconColor: rgba(0, 211, 255, 1)
+              name: Annotations & Alerts
+              type: dashboard
+    editable: true
+    fiscalYearStartMonth: 0
+    graphTooltip: 0
+    links: []
+    panels:
+        - datasource:
+            type: grafana-mongodb-datasource
+            uid: adonk9wsag3k0d
+          fieldConfig:
+            defaults:
+                color:
+                    mode: palette-classic
+                custom:
+                    axisBorderShow: false
+                    axisCenteredZero: false
+                    axisColorMode: text
+                    axisLabel: ""
+                    axisPlacement: auto
+                    fillOpacity: 100
+                    gradientMode: none
+                    hideFrom:
+                        legend: false
+                        tooltip: false
+                        viz: false
+                    lineWidth: 2
+                    scaleDistribution:
+                        type: linear
+                    thresholdsStyle:
+                        mode: "off"
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: green
+                          value: null
+                        - color: red
+                          value: 80
+            overrides: []
+          gridPos:
+            h: 27
+            w: 24
+            x: 0
+            "y": 0
+          id: 2
+          options:
+            barRadius: 0
+            barWidth: 0.63
+            fullHighlight: false
+            groupWidth: 0.7
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: true
+            orientation: horizontal
+            showValue: always
+            stacking: none
+            tooltip:
+                maxHeight: 600
+                mode: single
+                sort: none
+            xTickLabelRotation: 0
+            xTickLabelSpacing: 0
+          pluginVersion: 11.0.3
+          targets:
+            - datasource:
+                type: grafana-mongodb-datasource
+                uid: adonk9wsag3k0d
+              parsedQuery: |
+                payments.transactions.aggregate([{"$match":{"status":{"$ne":"COMPLETED"},"errorReason":{"$ne":null},"$expr":{"$and":[{"$gte":["$createdAt",{"$date":"2024-08-27T21:00:00Z"}]},{"$lte":["$createdAt",{"$date":"2024-08-28T20:59:59.999Z"}]},{"$or":[{"$eq":["8eb950cb-cbd4-40f1-b0b8-5c5011b7aca2","All"]},{"$eq":["$pspId","8eb950cb-cbd4-40f1-b0b8-5c5011b7aca2"]}]}]}}},{"$group":{"_id":"$errorReason","errorCount":{"$sum":1}}},{"$project":{"_id":0,"errorReason":"$_id","errorCount":1}},{"$sort":{"errorCount":-1}}])
+              query: "payments.transactions.aggregate([\r\n    {\r\n        $match: {\r\n            status: { $ne: 'COMPLETED' },  // Include only records where status is not \"COMPLETED\"\r\n            errorReason: { $ne: null },  // Exclude records where errorReason is null\r\n            $expr: {\r\n                $and: [\r\n                    { $gte: ['$createdAt', new ISODate($__from)] },  // Date range filter from $__from\r\n                    { $lte: ['$createdAt', new ISODate($__to)] },  // Date range filter to $__to\r\n                    {\r\n                        $or: [\r\n                            { $eq: [\"$provider\", \"All\"] },  // If \"All\" is selected, include all providers\r\n                            { $eq: [\"$pspId\", \"$provider\"] }  // Otherwise, match specific pspId\r\n                        ]\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    {\r\n        $group: {\r\n            _id: '$errorReason',\r\n            errorCount: { $sum: 1 }\r\n        }\r\n    },\r\n    {\r\n        $project: {\r\n            _id: 0,\r\n            errorReason: '$_id',\r\n            errorCount: 1\r\n        }\r\n    },\r\n    {\r\n        $sort: { errorCount: -1 }\r\n    }\r\n])\r\n"
+              queryType: query
+              refId: A
+          title: Error count
+          type: barchart
+    schemaVersion: 39
+    tags: []
+    templating:
+        list:
+            - allValue: All
+              current:
+                selected: true
+                text: All
+                value: $__all
+              datasource:
+                type: grafana-mongodb-datasource
+                uid: adonk9wsag3k0d
+              definition: "Query: payments.psps.aggregate([\r\n  {\r\n    $project: {\r\n      value: \"$_id\",\r\n      name: 1\r\n    }\r\n  },\r\n  {\r\n    $sort: { name: 1 }\r\n  }\r\n])\r\n"
+              hide: 0
+              includeAll: true
+              multi: false
+              name: provider
+              options: []
+              query:
+                parsedQuery: |
+                    payments.psps.aggregate([{"$project":{"value":"$_id","name":1}},{"$sort":{"name":1}}])
+                query: "payments.psps.aggregate([\r\n  {\r\n    $project: {\r\n      value: \"$_id\",\r\n      name: 1\r\n    }\r\n  },\r\n  {\r\n    $sort: { name: 1 }\r\n  }\r\n])\r\n"
+                queryType: query
+              refresh: 1
+              regex: ""
+              skipUrlSync: false
+              sort: 0
+              type: query
+    time:
+        from: now/d
+        to: now/d
+    timeRangeUpdatedDuringEditOrView: false
+    timepicker: {}
+    timezone: browser
+    title: Error count
+    uid: edw6adms8fo5ca
+    weekStart: ""

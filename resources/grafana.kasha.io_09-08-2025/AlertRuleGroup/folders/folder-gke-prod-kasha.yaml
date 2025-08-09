@@ -1,0 +1,9 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: DashboardFolder
+metadata:
+    name: gke-prod-kasha
+spec:
+    orgId: 1
+    parentUid: 7dc1e82d-c438-4785-b9af-636bec477a1d
+    title: gke-prod-kasha
+    uid: gke-prod-kasha

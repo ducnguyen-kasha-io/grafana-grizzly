@@ -1,0 +1,96 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Dashboard
+metadata:
+    folder: fds3wc5k1wkcgb
+    name: cduzjzwxa7togb
+spec:
+    annotations:
+        list:
+            - builtIn: 1
+              datasource:
+                type: grafana
+                uid: -- Grafana --
+              enable: true
+              hide: true
+              iconColor: rgba(0, 211, 255, 1)
+              name: Annotations & Alerts
+              type: dashboard
+    editable: true
+    fiscalYearStartMonth: 0
+    graphTooltip: 0
+    links: []
+    panels:
+        - datasource:
+            type: grafana-mongodb-datasource
+            uid: adonk9wsag3k0d
+          fieldConfig:
+            defaults:
+                color:
+                    mode: thresholds
+                custom:
+                    align: auto
+                    cellOptions:
+                        type: auto
+                    filterable: true
+                    inspect: false
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: green
+                          value: null
+                        - color: red
+                          value: 80
+            overrides: []
+          gridPos:
+            h: 8
+            w: 12
+            x: 0
+            "y": 0
+          id: 1
+          options:
+            cellHeight: sm
+            footer:
+                countRows: false
+                fields: ""
+                reducer:
+                    - sum
+                show: false
+            showHeader: true
+          pluginVersion: 11.0.3
+          targets:
+            - datasource:
+                type: grafana-mongodb-datasource
+                uid: adonk9wsag3k0d
+              parsedQuery: |
+                payments.transactions.aggregate([{"$match":{"createdAt":{"$gte":{"$date":"2024-08-29T03:28:40.415Z"},"$lte":{"$date":"2024-08-29T09:28:40.415Z"}},"status":"COMPLETED"}},{"$group":{"_id":{"merchantId":"$merchantId","countryCode":"$country"},"todayTotalAmount":{"$sum":"$fx.amount"}}},{"$lookup":{"from":"merchants","localField":"_id.merchantId","foreignField":"_id","as":"merchantDetails"}},{"$unwind":{"path":"$merchantDetails","preserveNullAndEmptyArrays":true}},{"$lookup":{"from":"countries","localField":"_id.countryCode","foreignField":"code","as":"countryDetails"}},{"$unwind":{"path":"$countryDetails","preserveNullAndEmptyArrays":true}},{"$project":{"_id":0,"merchantId":"$_id.merchantId","merchantName":{"$ifNull":["$merchantDetails.name","Unknown Merchant"]},"countryCode":"$_id.countryCode","countryName":{"$ifNull":["$countryDetails.name","Unknown Country"]},"todayTotalAmount":1}}])
+              query: "payments.transactions.aggregate([\r\n  {\r\n    $match: {\r\n      createdAt: {\r\n        $gte: new ISODate($__from),\r\n        $lte: new ISODate($__to)\r\n      },\r\n      status: \"COMPLETED\"\r\n    }\r\n  },\r\n  {\r\n    $group: {\r\n      _id: {\r\n        merchantId: \"$merchantId\",\r\n        countryCode: \"$country\"  \r\n      },\r\n      todayTotalAmount: { $sum: \"$fx.amount\" }\r\n    }\r\n  },\r\n  {\r\n    $lookup: {\r\n      from: \"merchants\",\r\n      localField: \"_id.merchantId\",\r\n      foreignField: \"_id\",\r\n      as: \"merchantDetails\"\r\n    }\r\n  },\r\n  {\r\n    $unwind: {\r\n      path: \"$merchantDetails\",\r\n      preserveNullAndEmptyArrays: true\r\n    }\r\n  },\r\n  {\r\n    $lookup: {\r\n      from: \"countries\",\r\n      localField: \"_id.countryCode\",\r\n      foreignField: \"code\",\r\n      as: \"countryDetails\"\r\n    }\r\n  },\r\n  {\r\n    $unwind: {\r\n      path: \"$countryDetails\",\r\n      preserveNullAndEmptyArrays: true\r\n    }\r\n  },\r\n  {\r\n    $project: {\r\n      _id: 0,\r\n      merchantId: \"$_id.merchantId\",\r\n      merchantName: { $ifNull: [\"$merchantDetails.name\", \"Unknown Merchant\"] },\r\n      countryCode: \"$_id.countryCode\",  \r\n      countryName: { $ifNull: [\"$countryDetails.name\", \"Unknown Country\"] },\r\n      todayTotalAmount: 1\r\n    }\r\n  }\r\n])\r\n"
+              queryType: query
+              refId: Today
+          transformations:
+            - id: organize
+              options:
+                excludeByName:
+                    countryCode: true
+                    merchantId: true
+                includeByName: {}
+                indexByName:
+                    countryName: 1
+                    merchantId: 2
+                    merchantName: 0
+                    todayTotalAmount: 3
+                renameByName: {}
+          type: table
+    schemaVersion: 39
+    tags: []
+    templating:
+        list: []
+    time:
+        from: now-6h
+        to: now
+    timeRangeUpdatedDuringEditOrView: false
+    timepicker: {}
+    timezone: browser
+    title: Comparison between days
+    uid: cduzjzwxa7togb
+    weekStart: ""

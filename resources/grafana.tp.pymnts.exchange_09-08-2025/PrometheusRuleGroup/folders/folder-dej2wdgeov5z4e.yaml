@@ -1,0 +1,7 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: DashboardFolder
+metadata:
+    name: dej2wdgeov5z4e
+spec:
+    title: Database - OSS
+    uid: dej2wdgeov5z4e

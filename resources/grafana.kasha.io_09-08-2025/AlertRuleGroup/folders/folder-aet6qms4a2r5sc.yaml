@@ -1,0 +1,8 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: DashboardFolder
+metadata:
+    name: aet6qms4a2r5sc
+spec:
+    orgId: 1
+    title: DASHBOARDS
+    uid: aet6qms4a2r5sc

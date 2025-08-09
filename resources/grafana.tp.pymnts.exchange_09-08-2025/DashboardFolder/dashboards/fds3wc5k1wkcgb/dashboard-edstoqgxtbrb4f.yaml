@@ -1,0 +1,88 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Dashboard
+metadata:
+    folder: fds3wc5k1wkcgb
+    name: edstoqgxtbrb4f
+spec:
+    annotations:
+        list:
+            - builtIn: 1
+              datasource:
+                type: grafana
+                uid: -- Grafana --
+              enable: true
+              hide: true
+              iconColor: rgba(0, 211, 255, 1)
+              name: Annotations & Alerts
+              type: dashboard
+    editable: true
+    fiscalYearStartMonth: 0
+    graphTooltip: 0
+    links: []
+    panels:
+        - datasource:
+            type: grafana-mongodb-datasource
+            uid: adonk9wsag3k0d
+          fieldConfig:
+            defaults:
+                color:
+                    mode: thresholds
+                custom:
+                    align: auto
+                    cellOptions:
+                        type: auto
+                    filterable: true
+                    inspect: false
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: green
+                          value: null
+                        - color: red
+                          value: 80
+            overrides: []
+          gridPos:
+            h: 10
+            w: 17
+            x: 0
+            "y": 0
+          id: 1
+          options:
+            cellHeight: sm
+            footer:
+                countRows: false
+                fields: ""
+                reducer:
+                    - sum
+                show: false
+            showHeader: true
+            sortBy:
+                - desc: true
+                  displayName: createdAtDay
+          pluginVersion: 11.0.3
+          targets:
+            - datasource:
+                type: grafana-mongodb-datasource
+                uid: adonk9wsag3k0d
+              parsedQuery: |
+                payments.transactions.aggregate([{"$match":{"createdAt":{"$lte":{"$date":"2024-08-12T11:55:52.650Z"}},"status":"COMPLETED"}},{"$addFields":{"createdAtDay":{"$dateToString":{"format":"%Y-%m-%d","date":"$createdAt"}},"fxAmount":"$fx.amount","ftdInfo":{"$cond":{"if":"$cardStats.ftd","then":"FTD","else":"Secondary Traffic"}},"merchantId":"$merchantId"}},{"$group":{"_id":{"createdAtDay":"$createdAtDay","merchantId":"$merchantId"},"totalAmount":{"$sum":"$fxAmount"},"ftdInfo":{"$first":"$ftdInfo"}}},{"$lookup":{"from":"merchants","localField":"_id.merchantId","foreignField":"_id","as":"merchantDetails"}},{"$unwind":"$merchantDetails"},{"$project":{"_id":0,"createdAtDay":"$_id.createdAtDay","merchantName":"$merchantDetails.name","fxAmount":"$totalAmount","ftdInfo":1}}])
+              query: "payments.transactions.aggregate([\r\n  {\r\n    $match: {\r\n      createdAt: {\r\n        $lte: new ISODate($__to)\r\n      },\r\n      status: \"COMPLETED\"\r\n    }\r\n  },\r\n  {\r\n    $addFields: {\r\n      createdAtDay: {\r\n        $dateToString: {\r\n          format: \"%Y-%m-%d\",\r\n          date: \"$createdAt\"\r\n        }\r\n      },\r\n      fxAmount: \"$fx.amount\",\r\n      ftdInfo: {\r\n        $cond: {\r\n          if: \"$cardStats.ftd\",\r\n          then: \"FTD\",\r\n          else: \"Secondary Traffic\"\r\n        }\r\n      },\r\n      merchantId: \"$merchantId\"\r\n    }\r\n  },\r\n  {\r\n    $group: {\r\n      _id: {\r\n        createdAtDay: \"$createdAtDay\",\r\n        merchantId: \"$merchantId\"\r\n      },\r\n      totalAmount: { $sum: \"$fxAmount\" },\r\n      ftdInfo: { $first: \"$ftdInfo\" }\r\n    }\r\n  },\r\n  {\r\n    $lookup: {\r\n      from: \"merchants\",\r\n      localField: \"_id.merchantId\",\r\n      foreignField: \"_id\",\r\n      as: \"merchantDetails\"\r\n    }\r\n  },\r\n  {\r\n    $unwind: \"$merchantDetails\"\r\n  },\r\n  {\r\n    $project: {\r\n      _id: 0,\r\n      createdAtDay: \"$_id.createdAtDay\",\r\n      merchantName: \"$merchantDetails.name\",\r\n      fxAmount: \"$totalAmount\",\r\n      ftdInfo: 1\r\n    }\r\n  }\r\n])\r\n"
+              queryType: query
+              refId: A
+          title: FTD
+          type: table
+    refresh: ""
+    schemaVersion: 39
+    tags: []
+    templating:
+        list: []
+    time:
+        from: now-6h
+        to: now
+    timeRangeUpdatedDuringEditOrView: false
+    timepicker: {}
+    timezone: browser
+    title: FTD
+    uid: edstoqgxtbrb4f
+    weekStart: ""

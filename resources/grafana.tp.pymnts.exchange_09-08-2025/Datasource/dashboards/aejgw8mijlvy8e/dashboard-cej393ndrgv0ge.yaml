@@ -1,0 +1,168 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Dashboard
+metadata:
+    folder: aejgw8mijlvy8e
+    name: cej393ndrgv0ge
+spec:
+    annotations:
+        list:
+            - builtIn: 1
+              datasource:
+                type: grafana
+                uid: -- Grafana --
+              enable: true
+              hide: true
+              iconColor: rgba(0, 211, 255, 1)
+              name: Annotations & Alerts
+              type: dashboard
+    editable: true
+    fiscalYearStartMonth: 0
+    graphTooltip: 0
+    links: []
+    panels:
+        - datasource:
+            default: false
+            type: haohanyang-mongodb-datasource
+            uid: aej2w43zd6mf4c
+          description: Transactions rate per 5 minutes
+          fieldConfig:
+            defaults:
+                color:
+                    fixedColor: semi-dark-green
+                    mode: shades
+                custom:
+                    axisBorderShow: false
+                    axisCenteredZero: false
+                    axisColorMode: text
+                    axisLabel: ""
+                    axisPlacement: auto
+                    barAlignment: 0
+                    barWidthFactor: 0.6
+                    drawStyle: bars
+                    fillOpacity: 100
+                    gradientMode: hue
+                    hideFrom:
+                        legend: false
+                        tooltip: false
+                        viz: false
+                    insertNulls: false
+                    lineInterpolation: linear
+                    lineStyle:
+                        fill: solid
+                    lineWidth: 5
+                    pointSize: 2
+                    scaleDistribution:
+                        type: linear
+                    showPoints: auto
+                    spanNulls: false
+                    stacking:
+                        group: A
+                        mode: none
+                    thresholdsStyle:
+                        mode: area
+                fieldMinMax: false
+                mappings: []
+                min: 0
+                noValue: "0"
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: dark-red
+                          value: null
+                        - color: transparent
+                          value: 2
+            overrides: []
+          gridPos:
+            h: 11
+            w: 12
+            x: 0
+            "y": 0
+          id: 2
+          options:
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: false
+            timezone:
+                - Europe/Budapest
+            tooltip:
+                maxHeight: 600
+                mode: single
+                sort: none
+          targets:
+            - collection: transactions
+              datasource:
+                type: haohanyang-mongodb-datasource
+                uid: aej2w43zd6mf4c
+              isStreaming: false
+              queryLanguage: json
+              queryText: '[{"$match":{"merchantId":"$merchantId","createdAt":{"$gt":{"$date":{"$numberLong":"$__from"}},"$lt":{"$date":{"$numberLong":"$__to"}}}}},{"$group":{"_id":{"$toDate":{"$subtract":[{"$toLong":"$createdAt"},{"$mod":[{"$toLong":"$createdAt"},300000]}]}},"count":{"$sum":1}}},{"$project":{"_id":1,"count":1}},{"$sort":{"time":1}}]'
+              queryType: table
+              refId: A
+          title: $merchantName Tx / 5 Min
+          type: timeseries
+    schemaVersion: 39
+    tags: []
+    templating:
+        list:
+            - current:
+                selected: true
+                text: FTH (SS)
+                value: FTH (SS)
+              datasource:
+                type: haohanyang-mongodb-datasource
+                uid: bej2ypc36xfr4e
+              definition: "merchants ([\r\n  {\r\n  \"$project\": {\r\n    \"value\": \"$name\"\r\n  }\r\n}\r\n])"
+              description: |-
+                [
+                  {
+                  "$project": {
+                    "value": "$name"
+                  }
+                }
+                ]
+              hide: 0
+              includeAll: false
+              label: Merchant Name
+              multi: false
+              name: merchantName
+              options: []
+              query:
+                collection: merchants
+                queryText: "[\r\n  {\r\n  \"$project\": {\r\n    \"value\": \"$name\"\r\n  }\r\n}\r\n]"
+              refresh: 1
+              regex: ""
+              skipUrlSync: false
+              sort: 0
+              type: query
+            - current:
+                selected: false
+                text: a39ac315-0fb8-43f9-8f72-6dc4601bceaa
+                value: a39ac315-0fb8-43f9-8f72-6dc4601bceaa
+              datasource:
+                type: haohanyang-mongodb-datasource
+                uid: bej2ypc36xfr4e
+              definition: "merchants ([\r\n  {\r\n    \"$match\":{\r\n      \"name\": \"$merchantName\"\r\n    }\r\n  },\r\n  {\r\n  \"$project\": {\r\n    \"value\": \"$_id\"\r\n  }\r\n}\r\n])"
+              hide: 0
+              includeAll: false
+              label: Merchant ID
+              multi: false
+              name: merchantId
+              options: []
+              query:
+                collection: merchants
+                queryText: "[\r\n  {\r\n    \"$match\":{\r\n      \"name\": \"$merchantName\"\r\n    }\r\n  },\r\n  {\r\n  \"$project\": {\r\n    \"value\": \"$_id\"\r\n  }\r\n}\r\n]"
+              refresh: 1
+              regex: ""
+              skipUrlSync: false
+              sort: 0
+              type: query
+    time:
+        from: now-6h
+        to: now
+    timepicker: {}
+    timezone: browser
+    title: Per Merchant Transactions [5m]
+    uid: cej393ndrgv0ge
+    weekStart: ""

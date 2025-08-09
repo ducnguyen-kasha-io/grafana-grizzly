@@ -1,0 +1,108 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Dashboard
+metadata:
+    folder: edoom9gbnjwu8c
+    name: ddork92ldi60wc
+spec:
+    annotations:
+        list:
+            - builtIn: 1
+              datasource:
+                type: grafana
+                uid: -- Grafana --
+              enable: true
+              hide: true
+              iconColor: rgba(0, 211, 255, 1)
+              name: Annotations & Alerts
+              type: dashboard
+    editable: true
+    fiscalYearStartMonth: 0
+    graphTooltip: 0
+    links: []
+    panels:
+        - datasource:
+            type: grafana-mongodb-datasource
+            uid: adonk9wsag3k0d
+          fieldConfig:
+            defaults:
+                color:
+                    mode: palette-classic
+                custom:
+                    axisBorderShow: false
+                    axisCenteredZero: false
+                    axisColorMode: text
+                    axisLabel: ""
+                    axisPlacement: auto
+                    barAlignment: 0
+                    drawStyle: line
+                    fillOpacity: 20
+                    gradientMode: none
+                    hideFrom:
+                        legend: false
+                        tooltip: false
+                        viz: false
+                    insertNulls: false
+                    lineInterpolation: linear
+                    lineStyle:
+                        fill: solid
+                    lineWidth: 1
+                    pointSize: 3
+                    scaleDistribution:
+                        type: linear
+                    showPoints: auto
+                    spanNulls: false
+                    stacking:
+                        group: A
+                        mode: none
+                    thresholdsStyle:
+                        mode: "off"
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: green
+                          value: null
+                        - color: red
+                          value: 80
+            overrides: []
+          gridPos:
+            h: 17
+            w: 24
+            x: 0
+            "y": 0
+          id: 1
+          options:
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: true
+            tooltip:
+                maxHeight: 600
+                mode: single
+                sort: none
+          pluginVersion: 11.0.0
+          targets:
+            - datasource:
+                type: grafana-mongodb-datasource
+                uid: adonk9wsag3k0d
+              parsedQuery: |
+                payments.transactions.aggregate([{"$match":{"createdAt":{"$gte":{"$date":"2024-05-15T14:36:03.303Z"},"$lte":{"$date":"2024-06-14T14:36:03.303Z"}}}},{"$group":{"_id":{"$dateToString":{"format":"%Y-%m-%d","date":"$createdAt"}},"txOthers":{"$sum":{"$cond":[{"$and":[{"$ne":["$status","COMPLETED"]},{"$ne":["$errorCategory",2]}]},1,0]}},"txCompleted":{"$sum":{"$cond":[{"$eq":["$status","COMPLETED"]},1,0]}}}},{"$addFields":{"date":{"$dateFromString":{"dateString":"$_id"}}}},{"$project":{"_id":0,"date":1,"approvalRate":{"$cond":[{"$eq":[{"$add":["$txOthers","$txCompleted"]},0]},100,{"$round":[{"$multiply":[{"$divide":["$txCompleted",{"$add":["$txOthers","$txCompleted"]}]},100]},2]}]}}},{"$sort":{"date":1}}])
+              query: "payments.transactions.aggregate([\r\n  {\r\n    $match: {\r\n      createdAt: {\r\n        $gte: new ISODate($__from),\r\n        $lte: new ISODate($__to)\r\n      }\r\n    }\r\n  },\r\n  {\r\n    $group: {\r\n      _id: {\r\n        $dateToString: { format: \"%Y-%m-%d\", date: \"$createdAt\" }\r\n      },\r\n      txOthers: {\r\n        $sum: {\r\n          $cond: [\r\n            { $and: [{ $ne: ['$status', 'COMPLETED'] }, { $ne: ['$errorCategory', 2] }] },\r\n            1,\r\n            0\r\n          ]\r\n        }\r\n      },\r\n      txCompleted: {\r\n        $sum: { $cond: [{ $eq: ['$status', 'COMPLETED'] }, 1, 0] }\r\n      }\r\n    }\r\n  },\r\n  {\r\n    $addFields: {\r\n      date: { $dateFromString: { dateString: \"$_id\" } }\r\n    }\r\n  },\r\n  {\r\n    $project: {\r\n      _id: 0,\r\n      date: 1,\r\n      approvalRate: {\r\n        $cond: [\r\n          { $eq: [{ $add: ['$txOthers', '$txCompleted'] }, 0] },\r\n          100,\r\n          {\r\n            $round: [\r\n              {\r\n                $multiply: [\r\n                  {\r\n                    $divide: ['$txCompleted', { $add: ['$txOthers', '$txCompleted'] }]\r\n                  },\r\n                  100\r\n                ]\r\n              },\r\n              2\r\n            ]\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  },\r\n  {\r\n    $sort: { date: 1 }\r\n  }\r\n])\r\n"
+              queryType: query
+              refId: A
+          title: AR per day
+          type: timeseries
+    schemaVersion: 39
+    tags: []
+    templating:
+        list: []
+    time:
+        from: now-90d
+        to: now
+    timeRangeUpdatedDuringEditOrView: false
+    timepicker: {}
+    timezone: browser
+    title: AR per day
+    uid: ddork92ldi60wc
+    weekStart: ""

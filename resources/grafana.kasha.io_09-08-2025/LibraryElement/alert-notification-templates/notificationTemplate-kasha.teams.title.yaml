@@ -1,0 +1,10 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: AlertNotificationTemplate
+metadata:
+    name: kasha.teams.title
+spec:
+    name: kasha.teams.title
+    template: |-
+        {{ define "kasha.teams.title" }}
+        [{{ .Status | toUpper }}] {{ len .Alerts }} instance(s) of {{ if gt (len .Alerts) 0 }}{{ (index .Alerts 0).Labels.alertname }}{{ else }}No Alerts{{ end }}
+        {{ end }}

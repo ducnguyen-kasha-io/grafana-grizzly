@@ -1,0 +1,26 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Datasource
+metadata:
+    name: metrics-gke-test-kasha
+spec:
+    access: proxy
+    basicAuth: true
+    basicAuthUser: metrics
+    jsonData:
+        disableRecordingRules: true
+        httpHeaderName1: X-Scope-OrgID
+        httpMethod: POST
+        manageAlerts: false
+        oauthPassThru: false
+        prometheusType: Mimir
+        prometheusVersion: 2.9.1
+        sigV4Auth: false
+    name: metrics-gke-test-kasha
+    orgId: 1
+    secureJsonFields:
+        basicAuthPassword: true
+        httpHeaderValue1: true
+    type: prometheus
+    typeLogoUrl: public/app/plugins/datasource/prometheus/img/prometheus_logo.svg
+    uid: metrics-gke-test-kasha
+    url: https://mimir.kasha.io/prometheus

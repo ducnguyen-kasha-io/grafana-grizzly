@@ -1,0 +1,381 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: AlertRuleGroup
+metadata:
+    name: gke-test-kasha.gke-test-kasha
+spec:
+    folderUid: gke-test-kasha
+    interval: 300
+    rules:
+        - annotations:
+            summary: Client's website is not ready after more than 15 minutes.
+          condition: B
+          data:
+            - datasourceUid: metrics-gke-test-kasha
+              model:
+                disableTextWrap: false
+                editorMode: builder
+                expr: kube_deployment_status_condition{namespace="deployments", status="false", condition="Available"} == 1
+                fullMetaSearch: false
+                includeNullMetadata: true
+                instant: true
+                intervalMs: 1000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: false
+                refId: A
+                useBackend: false
+              refId: A
+              relativeTimeRange:
+                from: 600
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 0
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: B
+                type: threshold
+              refId: B
+              relativeTimeRange: {}
+          execErrState: Error
+          folderUID: gke-test-kasha
+          for: 15m0s
+          id: 7
+          labels:
+            owner: IT Operations
+            priority: P1
+          noDataState: OK
+          orgID: 1
+          ruleGroup: gke-test-kasha
+          title: ClientWebsiteNotReady
+          uid: clientwebsitenotready-gke-test-kasha
+          updated: "2025-08-09T10:40:48.000Z"
+        - annotations:
+            summary: Backup Job {{ $labels.job_name }} has failed. Check the pod logs for details.
+          condition: B
+          data:
+            - datasourceUid: metrics-gke-test-kasha
+              model:
+                disableTextWrap: false
+                editorMode: builder
+                expr: increase(kube_job_status_failed{namespace="backups", job_name=~".*backup.*"}[24h]) > 0
+                fullMetaSearch: false
+                includeNullMetadata: true
+                instant: true
+                intervalMs: 1000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: false
+                refId: A
+                useBackend: false
+              refId: A
+              relativeTimeRange:
+                from: 600
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 0
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: B
+                type: threshold
+              refId: B
+              relativeTimeRange: {}
+          execErrState: Error
+          folderUID: gke-test-kasha
+          for: 5m0s
+          id: 8
+          labels:
+            owner: IT Operations
+            priority: P2
+          noDataState: OK
+          orgID: 1
+          ruleGroup: gke-test-kasha
+          title: BackupFailed
+          uid: backupfailed-gke-test-kasha
+          updated: "2025-08-09T10:40:48.000Z"
+        - annotations:
+            summary: RabbitMQ is down for the last 5 minutes.
+          condition: B
+          data:
+            - datasourceUid: metrics-gke-test-kasha
+              model:
+                datasource:
+                    type: prometheus
+                    uid: metrics-gke-test-kasha
+                disableTextWrap: false
+                editorMode: builder
+                expr: sum by(cluster, namespace, pod) (rabbitmq_build_info) < bool 1
+                fullMetaSearch: false
+                includeNullMetadata: true
+                instant: true
+                intervalMs: 1000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: false
+                refId: A
+                useBackend: false
+              refId: A
+              relativeTimeRange:
+                from: 600
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 0
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: B
+                type: threshold
+              refId: B
+              relativeTimeRange: {}
+          execErrState: Error
+          folderUID: gke-test-kasha
+          for: 5m0s
+          id: 9
+          labels:
+            owner: IT Operations
+            priority: P0
+          noDataState: NoData
+          orgID: 1
+          ruleGroup: gke-test-kasha
+          title: RabbitmqDown
+          uid: rabbitmqdown-gke-test-kasha
+          updated: "2025-08-09T10:40:48.000Z"
+        - annotations:
+            summary: Redis is down for the last 5 minutes.
+          condition: B
+          data:
+            - datasourceUid: metrics-gke-test-kasha
+              model:
+                datasource:
+                    type: prometheus
+                    uid: metrics-gke-test-kasha
+                disableTextWrap: false
+                editorMode: code
+                expr: redis_up == bool 0
+                fullMetaSearch: false
+                includeNullMetadata: true
+                instant: true
+                intervalMs: 1000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: false
+                refId: A
+                useBackend: false
+              refId: A
+              relativeTimeRange:
+                from: 600
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 0
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: B
+                type: threshold
+              refId: B
+              relativeTimeRange: {}
+          execErrState: Error
+          folderUID: gke-test-kasha
+          for: 5m0s
+          id: 10
+          labels:
+            owner: IT Operations
+            priority: P0
+          noDataState: NoData
+          orgID: 1
+          ruleGroup: gke-test-kasha
+          title: RedisDown
+          uid: redisdown-gke-test-kasha
+          updated: "2025-08-09T10:40:48.000Z"
+        - annotations:
+            summary: Minio is down for the last 5 minutes.
+          condition: B
+          data:
+            - datasourceUid: metrics-gke-test-kasha
+              model:
+                datasource:
+                    type: prometheus
+                    uid: metrics-gke-test-kasha
+                disableTextWrap: false
+                editorMode: builder
+                expr: sum by(cluster, namespace) (minio_cluster_health_status) == bool 0
+                fullMetaSearch: false
+                includeNullMetadata: true
+                instant: true
+                intervalMs: 1000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: false
+                refId: A
+                useBackend: false
+              refId: A
+              relativeTimeRange:
+                from: 600
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 0
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: B
+                type: threshold
+              refId: B
+              relativeTimeRange: {}
+          execErrState: Error
+          folderUID: gke-test-kasha
+          for: 5m0s
+          id: 11
+          labels:
+            owner: IT Operations
+            priority: P0
+          noDataState: NoData
+          orgID: 1
+          ruleGroup: gke-test-kasha
+          title: MinioDown
+          uid: miniodown-gke-test-kasha
+          updated: "2025-08-09T10:40:48.000Z"
+        - annotations:
+            summary: Kasha service is not ready after 5 minutes.
+          condition: B
+          data:
+            - datasourceUid: metrics-gke-test-kasha
+              model:
+                datasource:
+                    type: prometheus
+                    uid: metrics-gke-test-kasha
+                disableTextWrap: false
+                editorMode: builder
+                expr: kasha_service_health
+                fullMetaSearch: false
+                includeNullMetadata: true
+                instant: true
+                intervalMs: 1000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: false
+                refId: A
+                useBackend: false
+              refId: A
+              relativeTimeRange:
+                from: 600
+            - datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 1
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: B
+                type: threshold
+              refId: B
+              relativeTimeRange: {}
+          execErrState: Error
+          folderUID: gke-test-kasha
+          for: 5m0s
+          id: 12
+          labels:
+            owner: Developement Team
+            priority: P0
+          noDataState: NoData
+          orgID: 1
+          ruleGroup: gke-test-kasha
+          title: KashaServiceNotReady
+          uid: kashaservicenotready-gke-test-kasha
+          updated: "2025-08-09T10:40:48.000Z"
+    title: gke-test-kasha

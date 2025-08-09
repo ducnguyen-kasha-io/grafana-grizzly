@@ -1,0 +1,19 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Datasource
+metadata:
+    name: logs-gke-prod-kasha
+spec:
+    access: proxy
+    basicAuth: true
+    basicAuthUser: logs
+    jsonData:
+        httpHeaderName1: X-Scope-OrgID
+    name: logs-gke-prod-kasha
+    orgId: 1
+    secureJsonFields:
+        basicAuthPassword: true
+        httpHeaderValue1: true
+    type: loki
+    typeLogoUrl: public/app/plugins/datasource/loki/img/loki_icon.svg
+    uid: logs-gke-prod-kasha
+    url: https://loki.kasha.io

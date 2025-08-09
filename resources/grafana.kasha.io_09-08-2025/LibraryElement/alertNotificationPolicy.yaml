@@ -1,0 +1,36 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: AlertNotificationPolicy
+metadata:
+    name: global
+spec:
+    active_time_intervals: null
+    group_by:
+        - alertname
+        - cluster
+    mute_time_intervals: null
+    receiver: grafana-default-email
+    routes:
+        - active_time_intervals: null
+          group_by: null
+          mute_time_intervals: null
+          object_matchers:
+            - - cluster
+              - =~
+              - gke-prod-kasha|gke-prod-kasha-web
+            - - priority
+              - =~
+              - P0|P1
+          receiver: kasha-team-prd-alerts
+          routes: null
+        - active_time_intervals: null
+          group_by: null
+          mute_time_intervals: null
+          object_matchers:
+            - - cluster
+              - '!~'
+              - gke-prod-kasha|gke-prod-kasha-web
+            - - priority
+              - =~
+              - P0|P1|P2
+          receiver: kasha-team-non-prd-alerts
+          routes: null

@@ -1,0 +1,8 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: DashboardFolder
+metadata:
+    name: fen97rev6xp8ga
+spec:
+    orgId: 1
+    title: Imported Dashboards
+    uid: fen97rev6xp8ga

@@ -1,0 +1,21 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Datasource
+metadata:
+    name: aej2w43zd6mf4c
+spec:
+    access: proxy
+    jsonData:
+        authType: auth-username-password
+        connectionParameters: admin?tls=true&authSource=admin&replicaSet=prod-do-kasha-reports-database
+        connectionStringScheme: dns_seed_list
+        database: payments
+        host: prod-do-kasha-reports-database-b3425b08.mongo.ondigitalocean.com
+        port: 27017
+        username: grafana_user
+    name: prod-reports-db-oss-payments
+    orgId: 1
+    secureJsonFields:
+        password: true
+    type: haohanyang-mongodb-datasource
+    typeLogoUrl: public/plugins/haohanyang-mongodb-datasource/img/logo.svg
+    uid: aej2w43zd6mf4c

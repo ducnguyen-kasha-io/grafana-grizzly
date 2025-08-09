@@ -1,0 +1,333 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Dashboard
+metadata:
+    folder: fen97rev6xp8ga
+    name: denbwvjhn5k3kb
+spec:
+    annotations:
+        list:
+            - builtIn: 1
+              datasource:
+                type: grafana
+                uid: -- Grafana --
+              enable: true
+              hide: true
+              iconColor: rgba(0, 211, 255, 1)
+              name: Annotations & Alerts
+              type: dashboard
+    editable: true
+    fiscalYearStartMonth: 0
+    graphTooltip: 0
+    links: []
+    panels:
+        - datasource:
+            type: prometheus
+            uid: beienpsdcdce8b
+          fieldConfig:
+            defaults:
+                color:
+                    mode: fixed
+                mappings:
+                    - options:
+                        "0":
+                            color: red
+                            index: 1
+                            text: DOWN
+                        "1":
+                            color: green
+                            index: 0
+                            text: UP
+                      type: value
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: green
+            overrides: []
+          gridPos:
+            h: 8
+            w: 5
+            x: 0
+            "y": 0
+          id: 1
+          options:
+            colorMode: background
+            graphMode: area
+            justifyMode: auto
+            orientation: auto
+            percentChangeColorMode: standard
+            reduceOptions:
+                calcs:
+                    - last
+                fields: ""
+                values: false
+            showPercentChange: false
+            textMode: value_and_name
+            wideLayout: true
+          pluginVersion: 11.6.0
+          targets:
+            - datasource:
+                type: prometheus
+                uid: beienpsdcdce8b
+              disableTextWrap: false
+              editorMode: builder
+              exemplar: false
+              expr: kasha_service_health{exported_service="BOOKINGS_SERVICE"}
+              fullMetaSearch: false
+              includeNullMetadata: false
+              instant: true
+              legendFormat: '{{exported_service}}'
+              range: false
+              refId: A
+              useBackend: false
+          title: Backend Services
+          type: stat
+        - datasource:
+            type: loki
+            uid: deklbpo8ht1xcd
+          fieldConfig:
+            defaults:
+                color:
+                    mode: thresholds
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: green
+                        - color: red
+                          value: 500
+                unit: ms
+            overrides: []
+          gridPos:
+            h: 8
+            w: 19
+            x: 5
+            "y": 0
+          id: 6
+          options:
+            displayMode: lcd
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: false
+            maxVizHeight: 0
+            minVizHeight: 15
+            minVizWidth: 8
+            namePlacement: auto
+            orientation: horizontal
+            reduceOptions:
+                calcs:
+                    - last
+                fields: ""
+                values: false
+            showUnfilled: true
+            sizing: auto
+            text:
+                titleSize: 20
+                valueSize: 20
+            valueMode: color
+          pluginVersion: 11.6.0
+          targets:
+            - datasource:
+                type: loki
+                uid: deklbpo8ht1xcd
+              direction: backward
+              editorMode: code
+              expr: "sort_desc(topk(3, max_over_time({namespace=\"dev-lr\",container=\"istio-proxy\"}\r\n!~ `.ico|.svg|.css|.png|.txt|.js|.xml`\r\n| json\r\n| authority =~ `api-gateway.*`\r\n| unwrap duration\r\n| path =~ `/businesses/.*`\r\n| __error__=\"\" [3h]) by (path)))"
+              legendFormat: '{{path}}'
+              queryType: range
+              refId: A
+          title: Top 3 longest response Businesses API paths
+          type: bargauge
+        - datasource:
+            type: prometheus
+            uid: beienpsdcdce8b
+          fieldConfig:
+            defaults:
+                color:
+                    mode: fixed
+                mappings:
+                    - options:
+                        "0":
+                            color: red
+                            index: 1
+                            text: DOWN
+                        "1":
+                            color: green
+                            index: 0
+                            text: UP
+                      type: value
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: green
+            overrides: []
+          gridPos:
+            h: 7
+            w: 5
+            x: 0
+            "y": 8
+          id: 5
+          options:
+            colorMode: background
+            graphMode: area
+            justifyMode: auto
+            orientation: auto
+            percentChangeColorMode: standard
+            reduceOptions:
+                calcs:
+                    - last
+                fields: ""
+                values: false
+            showPercentChange: false
+            textMode: value_and_name
+            wideLayout: true
+          pluginVersion: 11.6.0
+          targets:
+            - datasource:
+                type: prometheus
+                uid: beienpsdcdce8b
+              disableTextWrap: false
+              editorMode: builder
+              exemplar: false
+              expr: kasha_service_health{exported_service=~"ECOM_ORDER_SERVICE|ECOM_PRICING_SERVICE|ECOM_PRODUCT_SERVICE"}
+              fullMetaSearch: false
+              includeNullMetadata: false
+              instant: true
+              legendFormat: '{{exported_service}}'
+              range: false
+              refId: A
+              useBackend: false
+          title: Backend Services
+          type: stat
+        - datasource:
+            type: loki
+            uid: deklbpo8ht1xcd
+          fieldConfig:
+            defaults:
+                color:
+                    mode: thresholds
+                mappings: []
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: green
+                        - color: red
+                          value: 500
+                unit: ms
+            overrides: []
+          gridPos:
+            h: 8
+            w: 19
+            x: 5
+            "y": 8
+          id: 7
+          options:
+            displayMode: gradient
+            legend:
+                calcs: []
+                displayMode: list
+                placement: bottom
+                showLegend: false
+            maxVizHeight: 0
+            minVizHeight: 15
+            minVizWidth: 8
+            namePlacement: auto
+            orientation: horizontal
+            reduceOptions:
+                calcs:
+                    - last
+                fields: ""
+                values: false
+            showUnfilled: true
+            sizing: auto
+            text: {}
+            valueMode: color
+          pluginVersion: 11.6.0
+          targets:
+            - datasource:
+                type: loki
+                uid: deklbpo8ht1xcd
+              direction: backward
+              editorMode: code
+              expr: "sort_desc(topk(1, max_over_time({namespace=\"dev-lr\",container=\"istio-proxy\"}\r\n!~ `.ico|.svg|.css|.png|.txt|.js|.xml`\r\n| json\r\n| authority =~ `api-gateway.*`\r\n| unwrap duration\r\n| path =~ `/auth/*`\r\n| __error__=\"\" [5m]) by (path)))"
+              legendFormat: '{{path}}'
+              queryType: range
+              refId: A
+          timeFrom: 6h
+          title: Top Booking API paths
+          type: bargauge
+        - datasource:
+            type: prometheus
+            uid: beienpsdcdce8b
+          fieldConfig:
+            defaults:
+                color:
+                    mode: fixed
+                mappings:
+                    - options:
+                        "0":
+                            color: red
+                            index: 1
+                            text: DOWN
+                        "1":
+                            color: green
+                            index: 0
+                            text: UP
+                      type: value
+                thresholds:
+                    mode: absolute
+                    steps:
+                        - color: green
+            overrides: []
+          gridPos:
+            h: 12
+            w: 11
+            x: 0
+            "y": 16
+          id: 2
+          options:
+            colorMode: background
+            graphMode: area
+            justifyMode: auto
+            orientation: auto
+            percentChangeColorMode: standard
+            reduceOptions:
+                calcs:
+                    - last
+                fields: ""
+                values: false
+            showPercentChange: false
+            textMode: value_and_name
+            wideLayout: true
+          pluginVersion: 11.6.0
+          targets:
+            - datasource:
+                type: prometheus
+                uid: beienpsdcdce8b
+              disableTextWrap: false
+              editorMode: code
+              exemplar: false
+              expr: kasha_service_health{exported_service=~".+_DB"}
+              fullMetaSearch: false
+              includeNullMetadata: false
+              instant: true
+              legendFormat: '{{exported_service}}'
+              range: false
+              refId: A
+              useBackend: false
+          title: Database Services
+          type: stat
+    preload: false
+    refresh: 5s
+    schemaVersion: 41
+    tags: []
+    templating:
+        list: []
+    time:
+        from: now-5m
+        to: now
+    timepicker: {}
+    timezone: browser
+    title: Backend Service Health Check
+    uid: denbwvjhn5k3kb
