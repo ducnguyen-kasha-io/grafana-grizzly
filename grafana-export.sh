@@ -1,21 +1,11 @@
 #!/bin/bash
 
-log_file="grafana-export.log"
-export_date=$(date +"%Y-%m-%d %H:%M:%S")
-
-echo "Export started at: $export_date" | tee -a "$log_file"
-
 providers=($(grr providers | awk 'NR>1 {print $2}'))
+grafana_url=$(grr config get | awk '/url:/ {gsub(/https?:\/\//, "", $2); print $2}')_$(date +"%d-%m-%Y")
+
+mkdir -p "resources/$grafana_url"
 
 for provider in "${providers[@]}"; do
-  echo "Pulling resources for provider: $provider" | tee -a "$log_file"
-  grr pull "$provider" >> "$log_file" 2>&1
-  if [ $? -ne 0 ]; then
-    echo "Error pulling resources for provider: $provider" | tee -a "$log_file"
-  fi
+  grr pull "$provider"
+  mv "$provider" "resources/$grafana_url/"
 done
-
-export_end_date=$(date +"%Y-%m-%d %H:%M:%S")
-echo "Export finished at: $export_end_date" | tee -a "$log_file"
-
-echo "Finished pulling resources for all providers." | tee -a "$log_file"

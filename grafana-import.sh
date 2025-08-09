@@ -1,6 +1,6 @@
 #!/bin/bash
 
-resources_dir="resources"
+resources_dir="resources/grafana.cyberpay.link_09-08-2025"
 
 # Iterate through folders
 for folder in "$resources_dir"/*/; do
